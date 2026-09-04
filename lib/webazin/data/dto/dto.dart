@@ -1,0 +1,15 @@
+export 'accreditation.dart';
+export 'affiliate.dart';
+export 'application_info.dart';
+export 'banks.dart';
+export 'currency.dart';
+export 'forget_password.dart';
+export 'generic_response.dart';
+export 'market.dart';
+export 'more_page.dart';
+export 'order.dart';
+export 'portfolio.dart';
+export 'ticket.dart';
+export 'user.dart';
+export 'vip_packs.dart';
+export 'wallet.dart';

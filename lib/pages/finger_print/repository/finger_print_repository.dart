@@ -1,0 +1,10 @@
+
+class FingerPrintRepository  {
+
+  FingerPrintRepository() {
+  }
+
+
+
+
+}
