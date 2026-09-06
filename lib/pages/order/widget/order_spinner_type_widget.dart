@@ -38,7 +38,8 @@ class OrderSpinnerType extends GetView<OrderController> {
               ),
             )
           : Container(
-              child: SpinKitWave(color: context.theme.highlightColor, size: 24, type: SpinKitWaveType.start),
+              child: SpinKitWave(color: context.theme.canvasColor//todo_selectedRowColor
+                , size: 24, type: SpinKitWaveType.start),
             );
     });
   }

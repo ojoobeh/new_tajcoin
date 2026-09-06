@@ -231,12 +231,12 @@ class SettingSmsView extends GetView<SettingSmsController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      // QrImage(
-                      //   data: controller.getQrCode(Core.user.setting!.google2FaSecret!),
-                      //   version: QrVersions.auto,
-                      //   size: 200.0,
-                      //   foregroundColor: Get.theme.dividerColor,
-                      // ),
+                      QrImageView(
+                        data: controller.getQrCode(Core.user.setting!.google2FaSecret!),
+                        version: QrVersions.auto,
+                        size: 200.0,
+                        foregroundColor: Get.theme.dividerColor,
+                      ),
                     ],
                   ),
                   Text(

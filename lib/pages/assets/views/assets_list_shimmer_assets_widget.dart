@@ -5,10 +5,10 @@ import 'package:shimmer/shimmer.dart';
 import '../controllers/assets_controller.dart';
 
 class ListShimmerAssetsWidget extends GetWidget<AssetsController> {
-  final int limit=0;
+  final int limit;
 
 
-  ListShimmerAssetsWidget();
+  ListShimmerAssetsWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {

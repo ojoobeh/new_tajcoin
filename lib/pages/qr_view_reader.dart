@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:webazin/utils/utils.dart';
 
 class QRViewReader extends StatefulWidget {
@@ -14,6 +15,7 @@ class QRViewReader extends StatefulWidget {
 class _QRViewReaderState extends State<QRViewReader> {
   GlobalKey qrKey = GlobalKey();
   var qrText = '';
+  QRViewController? qrViewController;
 
   @override
   Widget build(final BuildContext context) {
@@ -33,7 +35,10 @@ class _QRViewReaderState extends State<QRViewReader> {
                   ),
                   child: Container(
                       margin: const EdgeInsets.all(8),
-                     )),
+                      child: QRView(
+                        key: qrKey,
+                        onQRViewCreated: _onQRViewCreated,
+                      ))),
             ),
           ),
         ],
@@ -43,7 +48,18 @@ class _QRViewReaderState extends State<QRViewReader> {
 
   @override
   void dispose() {
+    qrViewController?.dispose();
     super.dispose();
   }
   bool isBack=false;
+  void _onQRViewCreated(QRViewController _qrViewController) {
+    this.qrViewController = _qrViewController;
+    qrViewController!.scannedDataStream.listen((event) {
+      if(!isBack){
+
+        Get.back(result: event.code.toString());
+        isBack=true;
+      }
+    });
+  }
 }

@@ -15,9 +15,9 @@ class MarketAllOrderRepository {
     return _laravelApiClient.cancelOrder(orderId);
   }
 
-  Future<CallMarketList?> getMarketList(int page, {String? search}) async {
+  Future<CallMarketList?> getMarketList(int page, {String search=''}) async {
     this._laravelApiClient = Get.find<LaravelApiClient>();
-    return _laravelApiClient.getMarketList(page, search: search??'');
+    return _laravelApiClient.getMarketList(page, search: search);
   }
 
   Future<CallMarketOrderList?> getMarketOrderList(int page,String status,int marketId, ) async {

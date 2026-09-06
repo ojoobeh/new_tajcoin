@@ -63,7 +63,7 @@ class MarketDrawerController extends GetxController {
   //   scrollController.dispose();
   // }
 
-  void refreshHome({bool? showMessage, required VoidCallback action}) {
+  void refreshHome({bool showMessage= false, required VoidCallback action}) {
     page.value = 0;
     marketList.clear();
     marketList.value = [];
@@ -72,7 +72,7 @@ class MarketDrawerController extends GetxController {
     update();
   }
 
-  void refreshHome2({bool? showMessage, required VoidCallback action}) {
+  void refreshHome2({bool showMessage= false, required VoidCallback action}) {
     page.value = 0;
     marketList.clear();
     marketList.value = [];
@@ -104,7 +104,7 @@ class MarketDrawerController extends GetxController {
 
   MarketSource marketSource = MarketSource(baseUrl: Core.uri);
 
-  void getMarkets({String? search, required VoidCallback action}) {
+  void getMarkets({String search= '', required VoidCallback action}) {
     if (!stateLoading.isLoading()) {
       try {
         stateLoading.loading();
@@ -114,7 +114,7 @@ class MarketDrawerController extends GetxController {
         marketSource.read(
           page: page.value,
           perPage: 25,
-          search: search??'',
+          search: search,
           onResponse: (response) {
             if (response.dataList!.isNotEmpty) {
               marketList.addAll(response.dataList ?? []);

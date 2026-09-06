@@ -14,23 +14,25 @@ class RootView extends GetView<RootController> {
     list.add(CustomBottomNavigationItem(icon: Assets.home, label: "Home".tr));
     list.add(CustomBottomNavigationItem(icon: Assets.wallet, label: "Wallet".tr));
     list.add(CustomBottomNavigationItem(icon: Assets.trade, label: "Trade".tr));
-    list.add(CustomBottomNavigationItem(icon: Assets.tradePro, label: "Market".tr));
+    list.add(CustomBottomNavigationItem(icon: Assets.tradePro, label: "Market".tr));//
     if (ConfigApp.portfolio) {
       list.add(CustomBottomNavigationItem(icon: Assets.profit_chart, label: "Instant inventory".tr));
     }
 
     return Obx(() {
-      return Scaffold(
-        body: controller.currentPage,
-        // body: controller.currentPage,
-        bottomNavigationBar: CustomBottomNavigationBar(
-          backgroundColor: context.theme.scaffoldBackgroundColor,
-          itemColor: context.theme.colorScheme.secondary,
-          currentIndex: controller.currentIndex.value,
-          onChange: (index) {
-            controller.changePage(index);
-          },
-          children: list,
+      return SafeArea(
+        child: Scaffold(
+          body: controller.currentPage,
+          // body: controller.currentPage,
+          bottomNavigationBar: CustomBottomNavigationBar(
+            backgroundColor: context.theme.scaffoldBackgroundColor,
+            itemColor: context.theme.colorScheme.secondary,
+            currentIndex: controller.currentIndex.value,
+            onChange: (index) {
+              controller.changePage(index);
+            },
+            children: list,
+          ),
         ),
       );
     });

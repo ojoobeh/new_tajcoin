@@ -9,9 +9,9 @@ import 'market_all_order_list_item_shimmer_widget.dart';
 import 'market_all_order_list_item_widget.dart';
 
 class ListMarketsWidget extends GetWidget<MarketAllOrderController> {
-  final int? limit;
+  final int limit;
 
-  ListMarketsWidget({this.limit});
+  ListMarketsWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {

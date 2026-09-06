@@ -96,5 +96,5 @@ class CustomBottomNavigationItem {
   final bool? isToast;
   final Color? color;
 
-  CustomBottomNavigationItem({@required this.icon, this.message, this.isToast, @required this.label, this.color});
+  CustomBottomNavigationItem({@required this.icon, this.message, this.isToast= false, @required this.label, this.color});
 }

@@ -8,9 +8,9 @@ import '../controllers/assets_controller.dart';
 import 'assets_list_item_widget.dart';
 
 class ListAssetsWidget extends GetWidget<AssetsController> {
-  final int limit=0;
+  final int limit;
 
-  const ListAssetsWidget();
+  ListAssetsWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {

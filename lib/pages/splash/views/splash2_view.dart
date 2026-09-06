@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:local_auth_android/local_auth_android.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
@@ -22,9 +24,9 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
 
   late VideoPlayerController videoController;
 
-  // LocalAuthentication auth = LocalAuthentication();
+  LocalAuthentication auth = LocalAuthentication();
   RxBool canCheckBiometric = false.obs;
-  // RxList<BiometricType> availableBiometric = <BiometricType>[].obs;
+  RxList<BiometricType> availableBiometric = <BiometricType>[].obs;
   RxString autherized = "Not autherized".obs;
 
   int progress = 0;
@@ -52,7 +54,20 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
                 action: () => getCurrencies(
                       action: () => getBankNameList(
                         action: () {
-                          Get.offAndToNamed(Routes.ROOT);
+                          checkBiometric(
+                            action: (canCheckBiometric) {
+                              Core.canCheckBiometric = canCheckBiometric;
+                              if (canCheckBiometric) {
+                                if (getBool (Core.fingerPrintEnable)) {
+                                  Get.offAndToNamed(Routes.FINGERPRINT);
+                                } else {
+                                  Get.offAndToNamed(Routes.ROOT);
+                                }
+                              } else {
+                                Get.offAndToNamed(Routes.ROOT);
+                              }
+                            },
+                          );
                         },
                       ),
                     )));
@@ -86,41 +101,40 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
       });
   }
 
-  // void initBiometric() {
-  //   checkBiometric(
-  //     action: (canCheckBiometric) {
-  //       if (canCheckBiometric) {
-  //         this.canCheckBiometric.value = canCheckBiometric;
-  //         getAvailableBiometrics(
-  //           action: (listBiometricType) {
-  //             // this.availableBiometric.value = listBiometricType;
-  //           },
-  //         );
-  //       } else {}
-  //     },
-  //   );
-  // }
+  void initBiometric() {
+    checkBiometric(
+      action: (canCheckBiometric) {
+        if (canCheckBiometric) {
+          this.canCheckBiometric.value = canCheckBiometric;
+          getAvailableBiometrics(
+            action: (listBiometricType) {
+              this.availableBiometric.value = listBiometricType;
+            },
+          );
+        } else {}
+      },
+    );
+  }
 
   void checkMyInternet() {}
 
-  // Future<void> checkBiometric({required Function(bool canCheckBiometric) action}) async {
-  //   bool _canCheckBiometric = false;
-  //   try {
-  //     _canCheckBiometric = await auth.canCheckBiometrics;
-  //     action(_canCheckBiometric);
-  //   } on PlatformException catch (_) {}
-  // }
+  Future<void> checkBiometric({required Function(bool canCheckBiometric) action}) async {
+    bool _canCheckBiometric = false;
+    try {
+      _canCheckBiometric = await auth.canCheckBiometrics;
+      action(_canCheckBiometric);
+    } on PlatformException catch (_) {}
+  }
 
-  // Future<void> getAvailableBiometrics({required Function(List<BiometricType> listBiometricType) action}) async {
-  //   action(_availableBiometric);
-  //   // List<BiometricType> _availableBiometric = <BiometricType>[];
-  //   // try {
-  //   //   _availableBiometric = await auth.getAvailableBiometrics();
-  //   //   action(_availableBiometric);
-  //   // } on PlatformException catch (_) {
-  //   //   // error = e.toString();
-  //   // }
-  // }
+  Future<void> getAvailableBiometrics({required Function(List<BiometricType> listBiometricType) action}) async {
+    List<BiometricType> _availableBiometric = <BiometricType>[];
+    try {
+      _availableBiometric = await auth.getAvailableBiometrics();
+      action(_availableBiometric);
+    } on PlatformException catch (_) {
+      // error = e.toString();
+    }
+  }
 
   // void getUser({required final VoidCallback action}) {
   //   userSource.readUser(
@@ -209,7 +223,12 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
                                                   padding: EdgeInsets.all(8),
                                                   height: double.infinity,
                                                   child: SingleChildScrollView(
-                                                    child: Container(),
+                                                    child: Ui.removeHtml(data.description!,
+                                                        style: TextStyle(
+                                                          fontFamily: FontFamily.vazirBold,
+                                                          fontSize: 14,
+                                                          color: Get.theme.dividerColor.withOpacity(0.8),
+                                                        )),
                                                   ),
                                                 ),
                                               ),
@@ -365,8 +384,9 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
                                   child: Text(
                                     'try again'.tr,
                                     style: TextStyle(
-                                      color: context.theme.highlightColor,
-                                      fontFamily: FontFamily.vazirBold,
+                                      color: context.theme.canvasColor//todo_selectedRowColor
+
+                                      ,fontFamily: FontFamily.vazirBold,
                                     ),
                                   ),
                                 ),

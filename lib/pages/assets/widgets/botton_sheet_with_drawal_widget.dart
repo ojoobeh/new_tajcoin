@@ -1,8 +1,8 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:get/get.dart';
+import 'package:webazin/currency_text_input_formatter.dart';
 import 'package:webazin/pages/assets/widgets/type_assets_widget.dart';
 import 'package:webazin/webazin/utilities.dart';
 
@@ -185,7 +185,8 @@ class BottomSheetWithdrawalWidget extends GetWidget<AssetsController> {
                                     ? Text(
                                         'Submit'.tr,
                                         style: TextStyle(
-                                          // color: context.theme.highlightColor,//todo-REMOVE
+                                          color: context.theme.canvasColor//todo_selectedRowColor
+
                                         ),
                                       )
                                     : CircularLoadingWidget(
@@ -252,11 +253,11 @@ class BottomSheetWithdrawalWidget extends GetWidget<AssetsController> {
                                       hintText: 'Amount'.tr,
                                       focus: controller.focusPrice,
                                       inputFormatters: <TextInputFormatter>[
-                                        // CurrencyTextInputFormatter(
-                                        //   locale: 'ko',
-                                        //   decimalDigits: 0,
-                                        //   symbol: '',
-                                        // ),//todo-REMOVE
+                                        CurrencyTextInputFormatter(
+                                          locale: 'ko',
+                                          decimalDigits: 0,
+                                          symbol: '',
+                                        ),
                                       ],
                                       keyboardType: TextInputType.number,
                                       onChanged: (value) {
@@ -339,7 +340,8 @@ class BottomSheetWithdrawalWidget extends GetWidget<AssetsController> {
                                       ? Text(
                                           'Submit'.tr,
                                           style: TextStyle(
-                                            // color: context.theme.highlightColor,//todo-REMOVE
+                                            color: context.theme.canvasColor//todo_selectedRowColor
+
                                           ),
                                         )
                                       : CircularLoadingWidget(

@@ -41,32 +41,23 @@ Future<bool> checkInternet() async {
   try {
     Dio _dio = Dio();
     Get.log('starting services ...');
-    return true;
 
-    // var connectivityResult = await (Connectivity().checkConnectivity());
-    // if (connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi) {
-    //   try {
-    //     Uri _uri = Uri.parse(
-    //       Core.uri + "application/version",
-    //     );
-    //
-    //     // _dio = createDio();
-    //     _dio = Dio();
-    //     await _dio.getUri(_uri, options: Options(headers: {"Authorization": "dddddd"}));
-    //
-    //     return true;
-    //   } catch (e) {
-    //     prt(
-    //       e.toString(),
-    //     );
-    //     return false;
-    //   }
-    // } else {
-    //   prt(
-    //     "Wifi and data is off",
-    //   );
-    //   return false;
-    // }
+    try {
+      Uri _uri = Uri.parse(
+        Core.uri + "application/version",
+      );
+
+      // _dio = createDio();
+      _dio = Dio();
+      await _dio.getUri(_uri, options: Options(headers: {"Authorization": "dddddd"}));
+
+      return true;
+    } catch (e) {
+      prt(
+        e.toString(),
+      );
+      return false;
+    }
   } catch (e) {
     prt(
       e.toString(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 import 'package:webazin/utils/utils.dart';
@@ -39,7 +40,12 @@ class PagesView extends GetView<PagesController> {
             child: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.all(8),
-                child: Container(),
+                child: Html(
+                  style: {
+                    "*": Style(textAlign: TextAlign.right,direction: TextDirection.rtl,fontSize: FontSize.medium),
+                  },
+
+                  data: controller.callPage.value.data,),
               ),
             ),
           )

@@ -59,7 +59,7 @@ class TradeDrawerController extends GetxController {
     scrollController.dispose();
   }
 
-  void refreshHome({required VoidCallback action, bool? showMessage}) {
+  void refreshHome({required VoidCallback action, bool showMessage= false}) {
     page.value = 0;
     currencies.clear();
     currencies.value = [];

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:webazin/utils/core.dart';
 import 'package:webazin/utils/getMultipart.dart';
 import 'package:webazin/webazin/data/dto/user.dart';
@@ -13,7 +14,7 @@ import '../../../services/settings_service.dart';
 class SettingsController extends GetxController {
   final user = DataUser().obs;
   late GetStorage _box;
-  // late LocalAuthentication auth = LocalAuthentication();
+  late LocalAuthentication auth = LocalAuthentication();
 
   SettingsController() {
     _box = GetStorage();

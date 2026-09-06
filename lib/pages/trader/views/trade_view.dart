@@ -1,4 +1,3 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +5,7 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:get/get.dart';
 import 'package:webazin/chart/line_chart_1.dart';
+import 'package:webazin/currency_text_input_formatter.dart';
 import 'package:webazin/webazin/utility/global.dart';
 import 'package:webazin/widgets/image.dart';
 
@@ -421,11 +421,11 @@ class TradeView extends GetView<TradeController> {
                                               child: CustomFormFiled(
                                                 controller.teTotalPrice,
                                                 inputFormatters: <TextInputFormatter>[
-                                                  // CurrencyTextInputFormatter(
-                                                  //   locale: 'ko',
-                                                  //   decimalDigits: 0,
-                                                  //   symbol: '',
-                                                  // ),
+                                                  CurrencyTextInputFormatter(
+                                                    locale: 'ko',
+                                                    decimalDigits: 0,
+                                                    symbol: '',
+                                                  ),
                                                 ],
                                                 keyboardType: TextInputType.number,
                                                 hintText: 'Total price'.tr,

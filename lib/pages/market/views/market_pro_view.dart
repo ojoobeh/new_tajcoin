@@ -674,19 +674,18 @@ class MarketProView extends GetView<MarketController> {
                                                   borderRadius: BorderRadius.circular(8),
                                                   color: AppColors.redGmail,
                                                 ),
-                                                child: Container()
-                                                // Center(
-                                                //   child: controller.isLoadingOrder.value
-                                                //       ? Loading(indicator: BallPulseIndicator(), size: 10.0)
-                                                //       : Text(
-                                                //           'Sell'.tr + " " + (controller.selectMarketList.value.symbol),
-                                                //           style: TextStyle(
-                                                //             fontSize: 12,
-                                                //             fontFamily: FontFamily.vazirBold,
-                                                //             color: Get.theme.dividerColor,
-                                                //           ),
-                                                //         ),
-                                                // ),
+                                                child: Center(
+                                                  child: controller.isLoadingOrder.value
+                                                      ? Container()
+                                                      : Text(
+                                                          'Sell'.tr + " " + (controller.selectMarketList.value.symbol),
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily: FontFamily.vazirBold,
+                                                            color: Get.theme.dividerColor,
+                                                          ),
+                                                        ),
+                                                ),
                                               ),
                                             )
                                           : InkWell(
@@ -699,19 +698,18 @@ class MarketProView extends GetView<MarketController> {
                                                   borderRadius: BorderRadius.circular(8),
                                                   color: AppColors.cursorColor,
                                                 ),
-                                                child:Container()
-                                                // Center(
-                                                //   child: controller.isLoadingOrder.value
-                                                //       ? Loading(indicator: BallPulseIndicator(), size: 10.0)
-                                                //       : Text(
-                                                //           'Buy'.tr + " " + (controller.selectMarketList.value.symbol != null ? controller.selectMarketList.value.symbol : ""),
-                                                //           style: TextStyle(
-                                                //             fontSize: 12,
-                                                //             fontFamily: FontFamily.vazirBold,
-                                                //             color: Get.theme.dividerColor,
-                                                //           ),
-                                                //         ),
-                                                // ),
+                                                child: Center(
+                                                  child: controller.isLoadingOrder.value
+                                                      ? Container()
+                                                      : Text(
+                                                          'Buy'.tr + " " + (controller.selectMarketList.value.symbol != null ? controller.selectMarketList.value.symbol : ""),
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontFamily: FontFamily.vazirBold,
+                                                            color: Get.theme.dividerColor,
+                                                          ),
+                                                        ),
+                                                ),
                                               ),
                                             );
                                       // : InkWell(

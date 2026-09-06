@@ -11,7 +11,7 @@ import '../controllers/authentication_controller.dart';
 class AuthCustomTextMobileFieldWidget extends GetView<AuthenticationController> {
   final String? labelText;
   final TextEditingController? textEditingController;
-  final double? width;
+  final width;
   final TextAlign? textAlign;
   final FormFieldValidator<String>? validator;
   final GestureTapCallback? onTap;
@@ -23,7 +23,7 @@ class AuthCustomTextMobileFieldWidget extends GetView<AuthenticationController> 
     this.validator,
     this.textEditingController,
     this.onTap,
-    this.width,
+    this.width= 0,
   });
 
   @override

@@ -11,7 +11,7 @@ import 'market_pro_view.dart';
 class MarketView extends GetView<MarketController> {
   @override
   Widget build(final BuildContext context) {
-    controller.connectToServer();
+    // controller.connectToServer();
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async{

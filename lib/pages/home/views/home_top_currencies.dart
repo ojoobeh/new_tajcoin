@@ -11,9 +11,9 @@ import '../controllers/home_controller.dart';
 import '../widgets/home_shimmer_list_item_widget.dart';
 
 class HomeTopCurrencies extends GetWidget<HomeController> {
-  final int? limit;
+  final int limit;
 
-  HomeTopCurrencies({this.limit});
+  HomeTopCurrencies({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {
@@ -32,8 +32,8 @@ class HomeTopCurrencies extends GetWidget<HomeController> {
                   var _category = controller.currencies.elementAt(index);
                   Color color = _category.percent.toString().contains("-") ? Colors.red : AppColors.green;
                   return Container(
-                    width: (Get.width / (limit??0)) - (100 / (limit??0)),
-                    margin: EdgeInsetsDirectional.only(end: index == (limit??0) - 1 ? 0 : 10, start: index == 0 ? 0 : 10),
+                    width: (Get.width / limit) - (100 / limit),
+                    margin: EdgeInsetsDirectional.only(end: index == limit - 1 ? 0 : 10, start: index == 0 ? 0 : 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[

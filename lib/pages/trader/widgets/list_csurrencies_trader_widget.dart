@@ -8,9 +8,9 @@ import '../../global_widgets/circular_loading_widget.dart';
 import '../controllers/trade_drawer_controller.dart';
 
 class ListCurrenciesTraderWidget extends GetWidget<TradeDrawerController> {
-   int? limit=0;
+  final int limit;
 
-  ListCurrenciesTraderWidget({this.limit});
+  ListCurrenciesTraderWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {

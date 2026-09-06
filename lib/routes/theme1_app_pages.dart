@@ -56,7 +56,7 @@ class Theme1AppPages {
 
   static final routes = [
     GetPage(name: Routes.ROOT, page: () => RootView(), binding: RootBinding()),
-    // GetPage(name: Routes.FINGERPRINT, page: () => FingerPrintView(), binding: FingerPrintBinding()),
+    GetPage(name: Routes.FINGERPRINT, page: () => FingerPrintView(), binding: FingerPrintBinding()),
     GetPage(name: Routes.TicketS, page: () => TicketsView(), binding: TicketsBinding()),
     GetPage(name: Routes.ORDER, page: () => OrderListView(), binding: OrderCardBinding()),
     GetPage(name: Routes.MARKETALLORDER, page: () => MarketAllOrderView(), binding: MarketAllOrderBinding()),

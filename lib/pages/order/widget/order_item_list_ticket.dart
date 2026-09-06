@@ -201,7 +201,8 @@ class OrderItemListTicket extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: FontFamily.vazirLight,
                                 fontSize: 10,
-                                color: context.theme.highlightColor,
+                                color: context.theme.canvasColor//todo_selectedRowColor
+
                               )),
                         ),
                       ),
@@ -233,7 +234,8 @@ class OrderItemListTicket extends StatelessWidget {
                               style: TextStyle(
                                 fontFamily: FontFamily.vazirLight,
                                 fontSize: 10,
-                                color: context.theme.highlightColor,
+                                color: context.theme.canvasColor//todo_selectedRowColor
+
                               )),
                         ),
                       ),

@@ -37,12 +37,7 @@ class _WebViewViewState extends State<WebViewView> {
     ]);
     return Scaffold(
       backgroundColor: Get.theme.scaffoldBackgroundColor,
-      body: Container()
-      // WebView(
-      //   initialUrl: widget.url,
-      //   javascriptMode: JavascriptMode.unrestricted,
-      //
-      // ),
+      body: Container(),
     );
   }
 }

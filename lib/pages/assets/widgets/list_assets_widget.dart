@@ -12,9 +12,9 @@ import 'botton_sheet_deposit_widget.dart';
 import 'botton_sheet_with_drawal_widget.dart';
 
 class ListAssetsWidget extends GetWidget<AssetsController> {
-  final int limit=0;
+  final int limit;
 
-  ListAssetsWidget();
+  ListAssetsWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {

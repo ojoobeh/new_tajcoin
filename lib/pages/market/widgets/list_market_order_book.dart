@@ -9,7 +9,7 @@ class ListMarketOrderBook extends StatelessWidget {
     this.list,
     this.color, {
     this.limit = 0,
-    this.reverse,
+    this.reverse= false,
   });
 
   List<SocketListUpDown> list;
@@ -17,13 +17,13 @@ class ListMarketOrderBook extends StatelessWidget {
   int limit;
 
   Color color;
-  bool? reverse;
+  bool reverse;
 
   @override
   Widget build(final BuildContext context) {
     return ListView.builder(
       itemCount: list.length,
-      reverse: reverse??false,
+      reverse: reverse,
       itemBuilder: (context, index) => Container(
         height: (200 / 8),
         child: Container(

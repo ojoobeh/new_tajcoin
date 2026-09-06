@@ -83,7 +83,7 @@ class MarketAllOrderController extends GetxController {
     update();
   }
 
-  Future refreshHome({bool showMessage = false, String? statusId}) async {
+  Future refreshHome({bool showMessage = false, String statusId= ''}) async {
     try {
       pageOrder.value = 0;
 
@@ -159,7 +159,7 @@ class MarketAllOrderController extends GetxController {
     }
   }
 
-  void loadCurrenciesOfStatus({String? statusId})  {
+  void loadCurrenciesOfStatus({String statusId= "All"})  {
     try {
       if (!isLoadingOrder.value) {
         isLoadingOrder.value = true;

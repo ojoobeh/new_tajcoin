@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 class ScrollingText extends StatefulWidget {
   final String text;
   final TextStyle? textStyle;
-  final Axis? scrollAxis;
+  final Axis scrollAxis;
   final Color color;
-  final double? ratioOfBlankToScreen;
+  final double ratioOfBlankToScreen;
 
   ScrollingText({
     required this.text,
     this.textStyle,
     required this.color,
-    this.scrollAxis,
-    this.ratioOfBlankToScreen,
+    this.scrollAxis= Axis.horizontal,
+    this.ratioOfBlankToScreen= 0.25,
   }) : assert(text != null,);
 
   @override
@@ -56,7 +56,7 @@ class ScrollingTextState extends State<ScrollingText>
         if (pixels + _moveDistance >= maxScrollExtent) {
           if (widget.scrollAxis == Axis.horizontal) {
             position = (maxScrollExtent -
-                screenWidth! * (widget.ratioOfBlankToScreen??0.25) +
+                screenWidth! * widget.ratioOfBlankToScreen +
                 widgetWidth) /
                 2 -
                 widgetWidth +
@@ -64,7 +64,7 @@ class ScrollingTextState extends State<ScrollingText>
                 maxScrollExtent;
           } else {
             position = (maxScrollExtent -
-                screenHeight! * (widget.ratioOfBlankToScreen??0.25) +
+                screenHeight! * widget.ratioOfBlankToScreen +
                 widgetHeight) /
                 2 -
                 widgetHeight +
@@ -107,9 +107,9 @@ class ScrollingTextState extends State<ScrollingText>
 
   Widget getCenterChild() {
     if (widget.scrollAxis == Axis.horizontal) {
-      return Container(width: screenWidth! * (widget.ratioOfBlankToScreen??0.25));
+      return Container(width: screenWidth! * widget.ratioOfBlankToScreen);
     } else {
-      return Container(height: screenHeight! * (widget.ratioOfBlankToScreen??0.25));
+      return Container(height: screenHeight! * widget.ratioOfBlankToScreen);
     }
   }
 
@@ -127,7 +127,7 @@ class ScrollingTextState extends State<ScrollingText>
       color: widget.color,
       child: ListView(
         key: _key,
-        scrollDirection: widget.scrollAxis??Axis.vertical,
+        scrollDirection: widget.scrollAxis,
         controller: scrollController,
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[

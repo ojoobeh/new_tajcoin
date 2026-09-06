@@ -10,9 +10,9 @@ late  LaravelApiClient _laravelApiClient;
     this._laravelApiClient = Get.find<LaravelApiClient>();
   }
 
-  Future<CallCurrencies?> getCurrencies(int page, {String? search}) async {
+  Future<CallCurrencies?> getCurrencies(int page, {String search= ''}) async {
     _laravelApiClient = Get.find<LaravelApiClient>();
-    return _laravelApiClient.getCurrencies(page,search: search??'');
+    return _laravelApiClient.getCurrencies(page,search: search);
   }
 
 

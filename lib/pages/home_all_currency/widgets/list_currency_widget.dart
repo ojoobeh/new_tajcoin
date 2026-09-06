@@ -9,9 +9,9 @@ import '../controllers/home_all_order_controller.dart';
 import 'home_all_order_list_item_widget.dart';
 
 class ListCurrencyWidget extends GetWidget<HomeAllOrderController> {
-  final int? limit;
+  final int limit;
 
-  ListCurrencyWidget({this.limit});
+  ListCurrencyWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {

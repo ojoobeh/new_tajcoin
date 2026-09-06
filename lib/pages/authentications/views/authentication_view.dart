@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:get/get.dart';
 import 'package:webazin/utils/core.dart';
 import 'package:webazin/webazin/utilities.dart';
@@ -73,7 +72,9 @@ class AuthenticationView extends GetView<AuthenticationController> {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     // ignore: deprecated_member_use
-                    color: Core.user.setting!.status! ? Get.theme.hoverColor : AppColors.orangeColor,
+                    color: Core.user.setting!.status! ? context.theme.canvasColor//todo_buttonColor
+
+                        : AppColors.orangeColor,
                     child: Core.user.setting!.status!
                         ? Text("You are already authenticated".tr, style: Get.textTheme.labelLarge!.merge(TextStyle(color: Get.theme.dividerColor)))
                         : Text("Submit".tr, style: Get.textTheme.labelLarge!.merge(TextStyle(color: Get.theme.primaryColor))),

@@ -21,7 +21,7 @@ class HomeHeader extends GetView<HomeController> {
   @override
   Widget build(final BuildContext context) {
     //
-    final CarouselController _controller = CarouselController();
+    final CarouselSliderController _controller = CarouselSliderController();
     return Container(
       width: double.infinity,
       height: ConfigApp.homeSliderWeight,
@@ -75,7 +75,7 @@ class HomeHeader extends GetView<HomeController> {
                           ),
                         );
                       }).toList(),
-                      // carouselController: _controller,
+                      carouselController: _controller,
                     ),
                   ),
                   SizedBox(

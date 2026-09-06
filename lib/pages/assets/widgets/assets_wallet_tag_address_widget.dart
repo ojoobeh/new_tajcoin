@@ -66,17 +66,16 @@ class AssetsWalletTagAddressWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    //todo-GQCODE
-                    // Container(
-                    //   margin: const EdgeInsets.only(top: 8),
-                    //   child: QrImage(
-                    //     data: dataAssets.currency!.networks![controller.selectNetworksIndex.value].address!,
-                    //     version: QrVersions.auto,
-                    //     backgroundColor: Colors.white,
-                    //     foregroundColor: Colors.black,
-                    //     size: 100.0,
-                    //   ),
-                    // ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 8),
+                      child: QrImageView(
+                        data: dataAssets.currency!.networks![controller.selectNetworksIndex.value].address!,
+                        version: QrVersions.auto,
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                        size: 100.0,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -131,17 +130,16 @@ class AssetsWalletTagAddressWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          //todo-GQCODE
-                          // Container(
-                          //   margin: const EdgeInsets.only(top: 8),
-                          //   child: QrImage(
-                          //     data: dataAssets.currency!.networks![controller.selectNetworksIndex.value].tag ?? '',
-                          //     version: QrVersions.auto,
-                          //     backgroundColor: Colors.white,
-                          //     foregroundColor: Colors.black,
-                          //     size: 100.0,
-                          //   ),
-                          // )
+                          Container(
+                            margin: const EdgeInsets.only(top: 8),
+                            child: QrImageView(
+                              data: dataAssets.currency!.networks![controller.selectNetworksIndex.value].tag ?? '',
+                              version: QrVersions.auto,
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
+                              size: 100.0,
+                            ),
+                          )
                         ],
                       ),
                     )

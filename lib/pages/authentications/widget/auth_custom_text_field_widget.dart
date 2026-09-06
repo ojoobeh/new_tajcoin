@@ -10,7 +10,7 @@ class AuthCustomTextFieldWidget extends GetView<AuthenticationController> {
   final String? labelText;
   final String? hintText;
   final TextEditingController? textEditingController;
-  final double? width;
+  final width;
   final keyboardType;
   final TextAlign? textAlign;
   final FormFieldValidator<String>? validator;
@@ -25,7 +25,7 @@ class AuthCustomTextFieldWidget extends GetView<AuthenticationController> {
     this.validator,
     this.textEditingController,
     this.onTap,
-    this.width,
+    this.width= 0,
   });
 
   @override

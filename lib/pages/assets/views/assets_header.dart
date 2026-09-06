@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-// import 'package:loading/indicator/ball_pulse_indicator.dart';
-// import 'package:loading/loading.dart';
 import 'package:webazin/chart/pieChart/pie_chart_sample2.dart';
 import 'package:webazin/pages/assets/views/assetsChart.dart';
 import 'package:webazin/webazin/utilities.dart';
@@ -62,15 +60,9 @@ class AssetsHeader extends GetView<AssetsController> {
                   child: Container(
                     height: 40,
                     child: Obx(() {
-                      return
-                        // controller.isLoading.value
-                          // ? Loading(
-                          //     indicator: BallPulseIndicator(),
-                          //     size: 40.0,
-                          //     color: Colors.white,
-                          //   )
-                          // :
-                      SvgPicture.asset(
+                      return controller.isLoading.value
+                          ? Container()
+                          : SvgPicture.asset(
                               Assets.refresh,
                               color: context.theme.dividerColor,
                               width: 22,

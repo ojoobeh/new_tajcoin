@@ -182,8 +182,8 @@ class NumberPicker extends StatelessWidget {
     TextStyle defaultStyle;
     TextStyle selectedStyle;
 
-    // defaultStyle = unselectedRowStyle ?? themeData.textTheme.bodyText2!;
-    // selectedStyle = selectedRowStyle ?? themeData.textTheme.subtitle2!;
+    defaultStyle = unselectedRowStyle ?? themeData.textTheme.bodyMedium!;
+    selectedStyle = selectedRowStyle ?? themeData.textTheme.bodySmall!;
 
     var listItemCount = integerItemCount + 2;
 
@@ -213,10 +213,10 @@ class NumberPicker extends StatelessWidget {
                   final int value = _intValueFromIndex(index);
 
                   //define special style for selected (middle) element
-                  // final TextStyle itemStyle =
-                  //     value == selectedIntValue && highlightSelectedValue
-                  //         ? selectedStyle
-                  //         : defaultStyle;
+                  final TextStyle itemStyle =
+                      value == selectedIntValue && highlightSelectedValue
+                          ? selectedStyle
+                          : defaultStyle;
 
                   bool isExtra = index == 0 || index == listItemCount - 1;
 
@@ -225,6 +225,7 @@ class NumberPicker extends StatelessWidget {
                       : Center(
                           child: Text(
                             getDisplayedValue(value),
+                            style: itemStyle,
                           ),
                         );
                 },

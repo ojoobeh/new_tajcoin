@@ -24,6 +24,7 @@ class _SpinWheelState extends State<SpinWheel> {
             height: 300,
             child: FortuneWheel(
               animateFirst: false,
+              // selected: selected,
               physics: CircularPanPhysics(
                 duration: Duration(seconds: 1),
                 curve: Curves.decelerate,

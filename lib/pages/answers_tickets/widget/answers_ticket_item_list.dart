@@ -49,7 +49,10 @@ class AnswersTicketItemList extends StatelessWidget {
                           ],
                         ),
                         child: Center(
-                          child: Container(),
+                          child: Ui.applyHtml(answersTickets.message!,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              )),
                         ),
                       ),
                     ],
@@ -89,7 +92,10 @@ class AnswersTicketItemList extends StatelessWidget {
                       ],
                     ),
                     child: Center(
-                      child: Container(),
+                      child: Ui.applyHtml(answersTickets.message!,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          )),
                     ),
                   ),
                 ],

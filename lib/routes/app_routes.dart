@@ -12,7 +12,7 @@ class Routes {
   static const PHONE_VERIFICATION = '/phone_verification';
   static const TicketS = '/tickets';
   static const ANSWERSTicketS = '/answersTickets';
-  // static const FINGERPRINT = '/fingerPrint';
+  static const FINGERPRINT = '/fingerPrint';
   static const BANKCARD = '/bank_card';
   static const MARKETALLORDER = '/marketAllOrder';
   static const ORDER = '/order';

@@ -84,7 +84,7 @@ class LaravelApiClient extends GetxService  {
 
   //************************* API *************************************//
 
-  Future<CallCurrencies?> getCurrencies(int page, {String? search= '', int? perPage= 20}) async {
+  Future<CallCurrencies?> getCurrencies(int page, {String search= '', int perPage= 20}) async {
     var user = Core.user;
     try {
       var _queryParameters = {
@@ -191,7 +191,7 @@ class LaravelApiClient extends GetxService  {
     }
   }
 
-  Future<CallMarketList?> getMarketList(int page, {String search= ""}) async {
+  Future<CallMarketList?> getMarketList(int page, {String search=""}) async {
     var user = Core.user;
     _httpClient = dio.Dio();
     try {

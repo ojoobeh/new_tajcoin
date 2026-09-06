@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webazin/generated/assets.dart';
@@ -55,7 +57,12 @@ class PagesCuntactUsView extends GetView<PagesCuntactUsController> {
                         width: double.infinity,
                         height: 100,
                         padding: EdgeInsets.all(8),
-                        child: Container(),
+                        child: Html(
+                          style: {
+                            "*": Style(textAlign: TextAlign.right, direction: TextDirection.rtl, fontSize: FontSize.medium),
+                          },
+                          data: controller.callPage.value.data,
+                        ),
                       ),
                       Expanded(
                         child: Container(

@@ -29,19 +29,18 @@ class NavigationBottomWidget extends StatelessWidget {
                               color: AppColors.redGmail,
                             ),
                             child: Obx(() {
-                              return Container();
-                              // return Center(
-                              //   child: controller.isLoading.value
-                              //       ? Loading(indicator: BallPulseIndicator(), size: 10.0)
-                              //       : Text(
-                              //           'Sell'.tr + " " + (Get.locale!.languageCode == "fa" ? controller.selectCurrencies.value.name! : controller.selectCurrencies.value.symbol!),
-                              //           style: TextStyle(
-                              //             fontSize: 12,
-                              //             fontFamily: FontFamily.vazirBold,
-                              //             color: Get.theme.dividerColor,
-                              //           ),
-                              //         ),
-                              // );
+                              return Center(
+                                child: controller.isLoading.value
+                                    ? Container()
+                                    : Text(
+                                        'Sell'.tr + " " + (Get.locale!.languageCode == "fa" ? controller.selectCurrencies.value.name! : controller.selectCurrencies.value.symbol!),
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: FontFamily.vazirBold,
+                                          color: Get.theme.dividerColor,
+                                        ),
+                                      ),
+                              );
                             }),
                           ),
                         )
@@ -57,21 +56,20 @@ class NavigationBottomWidget extends StatelessWidget {
                             ),
                             child: Obx(
                               () {
-                                return Container();
-                                // return Center(
-                                //   child: controller.isLoading.value
-                                //       ? Loading(indicator: BallPulseIndicator(), size: 10.0)
-                                //       : Text(
-                                //           'Buy'.tr +
-                                //               " " +
-                                //               (Get.locale!.languageCode == "fa" ? controller.selectCurrencies.value.name ?? '-*-' : controller.selectCurrencies.value.symbol ?? '-*-'),
-                                //           style: TextStyle(
-                                //             fontSize: 12,
-                                //             fontFamily: FontFamily.vazirBold,
-                                //             color: Get.theme.dividerColor,
-                                //           ),
-                                //         ),
-                                // );
+                                return Center(
+                                  child: controller.isLoading.value
+                                      ? Container()
+                                      : Text(
+                                          'Buy'.tr +
+                                              " " +
+                                              (Get.locale!.languageCode == "fa" ? controller.selectCurrencies.value.name ?? '-*-' : controller.selectCurrencies.value.symbol ?? '-*-'),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: FontFamily.vazirBold,
+                                            color: Get.theme.dividerColor,
+                                          ),
+                                        ),
+                                );
                               },
                             ),
                           ),

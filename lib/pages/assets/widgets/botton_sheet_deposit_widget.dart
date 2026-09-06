@@ -1,6 +1,6 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:webazin/currency_text_input_formatter.dart';
 import 'package:webazin/pages/assets/widgets/type_assets_widget.dart';
 import 'package:webazin/webazin/utilities.dart';
 
@@ -92,7 +92,7 @@ class BottomSheetDepositWidget extends GetWidget<AssetsController> {
                                     : Text(
                                         'Submit'.tr,
                                         style: TextStyle(
-                                          // color: context.theme.highlightColor,//todo-REMOVE
+                                          color: context.theme.canvasColor//todo_selectedRowColor
                                         ),
                                       ),
                               );
@@ -148,11 +148,11 @@ class BottomSheetDepositWidget extends GetWidget<AssetsController> {
                                     controller.c1,
                                     hintText: 'Amount'.tr,
                                     inputFormatters: <TextInputFormatter>[
-                                      // CurrencyTextInputFormatter(
-                                      //   locale: 'ko',
-                                      //   decimalDigits: 0,
-                                      //   symbol: '',
-                                      // ),//todo-REMOVE
+                                      CurrencyTextInputFormatter(
+                                        locale: 'ko',
+                                        decimalDigits: 0,
+                                        symbol: '',
+                                      ),
                                     ],
                                     keyboardType: TextInputType.number,
                                     focus: controller.focusPrice,
@@ -188,7 +188,7 @@ class BottomSheetDepositWidget extends GetWidget<AssetsController> {
                                     : Text(
                                         'Submit'.tr,
                                         style: TextStyle(
-                                          // color: context.theme.highlightColor,//todo-REMOVE
+                                          color: context.theme.canvasColor//todo_selectedRowColor
                                         ),
                                       ),
                               );

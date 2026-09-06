@@ -7,9 +7,9 @@ import 'package:webazin/utils/utils.dart';
 import '../controllers/home_controller.dart';
 
 class ListTopCurrenciesWidget extends GetWidget<HomeController> {
-  final int? limit;
+  final int limit;
 
-  ListTopCurrenciesWidget({this.limit});
+  ListTopCurrenciesWidget({this.limit= 0});
 
   @override
   Widget build(final BuildContext context) {
@@ -30,9 +30,9 @@ class ListTopCurrenciesWidget extends GetWidget<HomeController> {
                       ? Colors.red
                       : AppColors.green;
                   return Container(
-                    width: (Get.width/(limit??0))-(100/(limit??0)),
+                    width: (Get.width/limit)-(100/limit),
                     margin: EdgeInsetsDirectional.only(
-                        end: index == (limit??0) - 1
+                        end: index == limit - 1
                             ? 0
                             : 10,
                         start: index == 0 ? 0 : 10),

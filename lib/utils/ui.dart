@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:webazin/utils/utils.dart';
 
@@ -227,6 +228,58 @@ class Ui {
     );
   }
 
+  static Html applyHtml(String html,
+      {TextStyle? style,
+      TextAlign? textAlign,
+      Alignment alignment = Alignment.centerLeft}) {
+    return Html(
+      data: html.replaceAll('\r\n', '') ,
+      // customRender: {
+      //   "p": (RenderContext context, Widget child) {
+      //     return Text(
+      //       context.tree.element!.text,
+      //       textDirection: TextDirection.ltr,
+      //       textAlign: textAlign,
+      //       style: style == null
+      //           ? Get.textTheme.titleSmall!.merge(TextStyle(fontSize: 11))
+      //           : style.merge(TextStyle(fontSize: 11)),
+      //     );
+      //   },
+      // },
+      style: {
+        "*": Style(
+          textAlign: textAlign,
+          alignment: alignment,
+          color: style == null ? Get.theme.hintColor : style.color,
+          fontSize: style == null ? FontSize(16.0) : FontSize(style.fontSize??14),
+          display: Display.inlineBlock,
+          fontWeight: style == null ? FontWeight.w300 : style.fontWeight,
+          width: Width.auto(),
+        ),
+        "li": Style(
+          textAlign: textAlign,
+          lineHeight: LineHeight.normal,
+          listStylePosition: ListStylePosition.outside,
+          fontSize: style == null ? FontSize(14.0) : FontSize(style.fontSize??14),
+          display: Display.block,
+        ),
+        "h4,h5,h6": Style(
+          textAlign: textAlign,
+          fontSize:
+              style == null ? FontSize(16.0) : FontSize(style.fontSize! + 2),
+        ),
+        "h1,h2,h3": Style(
+          textAlign: textAlign,
+          lineHeight: LineHeight.number(2),
+          fontSize:
+              style == null ? FontSize(18.0) : FontSize(style.fontSize! + 4),
+        ),
+        "br": Style(
+          height: Height.auto(),
+        ),
+      },
+    );
+  }
 
   static BoxFit getBoxFit(String boxFit) {
     switch (boxFit) {
@@ -249,6 +302,39 @@ class Ui {
     }
   }
 
+  static Html removeHtml(String html,
+      {TextStyle? style,
+      TextAlign? textAlign,
+      Alignment alignment = Alignment.centerLeft}) {
+    return Html(
+      data: html.replaceAll('\r\n', '') ,
+      // customRender: {
+      //   "p": (RenderContext context, Widget child) {
+      //     return Text(
+      //       context.tree.element!.text,
+      //       textAlign: textAlign,
+      //       style: style == null
+      //           ? Get.textTheme.titleSmall!.merge(TextStyle(fontSize: 11))
+      //           : style.merge(TextStyle(fontSize: 11)),
+      //     );
+      //   },
+      // },
+      style: {
+        "*": Style(
+          textAlign: textAlign,
+          alignment: alignment,
+          color: style == null ? Get.theme.hintColor : style.color,
+          fontSize: style == null ? FontSize(11.0) : FontSize(style.fontSize??14),
+          display: Display.inlineBlock,
+          fontWeight: style == null ? FontWeight.w300 : style.fontWeight,
+          width: Width.auto(),
+        ),
+        "br": Style(
+          height: Height.auto(),
+        ),
+      },
+    );
+  }
 
   static AlignmentDirectional getAlignmentDirectional(
       String alignmentDirectional) {
