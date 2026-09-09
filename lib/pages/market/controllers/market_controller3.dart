@@ -51,7 +51,7 @@ class MarketController extends GetxController {
   final close = "".obs;
 
   final persentageValue = 0.0.obs;
-  String? _currentAskBidChannel;
+
   var user = DataUser().obs;
 
   late TutorialCoachMark tutorialCoachMark;
@@ -69,7 +69,7 @@ class MarketController extends GetxController {
     getOrder.value = false;
     update();
     await loadMarket();
-
+    connectToServer();
     getData();
     super.onInit();
   }
@@ -309,7 +309,6 @@ class MarketController extends GetxController {
     selectMarketList.value = dataMarket;
     isSelectMarket(true);
     isLoadingOrder(false);
-    connectToServer();
     update();
     if (!isLoadingOrder.value) {
       setIsLoadingOrder(true);
@@ -1025,9 +1024,9 @@ class MarketController extends GetxController {
 
     _registerBalanceListener(balanceChannel);
 
+    _registerAskBidListener(askBidChannel);
 
     _registerTickerListener(tickerChannel);
-    _registerTickerListener2(askBidChannel);
   }
 
   void _registerBalanceListener(String channelName) {
@@ -1354,93 +1353,6 @@ class MarketController extends GetxController {
       }
     });
   }
-  void _registerTickerListener2(String channelName) {
-    if (socket == null) return;
-
-    const eventName = 'AskBid';
-
-    socket!.off(eventName);
-
-    socket!.on(eventName, (dynamic e) {
-
-      try {
-        print('📈 .AskBid Event');
-        print('TYPE: ${e.runtimeType}');
-        print('DATA: $e');
-
-        Map<String, dynamic> data = e[1];
-
-        var asks = data['asks'];
-        var bids = data['bids'];
-
-        Map<String, dynamic> yy = bids != null ? Map<String, dynamic>.from(bids) : {};
-        Map<String, dynamic> xx = asks != null ? Map<String, dynamic>.from(asks) : {};
-
-        if (yy.length > 0) {
-          List<SocketListUpDown> dd = [];
-          yy.forEach((key, value) {
-            double d = double.parse(key);
-            String f = d.toString();
-            Map<String, dynamic> data = {
-              "price": f,
-              "percentage": value[0].toString(),
-              "volume": value.length > 1 ? value[1].toString() : "40",
-            };
-            dd.add(SocketListUpDown.fromJson(data));
-          });
-
-          List<SocketListUpDown> listReverse1 = dd.reversed.toList();
-          // // intDown limit=7;
-          // int limitDown = listReverse1.length;
-          // for (int i = 0; i < limitDown; i++) {
-          //   listReverse2.add(listReverse1[i]);
-          // }
-          // List<SocketListUpDown> listReverse3 = listReverse2.reversed.toList();
-          // List<SocketListUpDown> listReverse4 = [];
-          // for(int i=listReverse3.length;i>0;i--){
-          //   listReverse4.add(listReverse3[i]);
-          // }
-          listDown.assignAll(listReverse1);
-          //down
-
-
-
-
-
-
-          update();
-        }
-
-        if (xx.length > 0) {
-          List<SocketListUpDown> dd = [];
-          xx.forEach((key, value) {
-            double d = double.parse(key);
-            String f = d.toString();
-            Map<String, dynamic> data = {
-              "price": f,
-              "percentage": value[0].toString(),
-              "volume": value.length > 1 ? value[1].toString() : "0",
-            };
-            dd.add(SocketListUpDown.fromJson(data));
-          });
-          listUp.assignAll(dd);
-          update();
-        }
-
-
-      } catch (error, stackTrace) {
-        print('❌ AskBid Error');
-        print(error);
-        print(stackTrace);
-      }
-
-
-
-
-
-
-    });
-  }
 
 
   // void _registerTickerListener(
@@ -1590,57 +1502,6 @@ class MarketController extends GetxController {
       print(e);
       print(stackTrace);
     }
-  }
-
-  void _subscribeAskBidChannel() {
-    if (socket == null || !socket!.connected) {
-      print('❌ Socket is not connected');
-      return;
-    }
-
-    final symbol = selectMarketList.value.symbol;
-
-    if (symbol == null || symbol.isEmpty) {
-      print('❌ AskBid symbol is empty');
-      return;
-    }
-
-    final newChannel =
-        '${Core.channel}_database_ask-bid-channel-$symbol';
-
-    print('');
-    print('======================================');
-    print('📊 ASK BID SUBSCRIBE');
-    print('Symbol: $symbol');
-    print('Channel: $newChannel');
-    print('Old Channel: $_currentAskBidChannel');
-    print('======================================');
-
-    // اگر قبلاً روی همین کانال هستیم
-    if (_currentAskBidChannel == newChannel) {
-      print('⚠️ Already subscribed to this AskBid channel');
-      return;
-    }
-
-    // از کانال قبلی خارج شو
-    if (_currentAskBidChannel != null) {
-      print('📤 Unsubscribing old channel: $_currentAskBidChannel');
-
-      socket!.emit('unsubscribe', {
-        'channel': _currentAskBidChannel,
-      });
-    }
-
-    _currentAskBidChannel = newChannel;
-
-    // Subscribe کانال جدید
-    socket!.emit('subscribe', {
-      'channel': newChannel,
-    });
-
-    print('📥 Subscribe emitted: $newChannel');
-
-    _registerAskBidListener(newChannel);
   }
 
 

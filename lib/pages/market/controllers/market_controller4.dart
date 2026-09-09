@@ -69,7 +69,7 @@ class MarketController extends GetxController {
     getOrder.value = false;
     update();
     await loadMarket();
-
+    connectToServer();
     getData();
     super.onInit();
   }
@@ -309,7 +309,6 @@ class MarketController extends GetxController {
     selectMarketList.value = dataMarket;
     isSelectMarket(true);
     isLoadingOrder(false);
-    connectToServer();
     update();
     if (!isLoadingOrder.value) {
       setIsLoadingOrder(true);
@@ -420,10 +419,6 @@ class MarketController extends GetxController {
     updateTotalPrice();
   }
 
-  //
-  //
-  //
-  //
 
   void changeTPrice2(String price) {
     if (tePerPrice.text.length == 0) {
@@ -781,68 +776,7 @@ class MarketController extends GetxController {
   IO.Socket? socket;
 
   bool _isSocketConnecting = false;
-  // void connectToServer() {
-  //   try {
-  //     if (_isSocketConnecting) {
-  //       print('⚠️ Socket is already connecting...');
-  //       return;
-  //     }
-  //
-  //     _isSocketConnecting = true;
-  //
-  //     final String socketUrl =
-  //         '${Core.laravelBaseUrl2}:${Core.port}';
-  //
-  //     print('======================================');
-  //     print('🔌 CONNECTING SOCKET');
-  //     print('URL: $socketUrl');
-  //     print('USER ID: ${user.value.id}');
-  //     print('======================================');
-  //
-  //     // اگر قبلاً socket وجود دارد
-  //     if (socket != null) {
-  //       print('🧹 Disconnect old socket');
-  //
-  //       socket!.clearListeners();
-  //       socket!.disconnect();
-  //       socket!.dispose();
-  //
-  //       socket = null;
-  //     }
-  //
-  //     socket = IO.io(
-  //       socketUrl,
-  //       IO.OptionBuilder()
-  //           .setTransports(['websocket'])
-  //           .disableAutoConnect()
-  //           .enableReconnection()
-  //           .setReconnectionAttempts(999999)
-  //           .setReconnectionDelay(1000)
-  //           .setReconnectionDelayMax(5000)
-  //           .setTimeout(10000)
-  //           .setExtraHeaders({
-  //         'Authorization': 'Bearer ${user.value.apiToken}',
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json',
-  //       })
-  //           .setAuth({
-  //         'token': user.value.apiToken,
-  //       })
-  //           .build(),
-  //     );
-  //
-  //     _registerSocketConnectionEvents();
-  //
-  //     socket!.connect();
-  //
-  //   } catch (e, stackTrace) {
-  //     _isSocketConnecting = false;
-  //
-  //     print('❌ SOCKET CONNECTION ERROR');
-  //     print(e);
-  //     print(stackTrace);
-  //   }
-  // }
+
   void connectToServer() {
     try {
       final String url =
@@ -1015,9 +949,9 @@ class MarketController extends GetxController {
       'channel': balanceChannel,
     });
 
-    socket!.emit('subscribe', {
-      'channel': askBidChannel,
-    });
+    // socket!.emit('subscribe', {
+    //   'channel': askBidChannel,
+    // });
 
     socket!.emit('subscribe', {
       'channel': tickerChannel,
@@ -1025,9 +959,11 @@ class MarketController extends GetxController {
 
     _registerBalanceListener(balanceChannel);
 
+    // _registerAskBidListener(askBidChannel);
+
+    _subscribeAskBidChannel();
 
     _registerTickerListener(tickerChannel);
-    _registerTickerListener2(askBidChannel);
   }
 
   void _registerBalanceListener(String channelName) {
@@ -1354,195 +1290,8 @@ class MarketController extends GetxController {
       }
     });
   }
-  void _registerTickerListener2(String channelName) {
-    if (socket == null) return;
-
-    const eventName = 'AskBid';
-
-    socket!.off(eventName);
-
-    socket!.on(eventName, (dynamic e) {
-
-      try {
-        print('📈 .AskBid Event');
-        print('TYPE: ${e.runtimeType}');
-        print('DATA: $e');
-
-        Map<String, dynamic> data = e[1];
-
-        var asks = data['asks'];
-        var bids = data['bids'];
-
-        Map<String, dynamic> yy = bids != null ? Map<String, dynamic>.from(bids) : {};
-        Map<String, dynamic> xx = asks != null ? Map<String, dynamic>.from(asks) : {};
-
-        if (yy.length > 0) {
-          List<SocketListUpDown> dd = [];
-          yy.forEach((key, value) {
-            double d = double.parse(key);
-            String f = d.toString();
-            Map<String, dynamic> data = {
-              "price": f,
-              "percentage": value[0].toString(),
-              "volume": value.length > 1 ? value[1].toString() : "40",
-            };
-            dd.add(SocketListUpDown.fromJson(data));
-          });
-
-          List<SocketListUpDown> listReverse1 = dd.reversed.toList();
-          // // intDown limit=7;
-          // int limitDown = listReverse1.length;
-          // for (int i = 0; i < limitDown; i++) {
-          //   listReverse2.add(listReverse1[i]);
-          // }
-          // List<SocketListUpDown> listReverse3 = listReverse2.reversed.toList();
-          // List<SocketListUpDown> listReverse4 = [];
-          // for(int i=listReverse3.length;i>0;i--){
-          //   listReverse4.add(listReverse3[i]);
-          // }
-          listDown.assignAll(listReverse1);
-          //down
 
 
-
-
-
-
-          update();
-        }
-
-        if (xx.length > 0) {
-          List<SocketListUpDown> dd = [];
-          xx.forEach((key, value) {
-            double d = double.parse(key);
-            String f = d.toString();
-            Map<String, dynamic> data = {
-              "price": f,
-              "percentage": value[0].toString(),
-              "volume": value.length > 1 ? value[1].toString() : "0",
-            };
-            dd.add(SocketListUpDown.fromJson(data));
-          });
-          listUp.assignAll(dd);
-          update();
-        }
-
-
-      } catch (error, stackTrace) {
-        print('❌ AskBid Error');
-        print(error);
-        print(stackTrace);
-      }
-
-
-
-
-
-
-    });
-  }
-
-
-  // void _registerTickerListener(
-  //     String channelName,
-  //     ) {
-  //   if (socket == null) return;
-  //
-  //   const eventName =
-  //       'App\\Events\\Binance\\GetTicker';
-  //
-  //   socket!.off(eventName);
-  //
-  //   socket!.on(eventName, (dynamic e) {
-  //     try {
-  //       print('📈 Ticker Event');
-  //       print(e);
-  //
-  //       if (!e['isWallet']) {
-  //         // selectMarketList.value.balanceOne=e['BalanceOne'];
-  //         // selectMarketList.value.balanceTwo=e['BalanceTwo'].toString();
-  //
-  //         // selectMarketList.value.balanceOne="10.521";
-  //         // updateBalance(e);
-  //         if (e['id'] == selectMarketList.value.id) {
-  //           Map<String, dynamic> data = {
-  //             "id": e['id'],
-  //             "marketId": selectMarketList.value.id,
-  //             "icon": selectMarketList.value.icon,
-  //             "symbol": selectMarketList.value.symbol,
-  //             "price": selectMarketList.value.price,
-  //             "decimal": selectMarketList.value.decimal,
-  //             "percent": selectMarketList.value.percent,
-  //             "BalanceOne": e['BalanceOne'],
-  //             "BalanceTwo": e['BalanceTwo'],
-  //           };
-  //           DataMarket dataMarketList = DataMarket.fromMap(data);
-  //           selectCurrency(dataMarketList);
-  //           getOrder.value = false;
-  //           update();
-  //           updateAfterTrade(dataMarketList);
-  //           updateOrder(dataMarketList);
-  //         } else {
-  //           print('Currencyyyyy9 :${e['id'].toString()}');
-  //           Map<String, dynamic> data = {
-  //             "id": selectMarketList.value.id,
-  //             "marketId": selectMarketList.value.id,
-  //             "icon": selectMarketList.value.icon,
-  //             "symbol": selectMarketList.value.symbol,
-  //             "price": selectMarketList.value.price,
-  //             "decimal": selectMarketList.value.decimal,
-  //             "percent": selectMarketList.value.percent,
-  //             "BalanceOne": selectMarketList.value.balanceOne,
-  //             "BalanceTwo": e['BalanceTwo'],
-  //             // "BalanceTwo": "10.255",
-  //           };
-  //           print('Currencyyyyy8 >>>>>> ${data.toString()}');
-  //           DataMarket dataMarketList = DataMarket.fromMap(data);
-  //           selectCurrency2(dataMarketList);
-  //           getOrder.value = false;
-  //           update();
-  //           updateAfterTrade(dataMarketList);
-  //         }
-  //       } else {
-  //         // String currency = e['currency'];
-  //         // String balanceOne = e['BalanceOne'].toString();
-  //         // String irtPrice = e['BalanceTwo'].toString();
-  //         //
-  //         // // double balanceOne=10;
-  //         // // double irtPrice=2300;
-  //         //
-  //         // // double irtPrice=2.0;
-  //         // Get.find<AssetsController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
-  //         // Get.find<TradeController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
-  //         // Get.find<TradeDrawerController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
-  //         // prt(balanceOne.toString() + ":::::" + irtPrice.toString());
-  //         String currency = e['currency'];
-  //         String balanceOne = e['BalanceOne'].toString();
-  //         String irtPrice = e['irtPrice'].toString();
-  //         String xcxc = e['irtPrice'].toString();
-  //
-  //         // double balanceOne=10;
-  //         // double irtPrice=2300;
-  //
-  //         // double irtPrice=2.0;
-  //         // Get.find<AssetsController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice), 0.0);
-  //         // Get.find<TradeController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
-  //         // Get.find<TradeDrawerController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
-  //         // prt(balanceOne.toString() + ":::::" + irtPrice.toString());
-  //       }
-  //
-  //
-  //
-  //
-  //       // _handleTicker(e);
-  //
-  //     } catch (error, stackTrace) {
-  //       print('❌ Ticker Error');
-  //       print(error);
-  //       print(stackTrace);
-  //     }
-  //   });
-  // }
 
   void _handleTicker(dynamic e) {
     try {
