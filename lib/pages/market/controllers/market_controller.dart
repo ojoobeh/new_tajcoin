@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import 'package:webazin/pages/home_all_currency/controllers/home_all_order_controller.dart';
 import 'package:webazin/utils/core.dart';
 import 'package:webazin/webazin/data/models/socket/socket_list_up_down.dart';
 import 'package:webazin/webazin/utilities.dart';
@@ -80,11 +81,7 @@ class MarketController extends GetxController {
       targets: targets,
       colorShadow: Colors.blueGrey,
       textSkip: "",
-      textStyleSkip: TextStyle(
-        fontSize: 20,
-        color: AppColors.orangeColor,
-        fontFamily: FontFamily.vazirBold,
-      ),
+      textStyleSkip: TextStyle(fontSize: 20, color: AppColors.orangeColor, fontFamily: FontFamily.vazirBold),
       paddingFocus: 10,
       opacityShadow: 0.8,
       onFinish: () {
@@ -104,7 +101,7 @@ class MarketController extends GetxController {
         // Get.find<AuthService>().addShowHelper(AuthService.helperMarket);
         return true;
       },
-    )..show(context:context);
+    )..show(context: context);
   }
 
   void initTargets(final BuildContext context) {
@@ -123,34 +120,17 @@ class MarketController extends GetxController {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Center(
-                        child: Image.asset(
-                          Assets.arrow2,
-                          width: 100,
-                          height: 100,
-                          color: Colors.yellow,
-                        )),
+                    SizedBox(height: 32),
+                    Center(child: Image.asset(Assets.arrow2, width: 100, height: 100, color: Colors.yellow)),
                     Text(
                       "Market".tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontFamily.vazirBold,
-                        color: Colors.red,
-                        fontSize: 20.0,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontFamily: FontFamily.vazirBold, color: Colors.red, fontSize: 20.0),
                     ).marginOnly(top: 16),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
                         "Buying and selling is fast and your currency is traded at the best market price and the fastest time.".tr,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: FontFamily.vazirBold,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: Colors.white, fontFamily: FontFamily.vazirBold, fontSize: 16),
                       ),
                     ),
                   ],
@@ -178,32 +158,19 @@ class MarketController extends GetxController {
                     Container(
                       margin: const EdgeInsets.only(left: 16, top: 32),
                       child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Image.asset(
-                            Assets.arrow2,
-                            width: 100,
-                            height: 100,
-                            color: Colors.yellow,
-                          )),
+                        alignment: Alignment.centerLeft,
+                        child: Image.asset(Assets.arrow2, width: 100, height: 100, color: Colors.yellow),
+                      ),
                     ),
                     Text(
                       "limit".tr,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontFamily.vazirBold,
-                        color: Colors.red,
-                        fontSize: 20.0,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontFamily: FontFamily.vazirBold, color: Colors.red, fontSize: 20.0),
                     ).marginOnly(top: 32),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
                         "In this section, you can enter your desired price".tr,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: FontFamily.vazirBold,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: Colors.white, fontFamily: FontFamily.vazirBold, fontSize: 16),
                       ),
                     ),
                   ],
@@ -224,9 +191,7 @@ class MarketController extends GetxController {
   Future refreshHome({bool showMessage = false, String statusId = ""}) async {
     try {
       pageOrder.value = 0;
-      selectCurrency(
-        selectMarketList.value,
-      );
+      selectCurrency(selectMarketList.value);
 
       update();
     } catch (e) {
@@ -285,9 +250,7 @@ class MarketController extends GetxController {
     update();
   }
 
-  Future changeCurrency(
-      DataMarket dataMarket,
-      ) async {
+  Future changeCurrency(DataMarket dataMarket) async {
     await updateOrder(dataMarket);
     selectCurrency(dataMarket);
     // connectToServer();
@@ -298,9 +261,7 @@ class MarketController extends GetxController {
     update();
   }
 
-  Future selectCurrency(
-      DataMarket dataMarket,
-      ) async {
+  Future selectCurrency(DataMarket dataMarket) async {
     listDown.clear();
     listUp.clear();
     close.value = "0";
@@ -324,7 +285,7 @@ class MarketController extends GetxController {
           snackbarRed(title: 'Error'.tr, subtitle: errorResponse.message);
         },
         failure: (error) {
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' currency '.tr);
+          snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information '.tr + ' currency '.tr);
         },
       );
 
@@ -356,13 +317,10 @@ class MarketController extends GetxController {
       // c1.text = price.value.toString();
       getTotalPrice();
       // getCurrencies(0, search: '');
-
     }
   }
 
-  Future selectCurrency2(
-      DataMarket dataMarket,
-      ) async {
+  Future selectCurrency2(DataMarket dataMarket) async {
     selectMarketList.value = dataMarket;
     count.value = 1.0;
     count2.value = count.value;
@@ -505,9 +463,7 @@ class MarketController extends GetxController {
   Future<void> changeSeller(final bool isSeller) async {
     isSell.value = isSeller;
 
-    selectCurrency2(
-      selectMarketList.value,
-    );
+    selectCurrency2(selectMarketList.value);
   }
 
   void buyOrder(final BuildContext context) async {
@@ -516,21 +472,17 @@ class MarketController extends GetxController {
       showLoading();
       setIsLoadingOrder(true);
       marketSource.storeMarket(
-        storeMarket: StoreMarket(
-          marketId: ss.id,
-          price: tePerPrice.text.replaceAll(",", ""),
-          count: tecQuantity.text,
-          type: "buy",
-          orderType: "limit",
-        ),
+        storeMarket: StoreMarket(marketId: ss.id, price: tePerPrice.text.replaceAll(",", ""), count: tecQuantity.text, type: "buy", orderType: "limit"),
         onResponse: (response) {
-          getUser(action: () {
-            user.value = Core.user;
-            snackbarGreen(title: 'Success'.tr, subtitle: response.message);
-            dismissLoading();
-            setIsLoadingOrder(false);
-            update();
-          });
+          getUser(
+            action: () {
+              user.value = Core.user;
+              snackbarGreen(title: 'Success'.tr, subtitle: response.message);
+              dismissLoading();
+              setIsLoadingOrder(false);
+              update();
+            },
+          );
         },
         onError: (errorResponse) {
           dismissLoading();
@@ -556,20 +508,17 @@ class MarketController extends GetxController {
         showLoading();
         setIsLoadingOrder(true);
         marketSource.storeMarket(
-          storeMarket: StoreMarket(
-            marketId: ss.id,
-            sum: teTotalPrice.text,
-            type: "buy",
-            orderType: "market",
-          ),
+          storeMarket: StoreMarket(marketId: ss.id, sum: teTotalPrice.text, type: "buy", orderType: "market"),
           onResponse: (response) {
-            getUser(action: () {
-              user.value = Core.user;
-              snackbarGreen(title: 'Success'.tr, subtitle: response.message);
-              dismissLoading();
-              setIsLoadingOrder(false);
-              update();
-            });
+            getUser(
+              action: () {
+                user.value = Core.user;
+                snackbarGreen(title: 'Success'.tr, subtitle: response.message);
+                dismissLoading();
+                setIsLoadingOrder(false);
+                update();
+              },
+            );
           },
           onError: (errorResponse) {
             dismissLoading();
@@ -603,21 +552,17 @@ class MarketController extends GetxController {
 
       setIsLoadingOrder(true);
       marketSource.storeMarket(
-        storeMarket: StoreMarket(
-          marketId: ss.id,
-          price: tePerPrice.text.replaceAll(",", ""),
-          count: count.value.toString(),
-          type: "sell",
-          orderType: "limit",
-        ),
+        storeMarket: StoreMarket(marketId: ss.id, price: tePerPrice.text.replaceAll(",", ""), count: count.value.toString(), type: "sell", orderType: "limit"),
         onResponse: (response) {
-          getUser(action: () {
-            user.value = Core.user;
-            snackbarGreen(title: 'Success'.tr, subtitle: response.message);
-            dismissLoading();
-            setIsLoadingOrder(false);
-            update();
-          });
+          getUser(
+            action: () {
+              user.value = Core.user;
+              snackbarGreen(title: 'Success'.tr, subtitle: response.message);
+              dismissLoading();
+              setIsLoadingOrder(false);
+              update();
+            },
+          );
         },
         onError: (errorResponse) {
           dismissLoading();
@@ -643,20 +588,17 @@ class MarketController extends GetxController {
 
         setIsLoadingOrder(true);
         marketSource.storeMarket(
-          storeMarket: StoreMarket(
-            marketId: ss.id,
-            count: tecQuantity.text,
-            type: "sell",
-            orderType: "market",
-          ),
+          storeMarket: StoreMarket(marketId: ss.id, count: tecQuantity.text, type: "sell", orderType: "market"),
           onResponse: (response) {
-            getUser(action: () {
-              user.value = Core.user;
-              snackbarGreen(title: 'Success'.tr, subtitle: response.message);
-              dismissLoading();
-              setIsLoadingOrder(false);
-              update();
-            });
+            getUser(
+              action: () {
+                user.value = Core.user;
+                snackbarGreen(title: 'Success'.tr, subtitle: response.message);
+                dismissLoading();
+                setIsLoadingOrder(false);
+                update();
+              },
+            );
           },
           onError: (errorResponse) {
             dismissLoading();
@@ -685,13 +627,15 @@ class MarketController extends GetxController {
         status: 'cancel',
         marketId: dataOrderMarket.id ?? 0,
         onResponse: (response) {
-          getUser(action: () {
-            user.value = Core.user;
-            snackbarGreen(title: 'Success'.tr, subtitle: response.message);
-            dismissLoading();
-            setIsLoadingOrder(false);
-            update();
-          });
+          getUser(
+            action: () {
+              user.value = Core.user;
+              snackbarGreen(title: 'Success'.tr, subtitle: response.message);
+              dismissLoading();
+              setIsLoadingOrder(false);
+              update();
+            },
+          );
           update();
         },
         onError: (errorResponse) {
@@ -738,7 +682,7 @@ class MarketController extends GetxController {
           },
           failure: (error) {
             dismissLoading();
-            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' Orders'.tr);
+            snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information '.tr + ' Orders'.tr);
             isDoneOrder(true);
             debugPrint(error);
             update();
@@ -761,9 +705,11 @@ class MarketController extends GetxController {
   }
 
   Future<void> updateAfterTrade(DataMarket dataMarketList) async {
-    getUser(action: () {
-      user.value = Core.user;
-    });
+    getUser(
+      action: () {
+        user.value = Core.user;
+      },
+    );
     // await Get.find<AssetsController>().getAssets();
     Get.find<MarketDrawerController>().updateSelectMarket(dataMarketList);
     isDoneOrder(true);
@@ -774,13 +720,13 @@ class MarketController extends GetxController {
   Future updateBalance(dynamic e) async {
     selectMarketList.value.balanceTwo = 90.666;
     isSell.value = isSell.value;
-    selectCurrency2(
-      selectMarketList.value,
-    );
+    selectCurrency2(selectMarketList.value);
   }
+
   IO.Socket? socket;
 
   bool _isSocketConnecting = false;
+
   // void connectToServer() {
   //   try {
   //     if (_isSocketConnecting) {
@@ -859,7 +805,7 @@ class MarketController extends GetxController {
       print('Transport: websocket');
       print('==========================================');
 
-// Socket قبلی را کامل ببند
+      // Socket قبلی را کامل ببند
       if (socket != null) {
         print('🧹 Disposing previous socket...');
 
@@ -881,11 +827,7 @@ class MarketController extends GetxController {
             .setReconnectionDelay(2000)
             .setReconnectionDelayMax(5000)
             .setTimeout(20000)
-            .setExtraHeaders({
-          'Authorization': 'Bearer ${user.value.apiToken}',
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        })
+            .setExtraHeaders({'Authorization': 'Bearer ${user.value.apiToken}', 'Content-Type': 'application/json', 'Accept': 'application/json'})
             .build(),
       );
 
@@ -927,7 +869,6 @@ class MarketController extends GetxController {
       });
 
       socket!.connect();
-
     } catch (e, stackTrace) {
       print('');
       print('💥💥💥 SOCKET EXCEPTION 💥💥💥');
@@ -935,6 +876,7 @@ class MarketController extends GetxController {
       print(stackTrace);
     }
   }
+
   void _registerSocketConnectionEvents() {
     if (socket == null) return;
 
@@ -991,14 +933,11 @@ class MarketController extends GetxController {
       return;
     }
 
-    final String balanceChannel =
-        '${Core.channel}_database_balance-Update-${user.value.id}';
+    final String balanceChannel = '${Core.channel}_database_balance-Update-${user.value.id}';
 
-    final String askBidChannel =
-        '${Core.channel}_database_ask-bid-channel-${selectMarketList.value.symbol}';
+    final String askBidChannel = '${Core.channel}_database_ask-bid-channel-${selectMarketList.value.symbol}';
 
-    final String tickerChannel =
-        '${Core.channel}_database_ticker-update-channels';
+    final String tickerChannel = '${Core.channel}_database_ticker-update-channels';
 
     print('======================================');
     print('📡 SUBSCRIBING CHANNELS');
@@ -1011,66 +950,28 @@ class MarketController extends GetxController {
     // Laravel Echo Server Channel Subscription
     // --------------------------------------------------
 
+    // socket!.emit('subscribe', {'channel': balanceChannel},);
     socket!.emit('subscribe', {
       'channel': balanceChannel,
+      'auth': {
+        'headers': {'Authorization': 'Bearer ${user.value.apiToken}', 'Content-Type': 'application/json', 'Accept': 'application/json'},
+      },
+      'host': Core.laravelBaseUrl2 + ':' + Core.port.toString(),
+      'authEndpoint': Core.laravelBaseUrl2 + '/broadcasting/auth?api_token=${user.value.apiToken}',
     });
 
-    socket!.emit('subscribe', {
-      'channel': askBidChannel,
-    });
+    socket!.emit('subscribe', {'channel': askBidChannel});
 
-    socket!.emit('subscribe', {
-      'channel': tickerChannel,
-    });
+    socket!.emit('subscribe', {'channel': tickerChannel});
 
-    _registerBalanceListener(balanceChannel);
-
+    // _registerBalanceListener(balanceChannel);
 
     _registerTickerListener(tickerChannel);
+    _registerTickerListener0(balanceChannel);
     _registerTickerListener2(askBidChannel);
   }
 
-  void _registerBalanceListener(String channelName) {
-    if (socket == null) return;
-
-    socket!.off('BalanceUpdate');
-
-    socket!.on('BalanceUpdate', (dynamic e) {
-      try {
-        print('💰 BalanceUpdate');
-        print(e);
-
-        Map<String, dynamic> dataEvent =
-        Map<String, dynamic>.from(e);
-
-        _handleBalanceUpdate(dataEvent);
-
-      } catch (error, stackTrace) {
-        print('❌ BalanceUpdate Error');
-        print(error);
-        print(stackTrace);
-      }
-    });
-
-    // بعضی Laravel Echo Server ها event را با نام کامل می‌فرستند
-    socket!.off('.BalanceUpdate');
-
-    socket!.on('.BalanceUpdate', (dynamic e) {
-      try {
-        Map<String, dynamic> dataEvent =
-        Map<String, dynamic>.from(e);
-
-        _handleBalanceUpdate(dataEvent);
-
-      } catch (error) {
-        print('❌ .BalanceUpdate Error: $error');
-      }
-    });
-  }
-
-  void _handleBalanceUpdate(
-      Map<String, dynamic> e,
-      ) {
+  void _handleBalanceUpdate(Map<String, dynamic> e) {
     if (e['isWallet'] == false) {
       if (e['id'] == selectMarketList.value.id) {
         Map<String, dynamic> data = {
@@ -1085,8 +986,7 @@ class MarketController extends GetxController {
           "BalanceTwo": e['BalanceTwo'],
         };
 
-        DataMarket dataMarketList =
-        DataMarket.fromMap(data);
+        DataMarket dataMarketList = DataMarket.fromMap(data);
 
         selectCurrency(dataMarketList);
 
@@ -1097,7 +997,6 @@ class MarketController extends GetxController {
         updateAfterTrade(dataMarketList);
 
         updateOrder(dataMarketList);
-
       } else {
         Map<String, dynamic> data = {
           "id": selectMarketList.value.id,
@@ -1111,8 +1010,7 @@ class MarketController extends GetxController {
           "BalanceTwo": e['BalanceTwo'],
         };
 
-        DataMarket dataMarketList =
-        DataMarket.fromMap(data);
+        DataMarket dataMarketList = DataMarket.fromMap(data);
 
         selectCurrency2(dataMarketList);
 
@@ -1122,38 +1020,20 @@ class MarketController extends GetxController {
 
         updateAfterTrade(dataMarketList);
       }
-
     } else {
       String currency = e['currency'].toString();
 
-      String balanceOne =
-      e['BalanceOne'].toString();
+      String balanceOne = e['BalanceOne'].toString();
 
-      String irtPrice =
-      e['irtPrice'].toString();
+      String irtPrice = e['irtPrice'].toString();
 
-      Get.find<AssetsController>().changeBalance(
-        currency,
-        double.parse(balanceOne),
-        double.parse(irtPrice),
-        0.0,
-      );
+      Get.find<AssetsController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice), 0.0);
 
-      Get.find<TradeController>().changeBalance(
-        currency,
-        double.parse(balanceOne),
-        double.parse(irtPrice),
-      );
+      Get.find<TradeController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
 
-      Get.find<TradeDrawerController>().changeBalance(
-        currency,
-        double.parse(balanceOne),
-        double.parse(irtPrice),
-      );
+      Get.find<TradeDrawerController>().changeBalance(currency, double.parse(balanceOne), double.parse(irtPrice));
 
-      prt(
-        '$balanceOne ::::: $irtPrice',
-      );
+      prt('$balanceOne ::::: $irtPrice');
     }
   }
 
@@ -1177,7 +1057,6 @@ class MarketController extends GetxController {
         }
 
         _handleAskBid(data);
-
       } catch (error, stackTrace) {
         print('❌ AskBid Error');
         print(error);
@@ -1190,22 +1069,14 @@ class MarketController extends GetxController {
     socket!.on('.AskBid', handle);
   }
 
-  void _handleAskBid(
-      Map<String, dynamic> data,
-      ) {
+  void _handleAskBid(Map<String, dynamic> data) {
     var asks = data['asks'];
 
     var bids = data['bids'];
 
-    Map<String, dynamic> yy =
-    bids != null
-        ? Map<String, dynamic>.from(bids)
-        : {};
+    Map<String, dynamic> yy = bids != null ? Map<String, dynamic>.from(bids) : {};
 
-    Map<String, dynamic> xx =
-    asks != null
-        ? Map<String, dynamic>.from(asks)
-        : {};
+    Map<String, dynamic> xx = asks != null ? Map<String, dynamic>.from(asks) : {};
 
     // ============================
     // BID
@@ -1215,32 +1086,18 @@ class MarketController extends GetxController {
       List<SocketListUpDown> dd = [];
 
       yy.forEach((key, value) {
-        double d = double.parse(
-          key.toString(),
-        );
+        double d = double.parse(key.toString());
 
         String f = d.toString();
 
-        Map<String, dynamic> item = {
-          "price": f,
-          "percentage": value[0].toString(),
-          "volume":
-          value.length > 1
-              ? value[1].toString()
-              : "40",
-        };
+        Map<String, dynamic> item = {"price": f, "percentage": value[0].toString(), "volume": value.length > 1 ? value[1].toString() : "40"};
 
-        dd.add(
-          SocketListUpDown.fromJson(item),
-        );
+        dd.add(SocketListUpDown.fromJson(item));
       });
 
-      List<SocketListUpDown> listReverse =
-      dd.reversed.toList();
+      List<SocketListUpDown> listReverse = dd.reversed.toList();
 
-      listDown.assignAll(
-        listReverse,
-      );
+      listDown.assignAll(listReverse);
     }
 
     // ============================
@@ -1251,24 +1108,13 @@ class MarketController extends GetxController {
       List<SocketListUpDown> dd = [];
 
       xx.forEach((key, value) {
-        double d = double.parse(
-          key.toString(),
-        );
+        double d = double.parse(key.toString());
 
         String f = d.toString();
 
-        Map<String, dynamic> item = {
-          "price": f,
-          "percentage": value[0].toString(),
-          "volume":
-          value.length > 1
-              ? value[1].toString()
-              : "0",
-        };
+        Map<String, dynamic> item = {"price": f, "percentage": value[0].toString(), "volume": value.length > 1 ? value[1].toString() : "0"};
 
-        dd.add(
-          SocketListUpDown.fromJson(item),
-        );
+        dd.add(SocketListUpDown.fromJson(item));
       });
 
       listUp.assignAll(dd);
@@ -1276,6 +1122,53 @@ class MarketController extends GetxController {
 
     update();
   }
+
+  void _registerTickerListener0(String channelName) {
+    print('🔥🔥🔥 REGISTER BALANCE LISTENER 🔥🔥🔥');
+    print('CHANNEL: $channelName');
+    print('SOCKET NULL: ${socket == null}');
+
+    if (socket == null) return;
+
+    final events = ['BalanceUpdate', '.BalanceUpdate', 'App\\Events\\BalanceUpdate', 'App\\Events\\User\\BalanceUpdate', 'App\\Events\\Wallet\\BalanceUpdate'];
+
+    print('🔥 REGISTER EVENT: ${events[1]}');
+
+    socket!.off(events[1]);
+
+    socket!.on('.BalanceUpdate', (dynamic e) {
+      print('');
+      print('🚨🚨🚨 BALANCE EVENT RECEIVED 🚨🚨🚨');
+      print('EVENT: ${events[1]}');
+      print('TYPE: ${e.runtimeType}');
+      print('DATA: $e');
+      print('CHANNEL: $channelName');
+      print('🚨🚨🚨 END BALANCE 🚨🚨🚨');
+    });
+
+    print('✅ BALANCE LISTENER REGISTERED');
+  }
+
+  // void _registerTickerListener0(String channelName) {
+  //   if (socket == null) return;
+  //
+  //   print('📈 Balance Event chanel name $channelName');
+  //   const eventName = 'BalanceUpdate';
+  //
+  //   socket!.off(eventName);
+  //
+  //   socket!.on(eventName, (dynamic e) {
+  //     try {
+  //       print('📈 Balance Event');
+  //       print('TYPE: ${e.runtimeType}');
+  //       print('DATA: $e');
+  //     } catch (error, stackTrace) {
+  //       print('❌ Balance Error');
+  //       print(error);
+  //       print(stackTrace);
+  //     }
+  //   });
+  // }
 
   void _registerTickerListener(String channelName) {
     if (socket == null) return;
@@ -1292,7 +1185,6 @@ class MarketController extends GetxController {
 
         dynamic tickerData;
 
-
         // Socket.IO event به صورت List آمده:
         //
         // [
@@ -1307,9 +1199,9 @@ class MarketController extends GetxController {
         //   }
         // ]
 
-        if (e is List && e.length > 1) {//
+        if (e is List && e.length > 1) {
+          //
           tickerData = e[1];
-
         } else if (e is Map) {
           tickerData = e;
         } else if (e is String) {
@@ -1334,6 +1226,13 @@ class MarketController extends GetxController {
 
           var yyy = jsonDecode(tickerData);
           CallMarketClose callMarketClose = CallMarketClose.fromJson(yyy);
+          // DataCurrency _dataCurrency = DataCurrency(
+          //   symbol: callMarketClose.symbol,
+          //
+          //
+          // );
+          // Get.find<HomeAllOrderController>().changeCurrencyFromSocket(_dataCurrency);
+          // Get.find<HomeAllOrderController>().update();
           String ss = selectMarketList.value.symbol;
           if (callMarketClose.symbol == ss) {
             close.value = double.parse(callMarketClose.close ?? '0').toStringAsFixed(int.parse(selectMarketList.value.decimal));
@@ -1344,9 +1243,8 @@ class MarketController extends GetxController {
 
 
 
-
-        _handleTicker(yyy);
-      }
+          _handleTicker(yyy);
+        }
       } catch (error, stackTrace) {
         print('❌ Ticker Error');
         print(error);
@@ -1354,6 +1252,7 @@ class MarketController extends GetxController {
       }
     });
   }
+
   void _registerTickerListener2(String channelName) {
     if (socket == null) return;
 
@@ -1361,8 +1260,7 @@ class MarketController extends GetxController {
 
     socket!.off(eventName);
 
-    socket!.on(eventName, (dynamic e) {
-
+    socket!.on('AskBid', (dynamic e) {
       try {
         print('📈 .AskBid Event');
         print('TYPE: ${e.runtimeType}');
@@ -1381,32 +1279,12 @@ class MarketController extends GetxController {
           yy.forEach((key, value) {
             double d = double.parse(key);
             String f = d.toString();
-            Map<String, dynamic> data = {
-              "price": f,
-              "percentage": value[0].toString(),
-              "volume": value.length > 1 ? value[1].toString() : "40",
-            };
+            Map<String, dynamic> data = {"price": f, "percentage": value[0].toString(), "volume": value.length > 1 ? value[1].toString() : "40"};
             dd.add(SocketListUpDown.fromJson(data));
           });
 
           List<SocketListUpDown> listReverse1 = dd.reversed.toList();
-          // // intDown limit=7;
-          // int limitDown = listReverse1.length;
-          // for (int i = 0; i < limitDown; i++) {
-          //   listReverse2.add(listReverse1[i]);
-          // }
-          // List<SocketListUpDown> listReverse3 = listReverse2.reversed.toList();
-          // List<SocketListUpDown> listReverse4 = [];
-          // for(int i=listReverse3.length;i>0;i--){
-          //   listReverse4.add(listReverse3[i]);
-          // }
           listDown.assignAll(listReverse1);
-          //down
-
-
-
-
-
 
           update();
         }
@@ -1416,32 +1294,19 @@ class MarketController extends GetxController {
           xx.forEach((key, value) {
             double d = double.parse(key);
             String f = d.toString();
-            Map<String, dynamic> data = {
-              "price": f,
-              "percentage": value[0].toString(),
-              "volume": value.length > 1 ? value[1].toString() : "0",
-            };
+            Map<String, dynamic> data = {"price": f, "percentage": value[0].toString(), "volume": value.length > 1 ? value[1].toString() : "0"};
             dd.add(SocketListUpDown.fromJson(data));
           });
           listUp.assignAll(dd);
           update();
         }
-
-
       } catch (error, stackTrace) {
         print('❌ AskBid Error');
         print(error);
         print(stackTrace);
       }
-
-
-
-
-
-
     });
   }
-
 
   // void _registerTickerListener(
   //     String channelName,
@@ -1554,37 +1419,19 @@ class MarketController extends GetxController {
         decoded = e;
       }
 
-      Map<String, dynamic> data =
-      Map<String, dynamic>.from(decoded);
+      Map<String, dynamic> data = Map<String, dynamic>.from(decoded);
 
-      CallMarketClose callMarketClose =
-      CallMarketClose.fromJson(data);
+      CallMarketClose callMarketClose = CallMarketClose.fromJson(data);
 
-      String currentSymbol =
-          selectMarketList.value.symbol;
+      String currentSymbol = selectMarketList.value.symbol;
 
-      if (callMarketClose.symbol ==
-          currentSymbol) {
-        close.value =
-            double.parse(
-              callMarketClose.close ?? '0',
-            ).toStringAsFixed(
-              int.parse(
-                selectMarketList.value.decimal,
-              ),
-            );
+      if (callMarketClose.symbol == currentSymbol) {
+        close.value = double.parse(callMarketClose.close ?? '0').toStringAsFixed(int.parse(selectMarketList.value.decimal));
 
-        persentageValue.value =
-            double.parse(
-              callMarketClose.percentChange ??
-                  '0',
-            );
-
-
+        persentageValue.value = double.parse(callMarketClose.percentChange ?? '0');
 
         update();
       }
-
     } catch (e, stackTrace) {
       print('❌ Handle Ticker Error');
       print(e);
@@ -1605,8 +1452,7 @@ class MarketController extends GetxController {
       return;
     }
 
-    final newChannel =
-        '${Core.channel}_database_ask-bid-channel-$symbol';
+    final newChannel = '${Core.channel}_database_ask-bid-channel-$symbol';
 
     print('');
     print('======================================');
@@ -1626,24 +1472,18 @@ class MarketController extends GetxController {
     if (_currentAskBidChannel != null) {
       print('📤 Unsubscribing old channel: $_currentAskBidChannel');
 
-      socket!.emit('unsubscribe', {
-        'channel': _currentAskBidChannel,
-      });
+      socket!.emit('unsubscribe', {'channel': _currentAskBidChannel});
     }
 
     _currentAskBidChannel = newChannel;
 
     // Subscribe کانال جدید
-    socket!.emit('subscribe', {
-      'channel': newChannel,
-    });
+    socket!.emit('subscribe', {'channel': newChannel});
 
     print('📥 Subscribe emitted: $newChannel');
 
     _registerAskBidListener(newChannel);
   }
-
-
 
   UserSource userSource = UserSource(baseUrl: Core.uri);
 }
