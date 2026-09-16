@@ -62,16 +62,6 @@ class HomeAllOrderController extends GetxController {
     update();
   }
 
-
-  // void changeCurrencyFromSocket(DataCurrency dataCurrency){
-  //   // for(int i=0;i<currencies.length;i++){
-  //   //   if(currencies[i].symbol==dataCurrency.symbol){
-  //   //     currencies[i]=dataCurrency;
-  //   //     update();
-  //   //   }
-  //   // }
-  // }
-
   void changeTab(String statusId, String type) {
     this.currencies.clear();
     this.currencies.value = [];

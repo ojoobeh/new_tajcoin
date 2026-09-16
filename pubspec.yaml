@@ -115,7 +115,9 @@ flutter:
     - assets/icon/
     - assets/logo/
     - assets/locales/
-    - assets/my_db.db
+    - assets/locales/en.json
+    - assets/locales/fa.json
+    - assets/locales/en_US.json
     - assets/video/
   fonts:
     - family: Vazir

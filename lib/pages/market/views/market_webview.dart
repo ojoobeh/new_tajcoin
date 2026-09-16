@@ -42,7 +42,14 @@ class _MarketWebViewState extends State<MarketWebView> {
 
     return Scaffold(
       backgroundColor: Get.theme.scaffoldBackgroundColor,
+
+      //todo-REMOVE
       body: Container(),
+      // body: WebView(
+      //   initialUrl: widget.url,
+      //   javascriptMode: JavascriptMode.unrestricted,
+      //
+      // ),
     );
   }
 }

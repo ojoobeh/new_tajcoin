@@ -92,7 +92,7 @@ class BottomSheetDepositWidget extends GetWidget<AssetsController> {
                                     : Text(
                                         'Submit'.tr,
                                         style: TextStyle(
-                                          color: context.theme.canvasColor//todo_selectedRowColor
+                                          color: Get.theme.cardColor,
                                         ),
                                       ),
                               );
@@ -188,7 +188,7 @@ class BottomSheetDepositWidget extends GetWidget<AssetsController> {
                                     : Text(
                                         'Submit'.tr,
                                         style: TextStyle(
-                                          color: context.theme.canvasColor//todo_selectedRowColor
+                                          color: Get.theme.cardColor,
                                         ),
                                       ),
                               );

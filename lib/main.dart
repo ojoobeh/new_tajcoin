@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -47,6 +48,11 @@ Future<void> initServices() async {
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
+  );
   await initServices();
 
   runApp(
@@ -62,7 +68,16 @@ void main() async {
       theme: Themes.light,
       darkTheme: Themes.dark,
       home: Splash2View(),
-      builder: EasyLoading.init(),
+      builder: (context, child) {
+        return SafeArea(
+          top: false,
+          bottom: true,
+          child: EasyLoading.init()(
+            context,
+            child,
+          ),
+        );
+      },
     ),
   );
 }

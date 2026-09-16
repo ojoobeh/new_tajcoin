@@ -94,13 +94,42 @@ class BirthdayWidget extends GetView<AuthenticationController> {
                     thickness: 1,
                   ),
                   Expanded(
+
+                    //todo-REMOVE
                     child: Container(),
+                    // child: Container(
+                    //   child: PCupertinoDatePicker(
+                    //     mode: PCupertinoDatePickerMode
+                    //         .date,
+                    //     onDateTimeChanged:
+                    //         (Jalali dateTime) {
+                    //       tempPickedDate = dateTime;
+                    //       String birthday=dateTime.year.toString() +
+                    //           '/' +
+                    //           dateTime.month.toString() +
+                    //           '/' +
+                    //           dateTime.day.toString();
+                    //       controller.updateBirthday(birthday);
+                    //
+                    //       // debugPrint(tempPickedDate)
+                    //     },
+                    //   ),
+                    // ),
                   ),
                 ],
               ),
             );
           },
         );
+
+
+
+
+
+
+
+
+
 
         // Jalali? picked = await showPersianDatePicker(
         //   context: context,

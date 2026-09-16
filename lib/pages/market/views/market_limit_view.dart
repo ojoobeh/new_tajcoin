@@ -37,11 +37,7 @@ class MarketLimitView extends GetView<MarketController> {
       color: Get.theme.scaffoldBackgroundColor,
       child: Stack(
         children: <Widget>[
-          Container(
-            height: 50,
-            width: double.infinity,
-            color: context.theme.colorScheme.secondary,
-          ),
+          Container(height: 50, width: double.infinity, color: context.theme.colorScheme.secondary),
           Column(
             children: <Widget>[
               Container(
@@ -58,13 +54,8 @@ class MarketLimitView extends GetView<MarketController> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Icon(
-                              FontAwesome.align_right,
-                              color: context.theme.dividerColor.withOpacity(0.9),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
+                            Icon(FontAwesome.align_right, color: context.theme.dividerColor.withOpacity(0.9)),
+                            SizedBox(width: 8),
                             Obx(() {
                               return Text(
                                 controller.isSelectMarket.value ? controller.selectMarketList.value.symbol : "---",
@@ -76,49 +67,36 @@ class MarketLimitView extends GetView<MarketController> {
                                 ),
                               );
                             }),
-                            SizedBox(
-                              width: 8,
-                            ),
+                            SizedBox(width: 8),
                             Obx(() {
                               return !controller.isLoadingOrder.value && controller.isSelectMarket.value
                                   ? Container(
-                                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
-                                  color: (controller.isSelectMarket.value ? controller.selectMarketList.value.percent : "0").contains("-") ? Colors.red.withOpacity(0.8) : Colors.green.withOpacity(0.8),
-                                ),
-                                child: Text(
-                                  (controller.isSelectMarket.value ? controller.selectMarketList.value.percent : "0") + " %",
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Colors.white,
-                                    fontFamily: FontFamily.vazirLight,
-                                  ),
-                                  textDirection: TextDirection.ltr,
-                                ),
-                              )
+                                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                                        color: (controller.isSelectMarket.value ? controller.selectMarketList.value.percent : "0").contains("-")
+                                            ? Colors.red.withOpacity(0.8)
+                                            : Colors.green.withOpacity(0.8),
+                                      ),
+                                      child: Text(
+                                        (controller.isSelectMarket.value ? controller.selectMarketList.value.percent : "0") + " %",
+                                        style: TextStyle(fontSize: 10, color: Colors.white, fontFamily: FontFamily.vazirLight),
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                    )
                                   : Shimmer.fromColors(
-                                baseColor: Get.theme.cardColor,
-                                highlightColor: Get.theme.dividerColor.withOpacity(0.5),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(4),
-                                    ),
-                                    color: Colors.green.withOpacity(0.8),
-                                  ),
-                                  margin: const EdgeInsets.symmetric(vertical: 4),
-                                  width: 50,
-                                  height: 24,
-                                ),
-                              );
+                                      baseColor: Get.theme.cardColor,
+                                      highlightColor: Get.theme.dividerColor.withOpacity(0.5),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: Colors.green.withOpacity(0.8)),
+                                        margin: const EdgeInsets.symmetric(vertical: 4),
+                                        width: 50,
+                                        height: 24,
+                                      ),
+                                    );
                             }),
-                            SizedBox(
-                              width: 8,
-                            ),
+                            SizedBox(width: 8),
                             Obx(() {
                               return !controller.isLoadingOrder.value && controller.isSelectMarket.value
                                   ? Text(
@@ -137,10 +115,7 @@ class MarketLimitView extends GetView<MarketController> {
                                         margin: const EdgeInsets.symmetric(vertical: 4),
                                         width: 50,
                                         height: 16,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(2),
-                                          color: Colors.grey,
-                                        ),
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(2), color: Colors.grey),
                                       ),
                                     );
                             }),
@@ -154,31 +129,18 @@ class MarketLimitView extends GetView<MarketController> {
                             ? Container()
                             : InkWell(
                                 onTap: () async {
-                                  await SystemChrome.setPreferredOrientations([
-                                    DeviceOrientation.landscapeLeft,
-                                    DeviceOrientation.landscapeRight,
-                                  ]);
+                                  await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
                                   String web = Core.laravelBaseUrl + 'chart/${controller.selectMarketList.value.symbol}';
                                   await Get.to(MarketWebView(web));
 
-                                  SystemChrome.setPreferredOrientations([
-                                    DeviceOrientation.portraitUp,
-                                    DeviceOrientation.portraitDown,
-                                  ]);
+                                  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(2),
-                                  child: SvgPicture.asset(
-                                    Assets.candle01,
-                                    width: 22,
-                                    height: 22,
-                                    color: context.theme.dividerColor.withOpacity(0.9),
-                                  ),
+                                  child: SvgPicture.asset(Assets.candle01, width: 22, height: 22, color: context.theme.dividerColor.withOpacity(0.9)),
                                 ),
                               ),
-                        SizedBox(
-                          width: 8,
-                        ),
+                        SizedBox(width: 8),
                       ],
                     ),
                   ],
@@ -201,9 +163,7 @@ class MarketLimitView extends GetView<MarketController> {
                               Container(
                                 margin: const EdgeInsets.symmetric(horizontal: 8),
                                 padding: EdgeInsets.symmetric(horizontal: 4),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                                 width: Get.width / 2 - 80,
                                 height: double.infinity,
                                 child: Column(
@@ -217,20 +177,12 @@ class MarketLimitView extends GetView<MarketController> {
                                           Text(
                                             "Transaction".tr,
                                             textDirection: TextDirection.ltr,
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Get.theme.dividerColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: TextStyle(fontSize: 10, color: Get.theme.dividerColor, fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             "Price".tr,
                                             textDirection: TextDirection.ltr,
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Get.theme.dividerColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: TextStyle(fontSize: 10, color: Get.theme.dividerColor, fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
@@ -241,12 +193,7 @@ class MarketLimitView extends GetView<MarketController> {
                                         height: 180,
                                         child: Obx(() {
                                           return controller.listDown.length > 0
-                                              ? ListMarketOrderBook(
-                                                  controller.listDown,
-                                                  Colors.green,
-                                                  reverse: true,
-                                                  limit: 7,
-                                                )
+                                              ? ListMarketOrderBook(controller.listDown, Colors.green, reverse: true, limit: 7)
                                               : ListShimmerMarketOrderBook(7);
                                         }),
                                       ),
@@ -262,10 +209,7 @@ class MarketLimitView extends GetView<MarketController> {
                                                   margin: const EdgeInsets.symmetric(vertical: 4),
                                                   width: 80,
                                                   height: 16,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(2),
-                                                    color: Colors.grey,
-                                                  ),
+                                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(2), color: Colors.grey),
                                                 ),
                                               ),
                                             )
@@ -276,10 +220,7 @@ class MarketLimitView extends GetView<MarketController> {
                                                 child: Center(
                                                   child: Text(
                                                     sDouble(controller.close.value, decimal: int.parse(controller.selectMarketList.value.decimal)),
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Get.theme.dividerColor.withOpacity(0.8),
-                                                    ),
+                                                    style: TextStyle(fontWeight: FontWeight.bold, color: Get.theme.dividerColor.withOpacity(0.8)),
                                                   ),
                                                 ),
                                               ),
@@ -294,20 +235,12 @@ class MarketLimitView extends GetView<MarketController> {
                                           Text(
                                             "Transaction".tr,
                                             textDirection: TextDirection.ltr,
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Get.theme.dividerColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: TextStyle(fontSize: 10, color: Get.theme.dividerColor, fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             "Price".tr,
                                             textDirection: TextDirection.ltr,
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              color: Get.theme.dividerColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                            style: TextStyle(fontSize: 10, color: Get.theme.dividerColor, fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
@@ -318,12 +251,7 @@ class MarketLimitView extends GetView<MarketController> {
                                         height: 180,
                                         child: Obx(() {
                                           return controller.listUp.length > 0
-                                              ? ListMarketOrderBook(
-                                                  controller.listUp,
-                                                  Colors.red,
-                                                  reverse: false,
-                                                  limit: 7,
-                                                )
+                                              ? ListMarketOrderBook(controller.listUp, Colors.red, reverse: false, limit: 7)
                                               : ListShimmerMarketOrderBook(7);
                                         }),
                                       ),
@@ -336,88 +264,68 @@ class MarketLimitView extends GetView<MarketController> {
                                 height: double.infinity,
                                 child: Column(
                                   children: <Widget>[
-                                    Obx(
-                                      () {
-                                        return Container(
-                                          padding: EdgeInsets.symmetric(vertical: 8),
-                                          child: Directionality(
-                                            textDirection: TextDirection.rtl,
-                                            child: Row(
-                                              crossAxisAlignment: CrossAxisAlignment.end,
-                                              children: <Widget>[
-                                                InkWell(
-                                                  onTap: () {
-                                                    controller.changeSeller(true);
-                                                  },
-                                                  child: Stack(
-                                                    children: <Widget>[
-                                                      SvgPicture.asset(
-                                                        Assets.sell01,
-                                                        width: 104,
-                                                        height: 38,
-                                                        color: controller.isSell.value ? AppColors.strongWordsColor : Colors.grey.shade400,
+                                    Obx(() {
+                                      return Container(
+                                        padding: EdgeInsets.symmetric(vertical: 8),
+                                        child: Directionality(
+                                          textDirection: TextDirection.rtl,
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: <Widget>[
+                                              InkWell(
+                                                onTap: () {
+                                                  controller.changeSeller(true);
+                                                },
+                                                child: Stack(
+                                                  children: <Widget>[
+                                                    SvgPicture.asset(
+                                                      Assets.sell01,
+                                                      width: 104,
+                                                      height: 38,
+                                                      color: controller.isSell.value ? AppColors.strongWordsColor : Colors.grey.shade400,
+                                                    ),
+                                                    Positioned.fill(
+                                                      child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('SELL'.tr, style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 14)),
                                                       ),
-                                                      Positioned.fill(
-                                                        child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text(
-                                                            'SELL'.tr,
-                                                            style: TextStyle(
-                                                              fontFamily: FontFamily.vazirBold,
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    controller.changeSeller(false);
-                                                  },
-                                                  child: Stack(
-                                                    children: <Widget>[
-                                                      SvgPicture.asset(
-                                                        Assets.buy01,
-                                                        width: 104,
-                                                        height: 38,
-                                                        color: !controller.isSell.value ? AppColors.cursorColor : Colors.grey.shade400,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  controller.changeSeller(false);
+                                                },
+                                                child: Stack(
+                                                  children: <Widget>[
+                                                    SvgPicture.asset(
+                                                      Assets.buy01,
+                                                      width: 104,
+                                                      height: 38,
+                                                      color: !controller.isSell.value ? AppColors.cursorColor : Colors.grey.shade400,
+                                                    ),
+                                                    Positioned.fill(
+                                                      child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('BUY'.tr, style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 14)),
                                                       ),
-                                                      Positioned.fill(
-                                                        child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text(
-                                                            'BUY'.tr,
-                                                            style: TextStyle(
-                                                              fontFamily: FontFamily.vazirBold,
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      },
-                                    ),
+                                        ),
+                                      );
+                                    }),
                                     Container(
                                       margin: const EdgeInsets.only(top: 4),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Center(
-                                            child: Text(
-                                              "Exchange rate".tr,
-                                              style: TextStyle(
-                                                fontFamily: FontFamily.vazirLight,
-                                                fontSize: 10,
-                                              ),
-                                            ),
+                                            child: Text("Exchange rate".tr, style: TextStyle(fontFamily: FontFamily.vazirLight, fontSize: 10)),
                                           ),
                                           ConfigApp.orderPlane
                                               ? Wrap(
@@ -432,21 +340,12 @@ class MarketLimitView extends GetView<MarketController> {
                                                           width: 80,
                                                           height: 25,
                                                           decoration: BoxDecoration(
-                                                              color: Colors.blueGrey.withOpacity(0.5),
-                                                              borderRadius: BorderRadius.circular(4),
-                                                              border: Border.all(
-                                                                color: Colors.blueGrey,
-                                                              )),
+                                                            color: Colors.blueGrey.withOpacity(0.5),
+                                                            borderRadius: BorderRadius.circular(4),
+                                                            border: Border.all(color: Colors.blueGrey),
+                                                          ),
                                                           child: Center(
-                                                            child: Text(
-                                                              "Market".tr,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                                color: context.theme.dividerColor.withOpacity(
-                                                                  0.5,
-                                                                ),
-                                                              ),
-                                                            ),
+                                                            child: Text("Market".tr, style: TextStyle(fontSize: 12, color: context.theme.dividerColor.withOpacity(0.5))),
                                                           ),
                                                         ),
                                                       ),
@@ -457,21 +356,12 @@ class MarketLimitView extends GetView<MarketController> {
                                                       margin: const EdgeInsets.only(right: 8),
                                                       height: 25,
                                                       decoration: BoxDecoration(
-                                                          color: Colors.red.withOpacity(0.5),
-                                                          borderRadius: BorderRadius.circular(4),
-                                                          border: Border.all(
-                                                            color: Colors.red,
-                                                          )),
+                                                        color: Colors.red.withOpacity(0.5),
+                                                        borderRadius: BorderRadius.circular(4),
+                                                        border: Border.all(color: Colors.red),
+                                                      ),
                                                       child: Center(
-                                                        child: Text(
-                                                          "limit".tr,
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            color: context.theme.dividerColor.withOpacity(
-                                                              0.5,
-                                                            ),
-                                                          ),
-                                                        ),
+                                                        child: Text("limit".tr, style: TextStyle(fontSize: 12, color: context.theme.dividerColor.withOpacity(0.5))),
                                                       ),
                                                     ),
                                                   ],
@@ -485,11 +375,9 @@ class MarketLimitView extends GetView<MarketController> {
                                       margin: const EdgeInsets.only(top: 8),
                                       height: 45,
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Get.theme.dividerColor.withOpacity(0.8),
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.circular(8)),
+                                        border: Border.all(color: Get.theme.dividerColor.withOpacity(0.8), width: 1),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
@@ -497,41 +385,39 @@ class MarketLimitView extends GetView<MarketController> {
                                             onTap: () => controller.setTPrice(true),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Get.theme.dividerColor.withOpacity(0.1),
-                                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8))),
+                                                color: Get.theme.dividerColor.withOpacity(0.1),
+                                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
+                                              ),
                                               width: 50,
                                               height: 40,
-                                              child: Icon(
-                                                FontAwesome5.plus,
-                                                size: 14,
-                                              ),
+                                              child: Icon(FontAwesome5.plus, size: 14),
                                             ),
                                           ),
                                           Expanded(
-                                            child: Obx(() => Center(
-                                                  child: MarketCustomFormFiled(
-                                                    controller.tePerPrice,
-                                                    focus: controller.focusPrice,
-                                                    inputFormatters: [DecimalTextInputFormatter(int.parse(controller.selectMarketList.value.decimal))],
-                                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                                    onChanged: (value) {
-                                                      controller.changeTPrice(value);
-                                                    },
-                                                  ),
-                                                )),
+                                            child: Obx(
+                                              () => Center(
+                                                child: MarketCustomFormFiled(
+                                                  controller.tePerPrice,
+                                                  focus: controller.focusPrice,
+                                                  inputFormatters: [DecimalTextInputFormatter(int.parse(controller.selectMarketList.value.decimal))],
+                                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                                  onChanged: (value) {
+                                                    controller.changeTPrice(value);
+                                                  },
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                           InkWell(
                                             onTap: () => controller.setTPrice(false),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Get.theme.dividerColor.withOpacity(0.1),
-                                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), topLeft: Radius.circular(8))),
+                                                color: Get.theme.dividerColor.withOpacity(0.1),
+                                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), topLeft: Radius.circular(8)),
+                                              ),
                                               width: 50,
                                               height: double.infinity,
-                                              child: Icon(
-                                                FontAwesome5.minus,
-                                                size: 14,
-                                              ),
+                                              child: Icon(FontAwesome5.minus, size: 14),
                                             ),
                                           ),
                                         ],
@@ -544,24 +430,17 @@ class MarketLimitView extends GetView<MarketController> {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Center(
-                                            child: Text(
-                                              "Amount".tr,
-                                              style: TextStyle(
-                                                fontFamily: FontFamily.vazirLight,
-                                              ),
-                                            ),
-                                          )
+                                            child: Text("Amount".tr, style: TextStyle(fontFamily: FontFamily.vazirLight)),
+                                          ),
                                         ],
                                       ),
                                     ),
                                     //Dolor Price
                                     Container(
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Get.theme.dividerColor.withOpacity(0.8),
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.circular(8)),
+                                        border: Border.all(color: Get.theme.dividerColor.withOpacity(0.8), width: 1),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       height: 45,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -570,53 +449,46 @@ class MarketLimitView extends GetView<MarketController> {
                                             onTap: () => controller.setCount(true),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Get.theme.dividerColor.withOpacity(0.1),
-                                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8))),
+                                                color: Get.theme.dividerColor.withOpacity(0.1),
+                                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
+                                              ),
                                               width: 50,
                                               height: double.infinity,
-                                              child: Icon(
-                                                FontAwesome5.plus,
-                                                size: 14,
-                                              ),
+                                              child: Icon(FontAwesome5.plus, size: 14),
                                             ),
                                           ),
                                           Expanded(
                                             child: Center(
-                                              child: Obx(() => MarketCustomFormFiled(
-                                                    controller.tecQuantity,
-                                                    inputFormatters: [DecimalTextInputFormatter(int.parse(controller.selectMarketList.value.decimal))],
-                                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
-                                                    focus: controller.focusCount,
-                                                    onChanged: (value) {
-                                                      controller.changeCount(value);
-                                                    },
-                                                  )),
+                                              child: Obx(
+                                                () => MarketCustomFormFiled(
+                                                  controller.tecQuantity,
+                                                  inputFormatters: [DecimalTextInputFormatter(int.parse(controller.selectMarketList.value.decimal))],
+                                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                                  focus: controller.focusCount,
+                                                  onChanged: (value) {
+                                                    controller.changeCount(value);
+                                                  },
+                                                ),
+                                              ),
                                             ),
                                           ),
                                           InkWell(
                                             onTap: () => controller.setCount(false),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Get.theme.dividerColor.withOpacity(0.1),
-                                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8))),
+                                                color: Get.theme.dividerColor.withOpacity(0.1),
+                                                borderRadius: BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+                                              ),
                                               width: 50,
                                               height: double.infinity,
-                                              child: Icon(
-                                                FontAwesome5.minus,
-                                                size: 14,
-                                              ),
+                                              child: Icon(FontAwesome5.minus, size: 14),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
 
-                                    Container(
-                                      margin: const EdgeInsets.only(
-                                        top: 16,
-                                      ),
-                                      child: MarketPercentageWidget(),
-                                    ),
+                                    Container(margin: const EdgeInsets.only(top: 16), child: MarketPercentageWidget()),
                                     //Percentage
                                     Container(
                                       margin: const EdgeInsets.only(top: 14),
@@ -625,12 +497,7 @@ class MarketLimitView extends GetView<MarketController> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Center(
-                                            child: Text(
-                                              "Total price".tr + " (USDT)",
-                                              style: TextStyle(
-                                                fontFamily: FontFamily.vazirLight,
-                                              ),
-                                            ),
+                                            child: Text("Total price".tr + " (USDT)", style: TextStyle(fontFamily: FontFamily.vazirLight)),
                                           ),
                                           Container(),
                                         ],
@@ -641,11 +508,9 @@ class MarketLimitView extends GetView<MarketController> {
                                       margin: const EdgeInsets.only(top: 8),
                                       height: 45,
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Get.theme.dividerColor.withOpacity(0.8),
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.circular(8)),
+                                        border: Border.all(color: Get.theme.dividerColor.withOpacity(0.8), width: 1),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
@@ -653,14 +518,12 @@ class MarketLimitView extends GetView<MarketController> {
                                             onTap: () => controller.setTotalPrice(true),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Get.theme.dividerColor.withOpacity(0.1),
-                                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8))),
+                                                color: Get.theme.dividerColor.withOpacity(0.1),
+                                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
+                                              ),
                                               width: 50,
                                               height: 40,
-                                              child: Icon(
-                                                FontAwesome5.plus,
-                                                size: 14,
-                                              ),
+                                              child: Icon(FontAwesome5.plus, size: 14),
                                             ),
                                           ),
                                           Expanded(
@@ -680,14 +543,12 @@ class MarketLimitView extends GetView<MarketController> {
                                             onTap: () => controller.setTotalPrice(false),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Get.theme.dividerColor.withOpacity(0.1),
-                                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), topLeft: Radius.circular(8))),
+                                                color: Get.theme.dividerColor.withOpacity(0.1),
+                                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), topLeft: Radius.circular(8)),
+                                              ),
                                               width: 50,
                                               height: double.infinity,
-                                              child: Icon(
-                                                FontAwesome5.minus,
-                                                size: 14,
-                                              ),
+                                              child: Icon(FontAwesome5.minus, size: 14),
                                             ),
                                           ),
                                         ],
@@ -707,15 +568,14 @@ class MarketLimitView extends GetView<MarketController> {
                                                       child: Text(
                                                         "Cash: ".tr +
                                                             (controller.isSell.value
-                                                                ? sDouble(controller.selectMarketList.value.balanceOne.toString(),
-                                                                        decimal: int.parse(controller.selectMarketList.value.decimal)) +
-                                                                    " (${controller.selectMarketList.value.symbol.replaceAll("USDT", "").replaceAll("-", "")})"
-                                                                : sDouble(controller.selectMarketList.value.balanceTwo.toString(), decimal: Core.numberCountDecimal2) + " (USDT)"),
-                                                        style: TextStyle(
-                                                          fontFamily: FontFamily.vazirBold,
-                                                          fontSize: 12,
-                                                          color: Get.theme.dividerColor.withOpacity(0.8),
-                                                        ),
+                                                                ? sDouble(
+                                                                        controller.selectMarketList.value.balanceOne.toString(),
+                                                                        decimal: int.parse(controller.selectMarketList.value.decimal),
+                                                                      ) +
+                                                                      " (${controller.selectMarketList.value.symbol.replaceAll("USDT", "").replaceAll("-", "")})"
+                                                                : sDouble(controller.selectMarketList.value.balanceTwo.toString(), decimal: Core.numberCountDecimal2) +
+                                                                      " (USDT)"),
+                                                        style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.8)),
                                                       ),
                                                     ),
                                                   )
@@ -726,10 +586,7 @@ class MarketLimitView extends GetView<MarketController> {
                                                       margin: const EdgeInsets.symmetric(vertical: 4),
                                                       width: 120,
                                                       height: 16,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(2),
-                                                        color: Colors.grey,
-                                                      ),
+                                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(2), color: Colors.grey),
                                                     ),
                                                   );
                                           }),
@@ -746,20 +603,15 @@ class MarketLimitView extends GetView<MarketController> {
                                                 height: 32,
                                                 margin: const EdgeInsets.only(top: 8),
                                                 width: MediaQuery.of(context).size.width - 100,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(8),
-                                                  color: AppColors.redGmail,
-                                                ),
+                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.redGmail),
                                                 child: Center(
                                                   child: controller.isLoadingOrder.value
+                                                      //todo-REMOVE
                                                       ? Container()
+                                                      // ? Loading(indicator: BallPulseIndicator(), size: 10.0)
                                                       : Text(
                                                           'Sell'.tr + " " + (controller.selectMarketList.value.symbol),
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            fontFamily: FontFamily.vazirBold,
-                                                            color: Get.theme.dividerColor,
-                                                          ),
+                                                          style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold, color: Get.theme.dividerColor),
                                                         ),
                                                 ),
                                               ),
@@ -770,20 +622,15 @@ class MarketLimitView extends GetView<MarketController> {
                                                 height: 32,
                                                 margin: const EdgeInsets.only(top: 8),
                                                 width: MediaQuery.of(context).size.width - 100,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(8),
-                                                  color: AppColors.cursorColor,
-                                                ),
+                                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.cursorColor),
                                                 child: Center(
                                                   child: controller.isLoadingOrder.value
+                                                  //todo-REMOVE
                                                       ? Container()
+                                                  // ? Loading(indicator: BallPulseIndicator(), size: 10.0)
                                                       : Text(
                                                           'Buy'.tr + " " + (controller.selectMarketList.value.symbol != null ? controller.selectMarketList.value.symbol : ""),
-                                                          style: TextStyle(
-                                                            fontSize: 12,
-                                                            fontFamily: FontFamily.vazirBold,
-                                                            color: Get.theme.dividerColor,
-                                                          ),
+                                                          style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold, color: Get.theme.dividerColor),
                                                         ),
                                                 ),
                                               ),
@@ -829,9 +676,7 @@ class MarketLimitView extends GetView<MarketController> {
                           margin: const EdgeInsets.only(right: 16, left: 16, top: 8),
                           height: 36,
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: context.theme.colorScheme.secondary,
-                          ),
+                          decoration: BoxDecoration(color: context.theme.colorScheme.secondary),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
@@ -839,20 +684,11 @@ class MarketLimitView extends GetView<MarketController> {
                                 onTap: () => Get.toNamed(Routes.MARKETALLORDER, arguments: controller.selectMarketList.value),
                                 child: Row(
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.description,
-                                      size: 16,
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
+                                    Icon(Icons.description, size: 16),
+                                    SizedBox(width: 8),
                                     Text(
                                       "Total orders".tr,
-                                      style: TextStyle(
-                                        fontFamily: FontFamily.vazirBold,
-                                        color: Get.theme.dividerColor,
-                                        fontSize: 10,
-                                      ),
+                                      style: TextStyle(fontFamily: FontFamily.vazirBold, color: Get.theme.dividerColor, fontSize: 10),
                                     ),
                                   ],
                                 ).marginOnly(right: 8),
@@ -861,18 +697,11 @@ class MarketLimitView extends GetView<MarketController> {
                                 children: <Widget>[
                                   Text(
                                     "(Open orders)".tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      color: context.theme.dividerColor.withOpacity(0.4),
-                                      fontSize: 10,
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, color: context.theme.dividerColor.withOpacity(0.4), fontSize: 10),
                                   ),
                                   Text(
                                     "Open order",
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      color: context.theme.dividerColor.withOpacity(0.6),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, color: context.theme.dividerColor.withOpacity(0.6)),
                                   ).marginSymmetric(horizontal: 4),
                                 ],
                               ),
@@ -882,55 +711,38 @@ class MarketLimitView extends GetView<MarketController> {
                         Obx(() {
                           return controller.isDoneOrder.value
                               ? controller.marketOrderList.isEmpty
-                                  ? Center(
-                                      child: Container(
-                                      margin: const EdgeInsets.only(
-                                        top: 16,
-                                      ),
-                                      child: Text(
-                                        'Order not found'.tr,
-                                        style: TextStyle(
-                                          fontFamily: FontFamily.vazirBold,
-                                          fontSize: 14,
+                                    ? Center(
+                                        child: Container(
+                                          margin: const EdgeInsets.only(top: 16),
+                                          child: Text('Order not found'.tr, style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 14)),
                                         ),
-                                      ),
-                                    ))
-                                  : Container(
-                                      color: Get.theme.scaffoldBackgroundColor,
-                                      child: ListView.builder(
-                                        padding: EdgeInsets.only(bottom: 10, top: 10),
-                                        primary: false,
-                                        shrinkWrap: true,
-                                        itemCount: controller.marketOrderList.length + 1,
-                                        itemBuilder: ((_, index) {
-                                          if (index == controller.marketOrderList.length) {
-                                            return Obx(() {
-                                              return Container(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Center(
-                                                  child: Opacity(
-                                                    opacity: controller.isLoadingOrder.value ? 1 : 0,
-                                                    child: CircularProgressIndicator(),
+                                      )
+                                    : Container(
+                                        color: Get.theme.scaffoldBackgroundColor,
+                                        child: ListView.builder(
+                                          padding: EdgeInsets.only(bottom: 10, top: 10),
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          itemCount: controller.marketOrderList.length + 1,
+                                          itemBuilder: ((_, index) {
+                                            if (index == controller.marketOrderList.length) {
+                                              return Obx(() {
+                                                return Container(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Center(
+                                                    child: Opacity(opacity: controller.isLoadingOrder.value ? 1 : 0, child: CircularProgressIndicator()),
                                                   ),
-                                                ),
-                                              );
-                                            });
-                                          } else {
-                                            var _marketOrder = controller.marketOrderList.elementAt(index);
+                                                );
+                                              });
+                                            } else {
+                                              var _marketOrder = controller.marketOrderList.elementAt(index);
 
-                                            return MarketListItemWidget(
-                                              dataMarketOrderList: _marketOrder,
-                                              status: "Open",
-                                            );
-                                          }
-                                        }),
-                                      ),
-                                    )
-                              : Center(
-                                  child: CircularLoadingWidget(
-                                    height: 100,
-                                  ),
-                                );
+                                              return MarketListItemWidget(dataMarketOrderList: _marketOrder, status: "Open");
+                                            }
+                                          }),
+                                        ),
+                                      )
+                              : Center(child: CircularLoadingWidget(height: 100));
                         }),
                       ],
                     ),

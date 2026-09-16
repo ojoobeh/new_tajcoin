@@ -227,9 +227,7 @@ class PortfolioView extends GetView<PortfolioController> {
                           text: TextSpan(
                             children: <TextSpan>[
                               TextSpan(
-                                  text: 'Attention: This plugin is only to facilitate the user s calculations'.tr +
-                                      "It is created and is not the basis of decision for the user. The user is responsible for controlling the correctness of the calculations,".tr +
-                                      "and the Taj Coin application is responsible for this They don t have".tr ,
+                                  text: 'Attention: This plugin is only to facilitate the user s calculations It is created and is not the basis of decision for the user. The user is responsible for controlling the correctness of the calculations, and the Taj Coin application is responsible for this They don t have'.tr,
                                   style: TextStyle(color: Get.theme.disabledColor, fontFamily: FontFamily.vazirBold, fontSize: 14)),
                             ],
                           ),

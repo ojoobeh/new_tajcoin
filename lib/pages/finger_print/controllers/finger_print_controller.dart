@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 .
+ */
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';

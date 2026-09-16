@@ -234,6 +234,7 @@ class Ui {
       Alignment alignment = Alignment.centerLeft}) {
     return Html(
       data: html.replaceAll('\r\n', '') ,
+      //todo-REMOVE
       // customRender: {
       //   "p": (RenderContext context, Widget child) {
       //     return Text(
@@ -251,7 +252,7 @@ class Ui {
           textAlign: textAlign,
           alignment: alignment,
           color: style == null ? Get.theme.hintColor : style.color,
-          fontSize: style == null ? FontSize(16.0) : FontSize(style.fontSize??14),
+          fontSize: style == null ? FontSize(16.0) : FontSize(12),
           display: Display.inlineBlock,
           fontWeight: style == null ? FontWeight.w300 : style.fontWeight,
           width: Width.auto(),
@@ -260,7 +261,7 @@ class Ui {
           textAlign: textAlign,
           lineHeight: LineHeight.normal,
           listStylePosition: ListStylePosition.outside,
-          fontSize: style == null ? FontSize(14.0) : FontSize(style.fontSize??14),
+          fontSize: style == null ? FontSize(14.0) : FontSize(12),
           display: Display.block,
         ),
         "h4,h5,h6": Style(
@@ -275,7 +276,7 @@ class Ui {
               style == null ? FontSize(18.0) : FontSize(style.fontSize! + 4),
         ),
         "br": Style(
-          height: Height.auto(),
+          height: Height(0),
         ),
       },
     );
@@ -308,6 +309,7 @@ class Ui {
       Alignment alignment = Alignment.centerLeft}) {
     return Html(
       data: html.replaceAll('\r\n', '') ,
+      //todo-REMOVE
       // customRender: {
       //   "p": (RenderContext context, Widget child) {
       //     return Text(
@@ -324,13 +326,13 @@ class Ui {
           textAlign: textAlign,
           alignment: alignment,
           color: style == null ? Get.theme.hintColor : style.color,
-          fontSize: style == null ? FontSize(11.0) : FontSize(style.fontSize??14),
+          fontSize: style == null ? FontSize(11.0) : FontSize(12),
           display: Display.inlineBlock,
           fontWeight: style == null ? FontWeight.w300 : style.fontWeight,
           width: Width.auto(),
         ),
         "br": Style(
-          height: Height.auto(),
+          height: Height(0),
         ),
       },
     );

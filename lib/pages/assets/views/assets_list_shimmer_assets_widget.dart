@@ -8,7 +8,7 @@ class ListShimmerAssetsWidget extends GetWidget<AssetsController> {
   final int limit;
 
 
-  ListShimmerAssetsWidget({this.limit= 0});
+  ListShimmerAssetsWidget({this.limit = 0});
 
   @override
   Widget build(final BuildContext context) {

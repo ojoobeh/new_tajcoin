@@ -58,6 +58,7 @@ class PagesMoreDetailPage extends StatelessWidget {
                 child: Html(
                   data: dataMetaverse.body!.replaceAll('\r\n', '') ,
 
+                  //todo-REMOVE
                   // customRender: {
                   //   "p": (RenderContext context, Widget child) {
                   //     return Text(
@@ -78,7 +79,7 @@ class PagesMoreDetailPage extends StatelessWidget {
                       color: Get.theme.hintColor,
                       fontSize: FontSize(16.0),
                       display: Display.inlineBlock,
-                      width: Width.auto(),
+                      width: Width.auto()
                     ),
                     "li": Style(
                       textAlign: TextAlign.start,
@@ -97,7 +98,7 @@ class PagesMoreDetailPage extends StatelessWidget {
                       fontSize: FontSize(18.0),
                     ),
                     "br": Style(
-                      height: Height.auto(),
+                      height: Height(0),
                     ),
                   },
                 ),

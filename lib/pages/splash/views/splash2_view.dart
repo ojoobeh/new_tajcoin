@@ -384,9 +384,8 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
                                   child: Text(
                                     'try again'.tr,
                                     style: TextStyle(
-                                      color: context.theme.canvasColor//todo_selectedRowColor
-
-                                      ,fontFamily: FontFamily.vazirBold,
+                                      color: Get.theme.cardColor,
+                                      fontFamily: FontFamily.vazirBold,
                                     ),
                                   ),
                                 ),

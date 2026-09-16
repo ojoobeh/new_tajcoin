@@ -38,8 +38,7 @@ class MarketAllOrderSpinnerType extends GetView<MarketAllOrderController> {
               ),
             )
           : Container(
-              child: SpinKitWave(color: context.theme.canvasColor//todo_selectedRowColor
-                             ,size: 24, type: SpinKitWaveType.start),
+              child: SpinKitWave(color: context.theme.cardColor, size: 24, type: SpinKitWaveType.start),
             );
     });
   }

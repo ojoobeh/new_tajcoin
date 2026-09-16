@@ -185,8 +185,7 @@ class BottomSheetWithdrawalWidget extends GetWidget<AssetsController> {
                                     ? Text(
                                         'Submit'.tr,
                                         style: TextStyle(
-                                          color: context.theme.canvasColor//todo_selectedRowColor
-
+                                          color: Get.theme.cardColor,
                                         ),
                                       )
                                     : CircularLoadingWidget(
@@ -340,8 +339,7 @@ class BottomSheetWithdrawalWidget extends GetWidget<AssetsController> {
                                       ? Text(
                                           'Submit'.tr,
                                           style: TextStyle(
-                                            color: context.theme.canvasColor//todo_selectedRowColor
-
+                                            color: Get.theme.cardColor,
                                           ),
                                         )
                                       : CircularLoadingWidget(

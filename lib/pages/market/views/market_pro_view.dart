@@ -676,7 +676,9 @@ class MarketProView extends GetView<MarketController> {
                                                 ),
                                                 child: Center(
                                                   child: controller.isLoadingOrder.value
+                                                  //todo-REMOVE
                                                       ? Container()
+                                                  // ? Loading(indicator: BallPulseIndicator(), size: 10.0)
                                                       : Text(
                                                           'Sell'.tr + " " + (controller.selectMarketList.value.symbol),
                                                           style: TextStyle(
@@ -700,7 +702,9 @@ class MarketProView extends GetView<MarketController> {
                                                 ),
                                                 child: Center(
                                                   child: controller.isLoadingOrder.value
+                                                  //todo-REMOVE
                                                       ? Container()
+                                                  // ? Loading(indicator: BallPulseIndicator(), size: 10.0)
                                                       : Text(
                                                           'Buy'.tr + " " + (controller.selectMarketList.value.symbol != null ? controller.selectMarketList.value.symbol : ""),
                                                           style: TextStyle(

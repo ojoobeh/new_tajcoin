@@ -2,7 +2,6 @@
 
 import 'dart:developer' as developer;
 
-// import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,8 +38,7 @@ class Core{
   static const String apiPath = "api/v2/";
   static const String laravelBaseUrl = "https://tajcoin.org/";
   static const String laravelBaseUrl2 = "https://tajcoin.org";
-  // static const String laravelBaseUrl2 = "https://141.11.45.27";
-  static const int port  = 6003;
+  static const int port  = 8443;
   // static const String laravelBaseUrl2 = "https://tajcoin.org";
   static const String uri = laravelBaseUrl + apiPath;
 

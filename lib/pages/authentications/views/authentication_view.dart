@@ -72,9 +72,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     // ignore: deprecated_member_use
-                    color: Core.user.setting!.status! ? context.theme.canvasColor//todo_buttonColor
-
-                        : AppColors.orangeColor,
+                    color: Core.user.setting!.status! ? Get.theme.canvasColor : AppColors.orangeColor,
                     child: Core.user.setting!.status!
                         ? Text("You are already authenticated".tr, style: Get.textTheme.labelLarge!.merge(TextStyle(color: Get.theme.dividerColor)))
                         : Text("Submit".tr, style: Get.textTheme.labelLarge!.merge(TextStyle(color: Get.theme.primaryColor))),

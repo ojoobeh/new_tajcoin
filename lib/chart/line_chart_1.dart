@@ -23,9 +23,11 @@ class LineChartSample extends GetView<TradeController> {
       fontSize: 8,
     );
     return Container();
+    //todo-REMOVE
     // return SideTitleWidget(
-    //   axisSide: meta.axisSide,
+    //   // axisSide: meta.axisSide,
     //   // child: Text('${(value+1).toStringAsFixed(0)}', style: style),
+    //
     //   child: Text('', style: style),
     // );
   }

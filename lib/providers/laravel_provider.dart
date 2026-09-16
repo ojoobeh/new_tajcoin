@@ -191,7 +191,7 @@ class LaravelApiClient extends GetxService  {
     }
   }
 
-  Future<CallMarketList?> getMarketList(int page, {String search=""}) async {
+  Future<CallMarketList?> getMarketList(int page, {String search= ""}) async {
     var user = Core.user;
     _httpClient = dio.Dio();
     try {

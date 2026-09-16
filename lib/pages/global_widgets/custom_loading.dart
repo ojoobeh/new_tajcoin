@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:loading/indicator/ball_pulse_indicator.dart';
+// import 'package:loading/loading.dart';
 
 import '../../utils/assets.dart';
 
@@ -42,7 +44,13 @@ class CustomLoading extends StatelessWidget {
                     Assets.logo,
                     width: 100,
                   ),
-                  Container(),
+                  //todo-REMOVE
+                  Container()
+                  // Loading(
+                  //   indicator: BallPulseIndicator(),
+                  //   size: 50.0,
+                  //   color: Colors.pink,
+                  // ),
                 ],
               ),
             ),

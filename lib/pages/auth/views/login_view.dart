@@ -130,8 +130,7 @@ class LoginView extends GetView<AuthController> {
                                 ),
                               ),
                             )
-                                : SpinKitWave(color: context.theme.canvasColor//todo_selectedRowColor
-                             ,size: 24, type: SpinKitWaveType.start);
+                                : SpinKitWave(color: context.theme.cardColor, size: 24, type: SpinKitWaveType.start);
                           }),
                         ),
                       ).paddingOnly(top: 15, bottom: 5, right: 20, left: 20),
