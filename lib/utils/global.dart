@@ -155,67 +155,70 @@ Future<void> getBankNameList({required VoidCallback action}) async {
   );
 }
 
-void retRyDialog({required VoidCallback action, required String description, String? title}) => showDialog(
-      context: Get.context!,
-      builder: (final BuildContext context) => AlertDialog(
-        backgroundColor: Colors.transparent,
-        content: Container(
-          decoration: BoxDecoration(color: context.theme.scaffoldBackgroundColor, borderRadius: BorderRadius.circular(16)),
-          height: 250,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(16),
-                        topLeft: Radius.circular(16),
-                      ),
-                      color: Color(0xfff65656),
+void retRyDialog({required VoidCallback action, required String description, String? title}){
+  dismissLoading();
+  showDialog(
+    context: Get.context!,
+    builder: (final BuildContext context) => AlertDialog(
+      backgroundColor: Colors.transparent,
+      content: Container(
+        decoration: BoxDecoration(color: context.theme.scaffoldBackgroundColor, borderRadius: BorderRadius.circular(16)),
+        height: 250,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(16),
+                      topLeft: Radius.circular(16),
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.warning_rounded,
-                        size: 64,
-                        color: Colors.white,
-                      ),
+                    color: Color(0xfff65656),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.warning_rounded,
+                      size: 64,
+                      color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    title ?? 'Error'.tr,
-                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
-                  ),
-                ],
-              ),
-              Text(
-                description,
-                style: TextStyle(fontWeight: FontWeight.w400),
-              ).paddingSymmetric(horizontal: 8),
-
-              const SizedBox(height: 8),
-              InkWell(
-                onTap: () {
-                  Get.back();
-                  action();
-                },
-                child: SvgPicture.asset(
-                  Assets.refresh,
-                  width: 32,
-                  height: 32,
-                  color: Color(0xfff65656),
                 ),
-              ),
+                const SizedBox(height: 8),
+                Text(
+                  title ?? 'Error'.tr,
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+                ),
+              ],
+            ),
+            Text(
+              description,
+              style: TextStyle(fontWeight: FontWeight.w400),
+            ).paddingSymmetric(horizontal: 8),
 
-              const SizedBox(height: 16),
-            ],
-          ),
+            const SizedBox(height: 8),
+            InkWell(
+              onTap: () {
+                Get.back();
+                action();
+              },
+              child: SvgPicture.asset(
+                Assets.refresh,
+                width: 32,
+                height: 32,
+                color: Color(0xfff65656),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+          ],
         ),
       ),
-    );
+    ),
+  );
+}
 
 Dio createDio() {
   var dio = Dio(BaseOptions(headers: {

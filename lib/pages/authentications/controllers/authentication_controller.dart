@@ -314,6 +314,93 @@ class AuthenticationController extends GetxController {
         onError: (onError) {
           dismissLoading();
           snackbarRed(title: 'Error'.tr, subtitle: onError.message);
+          Get.defaultDialog(
+              title: "",
+              backgroundColor: Get.theme.scaffoldBackgroundColor,
+              content: Container(
+                width: 300,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Get.theme.scaffoldBackgroundColor,
+                ),
+                child: WillPopScope(
+                  onWillPop: () async => false,
+                  child: Container(
+                    decoration: BoxDecoration(color: Get.theme.scaffoldBackgroundColor, borderRadius: BorderRadius.circular(16)),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(Assets.logo),
+                            ),
+                          ),
+                        ),
+                        AuthCustomTextFieldWidget(
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.start,
+                          textEditingController: textEditingController,
+                          validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
+                          hintText: "Verify code".tr,
+                          labelText: "Verify code".tr,
+                        ).marginOnly(top: 8),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              actions: [
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () async {
+                          verifyCode(context);
+                        },
+                        child: Container(
+                          height: 50,
+                          child: Center(
+                            child: isLoadingVerify.value
+                                ? SpinKitWave(color: Colors.white, size: 24, type: SpinKitWaveType.center)
+                                : Text(
+                              "Confirm".tr,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: FontFamily.vazirBold,
+                                color: Get.theme.dividerColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                          Get.back();
+                        },
+                        child: Container(
+                          height: 50,
+                          child: Center(
+                            child: Text(
+                              "Cancel".tr,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: FontFamily.vazirBold,
+                                color: Get.theme.dividerColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ]);
         },
         failure: (error) {
           dismissLoading();

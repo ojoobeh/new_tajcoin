@@ -350,10 +350,7 @@ class AuthController extends GetxController {
 
   void nextPage({required VoidCallback action}) {
     getApplicationInfo(
-      action: () => getCurrencies(
-          action: () => getBankNameList(
-                action: action,
-              )),
+      action: () => action(),
     );
 
     // loadCurrenciesOfStatus(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
+import 'package:solar_datepicker/solar_datepicker.dart';
 
 import 'package:webazin/utils/utils.dart';
 import 'package:webazin/widgets/persianDatePicker/flutter_datepicker.dart';
@@ -12,7 +13,6 @@ class BirthdayWidget extends GetView<AuthenticationController> {
   Widget build(final BuildContext context) {
     return InkWell(
       onTap: () async {
-
         // LinearDatePicker(
         //     startDate: "1922/02/20", //yyyy/mm/dd
         //     endDate: "2023/02/20",
@@ -45,9 +45,7 @@ class BirthdayWidget extends GetView<AuthenticationController> {
         //     isJalaali: true  // false -> Gregorian
         // );
 
-
-        Jalali? pickedDate =
-        await showModalBottomSheet<Jalali>(
+        Jalali? pickedDate = await showModalBottomSheet<Jalali>(
           context: context,
           builder: (context) {
             Jalali? tempPickedDate;
@@ -57,44 +55,31 @@ class BirthdayWidget extends GetView<AuthenticationController> {
                 children: <Widget>[
                   Container(
                     child: Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         CupertinoButton(
-                          child:  Text(
+                          child: Text(
                             'Cancel'.tr,
-                            style: TextStyle(
-                              fontFamily: 'Dana',
-                                color: context.theme.dividerColor,
-                            ),
+                            style: TextStyle(fontFamily: 'Dana', color: context.theme.dividerColor),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         ),
                         CupertinoButton(
-                          child:  Text(
+                          child: Text(
                             "Confirm".tr,
-                            style: TextStyle(
-                              fontFamily: 'Dana',
-                              color: context.theme.dividerColor,
-                            ),
+                            style: TextStyle(fontFamily: 'Dana', color: context.theme.dividerColor),
                           ),
                           onPressed: () {
-                            Navigator.of(context).pop(
-                                tempPickedDate ??
-                                    Jalali.now());
+                            Navigator.of(context).pop(tempPickedDate ?? Jalali.now());
                           },
                         ),
                       ],
                     ),
                   ),
-                  const Divider(
-                    height: 0,
-                    thickness: 1,
-                  ),
+                  const Divider(height: 0, thickness: 1),
                   Expanded(
-
                     //todo-REMOVE
                     child: Container(),
                     // child: Container(
@@ -122,15 +107,6 @@ class BirthdayWidget extends GetView<AuthenticationController> {
           },
         );
 
-
-
-
-
-
-
-
-
-
         // Jalali? picked = await showPersianDatePicker(
         //   context: context,
         //
@@ -148,17 +124,46 @@ class BirthdayWidget extends GetView<AuthenticationController> {
         //   controller.updateBirthday(birthday);
         // }
       },
-      child: Container(
+      child: InkWell(
+        onTap: () async {
+          final picked = await showSolarDatePicker(
+            context: context,
+            textDirection: TextDirection.rtl,
+            initialDate: DateTime.now(),
+            locale: Locale('fa', 'IR'),
+            firstDate: DateTime.now().subtract(Duration(days: 100 * 365)),
+            lastDate: DateTime(2100),
+            isPersian: true,
+            headerContentColor: Colors.blue,
+            initialDatePickerMode: SolarDatePickerMode.day,
+          );
+          if (picked != null) {
+            DateTime pickedDate = picked;
+            final JalaliFormatter f = Jalali.fromDateTime(pickedDate).formatter;
+            var yy = f.yyyy;
+            var mm = f.mm;
+            var dd = f.dd;
+            debugPrint('dddd');
+
+            String birthday = '$yy/$mm/$dd';
+
+            controller.updateBirthday(birthday);
+            controller.update();
+
+            // dateExamController.text = '${f.yyyy}/${f.mm}/${f.dd}';
+            // setState(() {});
+            debugPrint('dddd');
+          } else {
+            // dateExamController.text = '';
+            // setState(() {});
+          }
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               'Birthday'.tr,
-              style: TextStyle(
-                fontFamily: FontFamily.vazirLight,
-                fontSize: 12,
-                color: Get.theme.dividerColor.withOpacity(0.8),
-              ),
+              style: TextStyle(fontFamily: FontFamily.vazirLight, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.8)),
               textAlign: TextAlign.start,
             ).marginOnly(right: 8),
             Container(
@@ -173,14 +178,10 @@ class BirthdayWidget extends GetView<AuthenticationController> {
               child: Center(
                 child: Container(
                   width: double.infinity,
-                  child: Obx((){
+                  child: Obx(() {
                     return Text(
-                      controller.birthDay.value ,
-                      style: TextStyle(
-                        fontFamily: FontFamily.vazirLight,
-                        fontSize: 12,
-                        color: Get.theme.dividerColor,
-                      ),
+                      controller.birthDay.value,
+                      style: TextStyle(fontFamily: FontFamily.vazirLight, fontSize: 12, color: Get.theme.dividerColor),
                       textAlign: TextAlign.end,
                     );
                   }),
