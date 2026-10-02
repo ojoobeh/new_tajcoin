@@ -70,7 +70,7 @@ class MarketController extends GetxController {
     update();
     await loadMarket();
     connectToServer();
-    getData();
+   await getData();
     super.onInit();
   }
 
@@ -216,9 +216,9 @@ class MarketController extends GetxController {
     );
   }
 
-  void getData() {
-    //perform http request here
-    //show cool alert
+  Future getData() async{
+    await loadMarket();
+    connectToServer();
   }
 
   Future refreshHome({bool showMessage = false, String statusId = ""}) async {
