@@ -49,28 +49,31 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
 
     getAppInfo(action: () {
       if (isLogin()) {
-        getUser(
-            action: () => getBankNameList(
-                action: () => getCurrencies(
-                      action: () => getBankNameList(
-                        action: () {
-                          checkBiometric(
-                            action: (canCheckBiometric) {
-                              Core.canCheckBiometric = canCheckBiometric;
-                              if (canCheckBiometric) {
-                                if (getBool (Core.fingerPrintEnable)) {
-                                  Get.offAndToNamed(Routes.FINGERPRINT);
-                                } else {
-                                  Get.offAndToNamed(Routes.ROOT);
-                                }
+        getPopup(action: () {
+          getUser(
+              action: () => getBankNameList(
+                  action: () => getCurrencies(
+                    action: () => getBankNameList(
+                      action: () {
+                        checkBiometric(
+                          action: (canCheckBiometric) {
+                            Core.canCheckBiometric = canCheckBiometric;
+                            if (canCheckBiometric) {
+                              if (getBool (Core.fingerPrintEnable)) {
+                                Get.offAndToNamed(Routes.FINGERPRINT);
                               } else {
                                 Get.offAndToNamed(Routes.ROOT);
                               }
-                            },
-                          );
-                        },
-                      ),
-                    )));
+                            } else {
+                              Get.offAndToNamed(Routes.ROOT);
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  )));
+        },);
+
       } else {
         Get.offAndToNamed(Routes.LOGIN);
       }

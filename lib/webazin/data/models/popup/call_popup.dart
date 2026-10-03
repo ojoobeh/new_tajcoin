@@ -3,11 +3,7 @@ class CallPopup {
   List<DataPopup>? data;
   String? message;
 
-  CallPopup({
-    this.code,
-    this.data,
-    this.message,
-  });
+  CallPopup({this.code, this.data, this.message});
 
   CallPopup.fromJson(Map<String, dynamic> json) {
     code = json['code'];
@@ -18,7 +14,7 @@ class CallPopup {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['code'] = this.code;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
@@ -35,13 +31,7 @@ class DataPopup {
   String? title;
   String? message;
 
-  DataPopup({
-    this.id,
-    this.image,
-    this.link,
-    this.title,
-    this.message,
-  });
+  DataPopup({this.id, this.image, this.link, this.title, this.message});
 
   DataPopup.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -52,7 +42,7 @@ class DataPopup {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['image'] = this.image;
     data['link'] = this.link;

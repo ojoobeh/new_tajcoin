@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:webazin/pages/splash/views/splash2_view.dart';
+import 'package:webazin/webazin/data/remote_datasource/other_source.dart';
 import 'package:webazin/webazin/utilities.dart';
 import 'package:webazin/webazin/utility/local_storage.dart';
 
@@ -20,6 +21,8 @@ class Core{
   static List<DataBank> bankList =[];
   static List<DataPortfolio> portfolios =[];
   static bool canCheckBiometric=true;
+
+  static DataPopup lastPopupData=DataPopup();
 
 
   // static const String site = "v6.exchange-demo.ir";
@@ -36,11 +39,13 @@ class Core{
   static const String appNameFa = "تاج کوین";
   static const String channel = "tajcoin";
   static const String apiPath = "api/v2/";
+  static const String apiPath2 = "api/v1/";
   static const String laravelBaseUrl = "https://tajcoin.org/";
   static const String laravelBaseUrl2 = "https://tajcoin.org";
   static const int port  = 8443;
   // static const String laravelBaseUrl2 = "https://tajcoin.org";
   static const String uri = laravelBaseUrl + apiPath;
+  static const String uri2 = laravelBaseUrl + apiPath2;
 
   static const String VERSIONNAME = "3.2.0";
   static const int VERSIONCODE = 32;

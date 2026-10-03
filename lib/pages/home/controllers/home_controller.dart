@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import 'package:webazin/utils/core.dart';
 import 'package:webazin/webazin/data/models/parents/statistic.dart';
+import 'package:webazin/webazin/data/remote_datasource/other_source.dart';
 import 'package:webazin/webazin/utilities.dart';
 import 'package:webazin/webazin/utility/local_storage.dart';
 
@@ -27,6 +28,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   List<TargetFocus> targets = <TargetFocus>[];
   GlobalKey keyButton1 = GlobalKey();
 
+
   HomeController() {}
 
   Future<void> getPopup() async {
@@ -41,7 +43,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     }
   }
 
-  setChangeThem (final bool isChange) {
+  setChangeThem(final bool isChange) {
     isHomeLoaded.value = true;
     update();
   }
@@ -52,11 +54,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
       targets: targets,
       colorShadow: Colors.blueGrey,
       textSkip: "I understand".tr,
-      textStyleSkip: TextStyle(
-        fontSize: 20,
-        color: AppColors.orangeColor,
-        fontFamily: FontFamily.vazirBold,
-      ),
+      textStyleSkip: TextStyle(fontSize: 20, color: AppColors.orangeColor, fontFamily: FontFamily.vazirBold),
       paddingFocus: 10,
       opacityShadow: 0.8,
       onFinish: () {
@@ -76,7 +74,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
         setData('${Core.helperHome}', true);
         return false;
       },
-    )..show(context:context);
+    )..show(context: context);
   }
 
   void initTargets(final BuildContext context) {
@@ -97,31 +95,16 @@ class HomeController extends GetxController with WidgetsBindingObserver {
                   children: <Widget>[
                     Text(
                       "More...",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontFamily.vazirBold,
-                        color: Colors.red,
-                        fontSize: 20.0,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontFamily: FontFamily.vazirBold, color: Colors.red, fontSize: 20.0),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Text(
                         "By clicking on this option, you will have access to all the features of the application".tr,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: FontFamily.vazirBold,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: Colors.white, fontFamily: FontFamily.vazirBold, fontSize: 16),
                       ),
                     ).marginOnly(bottom: 32),
-                    Center(
-                        child: Image.asset(
-                      Assets.arrow1,
-                      width: 100,
-                      height: 100,
-                      color: Colors.yellow,
-                    ))
+                    Center(child: Image.asset(Assets.arrow1, width: 100, height: 100, color: Colors.yellow)),
                   ],
                 ),
               );
@@ -138,6 +121,8 @@ class HomeController extends GetxController with WidgetsBindingObserver {
 
     WidgetsBinding.instance.addObserver(this);
 
+
+
     await refreshHome();
     super.onInit();
   }
@@ -151,7 +136,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     }
   }
 
-  void setLoading (final bool _isLoading) {
+  void setLoading(final bool _isLoading) {
     isLoading2.value = _isLoading;
     update();
   }
@@ -225,11 +210,7 @@ class HomeController extends GetxController with WidgetsBindingObserver {
   //   }
   // }
 
-  void updateCurrencies(
-    String symbol2,
-    String close,
-    String percentChange,
-  ) {
+  void updateCurrencies(String symbol2, String close, String percentChange) {
     for (int i = 0; i < currencies.length; i++) {
       List<MarketElement> list = currencies[i].markets!;
       for (int i2 = 0; i2 < list.length; i2++) {

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webazin/pages/global_widgets/scrolling_text.dart';
 import 'package:webazin/utils/core.dart';
+import 'package:webazin/webazin/data/models/popup/call_popup.dart' hide DataPopup;
+import 'package:webazin/webazin/data/remote_datasource/other_source.dart';
 import 'package:webazin/webazin/utilities.dart';
+import 'package:webazin/webazin/utility/local_storage.dart';
 
 import '../../../utils/helper.dart';
 import '../../../routes/app_routes.dart';
@@ -36,7 +41,7 @@ class HomeView extends GetView<HomeController> {
       SystemUiOverlayStyle.dark.copyWith(),
     );
     if (!controller.isShowDialog) {
-      Future.delayed(Duration.zero, () => sendMessage(context));
+      Future.delayed(Duration.zero, () => sendMessage(context,Core.lastPopupData));
       controller.isShowDialog = true;
     }
 
@@ -64,6 +69,9 @@ class HomeView extends GetView<HomeController> {
                       children: <Widget>[
                         InkWell(
                           onTap: () => Get.toNamed(Routes.TicketS),
+                          // onTap: () {
+                          //
+                          // },
                           // onTap: () =>  showLoading(),
                           child: Row(
                             children: <Widget>[
@@ -229,186 +237,195 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  void sendMessage(final BuildContext context) async {
-    // CallPopup data = Get.find<AppService>().callPopup.value;
-    // List<DataPopup> list = await DbHelper.getPopupList();
-    // List<int> l1 = [];
-    // list.forEach((element) {
-    //   l1.add(element.id!);
-    // });
-    // if (!l1.contains(data.data![0].id)) {
-    //   showGeneralDialog(
-    //       barrierColor: Colors.black.withOpacity(0.8),
-    //       transitionBuilder: (context, a1, a2, widget) {
-    //         return Transform.scale(
-    //           scale: a1.value,
-    //           child: Opacity(
-    //             opacity: a1.value,
-    //             child: AlertDialog(
-    //               contentPadding: EdgeInsets.zero,
-    //               backgroundColor: Colors.transparent,
-    //               elevation: 0,
-    //               content: WillPopScope(
-    //                 onWillPop: () async => false,
-    //                 child: Column(
-    //                   mainAxisAlignment: MainAxisAlignment.center,
-    //                   children: <Widget>[
-    //                     Container(
-    //                       decoration: BoxDecoration(color: context.theme.primaryColor, borderRadius: BorderRadius.circular(16)),
-    //                       height: 400,
-    //                       child: Container(
-    //                         decoration: BoxDecoration(
-    //                           image: DecorationImage(
-    //                             image: NetworkImage(data.data![0].image!),
-    //                             fit: BoxFit.cover,
-    //                           ),
-    //                         ),
-    //                         height: double.infinity,
-    //                         child: Column(
-    //                           children: <Widget>[
-    //                             Container(
-    //                               margin: const EdgeInsets.only(top: 16),
-    //                               child: Text(
-    //                                 data.data![0].title.toString(),
-    //                                 style: TextStyle(
-    //                                   fontFamily: FontFamily.vazirBold,
-    //                                   fontSize: 15,
-    //                                   color: Colors.white,
-    //                                 ),
-    //                               ),
-    //                             ),
-    //                             Flexible(
-    //                               child: Container(
-    //                                 height: double.infinity,
-    //                                 padding: EdgeInsets.all(16),
-    //                                 margin: const EdgeInsets.only(top: 26),
-    //                                 child: Text(
-    //                                   data.data![0].message.toString(),
-    //                                   style: TextStyle(
-    //                                     fontFamily: FontFamily.vazirBold,
-    //                                     fontSize: 13,
-    //                                     color: Colors.white,
-    //                                   ),
-    //                                 ),
-    //                               ),
-    //                             ),
-    //                             Container(
-    //                               height: 80,
-    //                               child: Row(
-    //                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //                                 children: <Widget>[
-    //                                   InkWell(
-    //                                     onTap: () {
-    //                                       // DbHelper.insertPopup(dataPopup: data.data![0]);
-    //                                       Get.back();
-    //                                       bool isShowHelper = getBool('${Core.helperHome}');
-    //
-    //                                       if (!isShowHelper) {
-    //                                         controller.showTutorial(context);
-    //                                       }
-    //                                     },
-    //                                     child: Container(
-    //                                       width: 130,
-    //                                       height: 50,
-    //                                       decoration: BoxDecoration(
-    //                                         borderRadius: BorderRadius.circular(8),
-    //                                         border: Border.all(color: Colors.orangeAccent, width: 1),
-    //                                       ),
-    //                                       child: Center(
-    //                                         child: Text(
-    //                                           style: TextStyle(
-    //                                             fontSize: 12,
-    //                                             fontFamily: FontFamily.vazirBold,
-    //                                             color: Colors.orange,
-    //                                           ),
-    //                                         ),
-    //                                       ),
-    //                                     ),
-    //                                   ),
-    //                                   InkWell(
-    //                                     onTap: () async {
-    //                                       await launch(data.data![0].link!);
-    //                                       Get.back();
-    //                                       bool isShowHelper = getBool('${Core.helperHome}');
-    //
-    //                                       if (!isShowHelper) {
-    //                                         controller.showTutorial(context);
-    //                                       }
-    //                                     },
-    //                                     child: Container(
-    //                                       width: 130,
-    //                                       height: 50,
-    //                                       decoration: BoxDecoration(
-    //                                         borderRadius: BorderRadius.circular(8),
-    //                                         color: Colors.orangeAccent,
-    //                                       ),
-    //                                       child: Center(
-    //                                         child: Text(
-    //                                           style: TextStyle(
-    //                                             fontSize: 12,
-    //                                             fontFamily: FontFamily.vazirBold,
-    //                                             color: Colors.white,
-    //                                           ),
-    //                                         ),
-    //                                       ),
-    //                                     ),
-    //                                   ),
-    //                                 ],
-    //                               ),
-    //                             )
-    //                           ],
-    //                         ),
-    //                       ),
-    //                     ),
-    //                     Container(
-    //                       width: 2,
-    //                       height: 50,
-    //                       color: Colors.white,
-    //                     ),
-    //                     InkWell(
-    //                         onTap: () {
-    //                           Get.back();
-    //                           bool isShowHelper = getBool('${Core.helperHome}');
-    //
-    //                           if (!isShowHelper) {
-    //                             controller.showTutorial(context);
-    //                           }
-    //                         },
-    //                         child: SvgPicture.asset(
-    //                           Assets.close,
-    //                           width: 34,
-    //                           height: 34,
-    //                           color: Colors.white,
-    //                         ))
-    //                   ],
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         );
-    //       },
-    //       transitionDuration: Duration(milliseconds: 200),
-    //       barrierDismissible: false,
-    //       barrierLabel: '',
-    //       context: context,
-    //       pageBuilder: (context, animation1, animation2) {
-    //         return Container();
-    //       });
-    // } else {
-    //   bool isShowHelper = getBool('${Core.helperHome}');
-    //   // final keyZero = GlobalKey();
-    //   // final keyOne2 = GlobalKey();
-    //   // WidgetsBinding.instance!.addPostFrameCallback(
-    //   //       (_) => ShowCaseWidget.of(context)!.startShowCase([
-    //   //     isShowHelper != true ? keyOne2 : keyZero,
-    //   //     keyOne2,
-    //   //     // keyTwo2,
-    //   //   ]),
-    //   // );
-    //   if (!isShowHelper) {
-    //     controller.showTutorial(context);
-    //   }
-    // }
+  void sendMessage(final BuildContext context,DataPopup data) async {
+
+    String lastId=getString('LastPopup')??'-1';
+
+    if (data.id!=lastId) {
+      debugPrint('ddd');
+      showGeneralDialog(
+          barrierColor: Colors.black.withOpacity(0.8),
+          transitionBuilder: (context, a1, a2, widget) {
+            return Transform.scale(
+              scale: a1.value,
+              child: Opacity(
+                opacity: a1.value,
+                child: AlertDialog(
+                  contentPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  content: WillPopScope(
+                    onWillPop: () async => false,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(color: context.theme.primaryColor, borderRadius: BorderRadius.circular(16)),
+                          height: 400,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(data.image!),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            height: double.infinity,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: const EdgeInsets.only(top: 16),
+                                  child: Text(
+                                    data.title.toString(),
+                                    style: TextStyle(
+                                      fontFamily: FontFamily.vazirBold,
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Container(
+                                    height: double.infinity,
+                                    padding: EdgeInsets.all(16),
+                                    margin: const EdgeInsets.only(top: 26),
+                                    child: Text(
+                                      data.message.toString(),
+                                      style: TextStyle(
+                                        fontFamily: FontFamily.vazirBold,
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 80,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: <Widget>[
+                                      InkWell(
+                                        onTap: () {
+                                          // DbHelper.insertPopup(dataPopup: data.data![0]);
+                                          Get.back();
+                                          bool isShowHelper = getBool('${Core.helperHome}');
+
+                                          setData('LastPopup', data.id);
+
+                                          if (!isShowHelper) {
+                                            controller.showTutorial(context);
+                                          }
+                                        },
+                                        child: Container(
+                                          width: 130,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(8),
+                                            border: Border.all(color: Colors.orangeAccent, width: 1),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              'متوجه شدم',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily: FontFamily.vazirBold,
+                                                color: Colors.orange,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          await launch(data.link!);
+                                          Get.back();
+                                          bool isShowHelper = getBool('${Core.helperHome}');
+
+                                          if (!isShowHelper) {
+                                            controller.showTutorial(context);
+                                          }
+                                        },
+                                        child: Container(
+                                          width: 130,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(8),
+                                            color: Colors.orangeAccent,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              'جزئیات',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily: FontFamily.vazirBold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 2,
+                          height: 50,
+                          color: Colors.white,
+                        ),
+                        InkWell(
+                            onTap: () {
+                              Get.back();
+                              bool isShowHelper = getBool('${Core.helperHome}');
+
+                              if (!isShowHelper) {
+                                controller.showTutorial(context);
+                              }
+                            },
+                            child: SvgPicture.asset(
+                              Assets.close,
+                              width: 34,
+                              height: 34,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+          transitionDuration: Duration(milliseconds: 200),
+          barrierDismissible: false,
+          barrierLabel: '',
+          context: context,
+          pageBuilder: (context, animation1, animation2) {
+            return Container();
+          });
+    } else {
+      bool isShowHelper = getBool('${Core.helperHome}');
+      debugPrint('ddd');
+      // final keyZero = GlobalKey();
+      // final keyOne2 = GlobalKey();
+      // WidgetsBinding.instance!.addPostFrameCallback(
+      //       (_) => ShowCaseWidget.of(context)!.startShowCase([
+      //     isShowHelper != true ? keyOne2 : keyZero,
+      //     keyOne2,
+      //     // keyTwo2,
+      //   ]),
+      // );
+      if (!isShowHelper) {
+        controller.showTutorial(context);
+      }
+    }
+  }
+
+  void showPopup(DataPopup response) {
+
+    Get.dialog(Container(width: 100,height: 100,color: Colors.red,));
+
   }
 }
 

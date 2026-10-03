@@ -1141,7 +1141,6 @@ class MarketController extends GetxController {
     print('✅ BALANCE LISTENER REGISTERED');
   }
 
-
   void _registerTickerListener(String channelName) {
     if (socket == null) return;
 
@@ -1279,7 +1278,6 @@ class MarketController extends GetxController {
       }
     });
   }
-
 
   void _handleTicker(dynamic e) {
     try {
