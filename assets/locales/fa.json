@@ -60,6 +60,7 @@
   " IRT": "تومان",
   "Identifier Code": "کد معرف",
   "It is possible to register for eighteen years or more": "هجده سال به بالا امکان ثبت وجود دارد",
+  "theFileSizeMustBeLessThanSizeMB": "حجم فایل باید کمتر از  {size} مگابایت باشد",
   "Limit": "محدود شده",
   "List Tikets": "لیست تیکت ها",
   "Loan to buy more @@@": "برای خرید بیشتر @@@ وام بگیرید",

@@ -22,7 +22,7 @@ class TicketsController extends GetxController with SingleGetTickerProviderMixin
   final oldPassword = "".obs;
   final newPassword = "".obs;
   final confirmPassword = "".obs;
-  final imageAuthentication = "".obs;
+  Rx<String> imageAuthentication = "".obs;
   final smsSent = "".obs;
   final label = ''.obs;
   final subjectTicket = ''.obs;
