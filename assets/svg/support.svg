@@ -1,4 +1,15 @@
-<svg width="24px" height="24px" viewBox="0 0 24 24" id="_24x24_On_Light_Support" data-name="24x24/On Light/Support" xmlns="http://www.w3.org/2000/svg">
-  <rect id="view-box" width="24" height="24" fill="none"/>
-  <path id="Shape" d="M8,17.751a2.749,2.749,0,0,1,5.127-1.382C15.217,15.447,16,14,16,11.25v-3c0-3.992-2.251-6.75-5.75-6.75S4.5,4.259,4.5,8.25v3.5a.751.751,0,0,1-.75.75h-1A2.753,2.753,0,0,1,0,9.751v-1A2.754,2.754,0,0,1,2.75,6h.478c.757-3.571,3.348-6,7.022-6s6.264,2.429,7.021,6h.478a2.754,2.754,0,0,1,2.75,2.75v1a2.753,2.753,0,0,1-2.75,2.75H17.44A5.85,5.85,0,0,1,13.5,17.84,2.75,2.75,0,0,1,8,17.751Zm1.5,0a1.25,1.25,0,1,0,1.25-1.25A1.251,1.251,0,0,0,9.5,17.751Zm8-6.75h.249A1.251,1.251,0,0,0,19,9.751v-1A1.251,1.251,0,0,0,17.75,7.5H17.5Zm-16-2.25v1A1.251,1.251,0,0,0,2.75,11H3V7.5H2.75A1.251,1.251,0,0,0,1.5,8.751Z" transform="translate(1.75 2.25)" fill="#141124"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3987ff"/>
+      <stop offset="1" stop-color="#1760ee"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="230" fill="#eaf3ff"/>
+  <path d="M135 267 V220a121 121 0 0 1 242 0v47" fill="none" stroke="url(#blue)" stroke-width="22" stroke-linecap="round"/>
+  <rect x="111" y="225" width="64" height="105" rx="30" fill="url(#blue)"/>
+  <rect x="337" y="225" width="64" height="105" rx="30" fill="url(#blue)"/>
+  <path d="M369 308v29a76 76 0 0 1-76 76h-26" fill="none" stroke="url(#blue)" stroke-width="22" stroke-linecap="round"/>
+  <rect x="237" y="397" width="61" height="36" rx="18" fill="url(#blue)"/>
+  <text x="256" y="296" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="700" fill="#1768f5">24H</text>
 </svg>

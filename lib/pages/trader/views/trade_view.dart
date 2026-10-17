@@ -114,44 +114,6 @@ class TradeView extends GetView<TradeController> {
                                     ),
                                     Row(
                                       children: <Widget>[
-                                        // controller.selectCurrencies.value.symbol == 'USDT'
-                                        //     ? Container()
-                                        //     : InkWell(
-                                        //         onTap: () async {
-                                        //           SystemChrome.setPreferredOrientations([
-                                        //             DeviceOrientation.landscapeLeft,
-                                        //           ]);
-                                        //           await Get.to(WebViewView (Core.laravelBaseUrl + 'chart/${controller.selectCurrencies.value.symbol}'));
-                                        //
-                                        //           SystemChrome.setPreferredOrientations([
-                                        //             DeviceOrientation.portraitUp,
-                                        //           ]);
-                                        //         },
-                                        //         child: Container(
-                                        //           padding: EdgeInsets.all(2),
-                                        //           child: SvgPicture.asset(
-                                        //             Assets.candle01,
-                                        //             width: 22,
-                                        //             height: 22,
-                                        //             color: context.theme.dividerColor.withOpacity(0.9),
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        // SizedBox(
-                                        //   width: 8,
-                                        // ),
-                                        // InkWell(
-                                        //   onTap: () => controller.updtaeDataCurrencies(),
-                                        //   child: Container(
-                                        //     padding: EdgeInsets.all(2),
-                                        //     child: SvgPicture.asset(
-                                        //       Assets.star_empty,
-                                        //       width: 22,
-                                        //       height: 22,
-                                        //       color: Colors.black54.withOpacity(0.9),
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         SizedBox(
                                           width: 8,
                                         ),

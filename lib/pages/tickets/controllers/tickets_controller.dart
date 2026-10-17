@@ -81,10 +81,7 @@ class TicketsController extends GetxController with SingleGetTickerProviderMixin
   }
 
   Future<void> getOrderList({required VoidCallback action}) async {
-    orderList.add(new DataOrder(
-      id: 0,
-      itemId: 0,
-    ));
+    orderList.add(new DataOrder(id: 0, itemId: 0));
     selectOrder.value = orderList[0];
     update();
     orderSource.readHistory(
@@ -181,17 +178,18 @@ class TicketsController extends GetxController with SingleGetTickerProviderMixin
       if (messageTicket.value.length > 3) {
         showLoading();
 
-        ticketSource.createTicket(
+        ticketSource.createTicket2(
           categoryId: selectCategory.value.id ?? 0,
           subject: subjectTicket.value,
           message: messageTicket.value,
-          onResponse: (response) {
+          filePath: imageAuthentication.value != '' ? imageAuthentication.value : null,
+          onResponse: () {
             refreshList();
             controller.animateTo(1);
             dismissLoading();
           },
           onError: (errorResponse) {
-            snackbarRed(title: 'Error'.tr, subtitle: errorResponse.message);
+            snackbarRed(title: 'Error'.tr, subtitle: errorResponse);
             dismissLoading();
           },
           failure: (error) {

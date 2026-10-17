@@ -96,31 +96,30 @@ class AssetsController extends GetxController {
     super.onInit();
   }
 
-
   void warningDialog({required VoidCallback action, required String description, String? title}) => showDialog(
     context: Get.context!,
     builder: (final BuildContext context) => AlertDialog(
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       content: SizedBox(
-        height: 300,
+        // height: 500,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Column(
               children: <Widget>[
-                Icon(
-                  Icons.warning_rounded,
-                  size: 64,
-                  color: Colors.red,
-                ),
+                Icon(Icons.warning_rounded, size: 64, color: Colors.red),
                 Text(
                   title ?? 'Error'.tr,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: context.theme.dividerColor,fontSize: 20),
                 ),
               ],
             ),
+            SizedBox(height: 8),
             Text(
               description,
-              style: TextStyle(fontWeight: FontWeight.w400),
+              style: TextStyle(fontWeight: FontWeight.w400, color: context.theme.dividerColor.withValues(alpha: 0.7)),
+              textAlign: TextAlign.justify,
             ),
             Container(
               height: 50,
@@ -137,8 +136,8 @@ class AssetsController extends GetxController {
                   }),
                   Text(
                     'I read and understood'.tr,
-                    style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold),
-                  )
+                    style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold, color: context.theme.dividerColor),
+                  ),
                 ],
               ),
             ),
@@ -149,17 +148,23 @@ class AssetsController extends GetxController {
                   action();
                 }
               },
-              child: Text(
-                "Confirm".tr,
-                style: TextStyle(fontWeight: FontWeight.w400),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(color: Colors.blueGrey.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(8)),
+                padding: EdgeInsets.all(8),
+                child: Center(
+                  child: Text(
+                    "Confirm".tr,
+                    style: TextStyle(fontWeight: FontWeight.w400, color: context.theme.dividerColor),
+                  ),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
     ),
   );
-
 
   void showTutorial(final BuildContext context) {
     initTargets(context);
@@ -167,11 +172,7 @@ class AssetsController extends GetxController {
       targets: targets,
       colorShadow: Colors.blueGrey,
       textSkip: "I know".tr,
-      textStyleSkip: TextStyle(
-        fontSize: 20,
-        color: AppColors.orangeColor,
-        fontFamily: FontFamily.vazirBold,
-      ),
+      textStyleSkip: TextStyle(fontSize: 20, color: AppColors.orangeColor, fontFamily: FontFamily.vazirBold),
       paddingFocus: 1,
       onFinish: () {
         setData(Core.helperAsset, true);
@@ -210,31 +211,16 @@ class AssetsController extends GetxController {
               children: <Widget>[
                 Text(
                   "Wallet".tr,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: FontFamily.vazirBold,
-                    color: Colors.red,
-                    fontSize: 20,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontFamily: FontFamily.vazirBold, color: Colors.red, fontSize: 20),
                 ).marginOnly(top: 32),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
                     "This option will show the number of available and withdrawable currencies".tr,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: FontFamily.vazirBold,
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Colors.white, fontFamily: FontFamily.vazirBold, fontSize: 16),
                   ),
                 ),
-                Center(
-                    child: Image.asset(
-                  Assets.arrow4,
-                  width: 50,
-                  height: 50,
-                  color: Colors.yellow,
-                ))
+                Center(child: Image.asset(Assets.arrow4, width: 50, height: 50, color: Colors.yellow)),
               ],
             ),
           ),
@@ -336,10 +322,7 @@ class AssetsController extends GetxController {
   Future<void> scanTagQrCode(final BuildContext context) async {
     final PermissionStatus camPermission = await Permission.camera.status;
     if (camPermission.isGranted) {
-      final cameraScanResult = await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (final BuildContext context) => const QRViewReader()),
-      );
+      final cameraScanResult = await Navigator.push(context, MaterialPageRoute(builder: (final BuildContext context) => const QRViewReader()));
       tTag.value.text = cameraScanResult;
       update();
     } else {
@@ -353,10 +336,7 @@ class AssetsController extends GetxController {
   Future<void> scanTxidQrCode(final BuildContext context) async {
     final PermissionStatus camPermission = await Permission.camera.status;
     if (camPermission.isGranted) {
-      final cameraScanResult = await Navigator.push(
-        context,
-        MaterialPageRoute(builder: (final BuildContext context) => const QRViewReader()),
-      );
+      final cameraScanResult = await Navigator.push(context, MaterialPageRoute(builder: (final BuildContext context) => const QRViewReader()));
       tTXID.value.text = cameraScanResult;
       update();
     } else {
@@ -415,11 +395,7 @@ class AssetsController extends GetxController {
               if (model.balanceFree! > 0 && (model.currency?.symbol ?? '') != 'IRT') {
                 double totalPrice = (model.balanceFree ?? 0.0) * (model.currency?.price ?? 0);
                 double p = (100 / (double.parse(myUsd.value) / totalPrice));
-                vals.add(PieChartModel(
-                  values: p,
-                  color: model.currency?.color ?? '',
-                  title: model.currency!.symbol ?? '',
-                ));
+                vals.add(PieChartModel(values: p, color: model.currency?.color ?? '', title: model.currency!.symbol ?? ''));
               }
             }
 
@@ -441,19 +417,11 @@ class AssetsController extends GetxController {
               if (i < Core.pieChartHomeLimit) {
                 tVals = tVals - vals[i].values;
                 double values = double.parse(vals[i].values.toStringAsFixed(Core.pieChartHomeDecimalLimit));
-                PieChartModel pieChartModel = PieChartModel(
-                  values: values,
-                  color: data.color,
-                  title: data.title,
-                );
+                PieChartModel pieChartModel = PieChartModel(values: values, color: data.color, title: data.title);
                 listChartModel.add(pieChartModel);
               } else {
                 if (i == vals.length - 1) {
-                  PieChartModel pieChartModel = PieChartModel(
-                    values: double.parse(tVals.toStringAsFixed(Core.pieChartHomeDecimalLimit)),
-                    color: data.color,
-                    title: 'Other',
-                  );
+                  PieChartModel pieChartModel = PieChartModel(values: double.parse(tVals.toStringAsFixed(Core.pieChartHomeDecimalLimit)), color: data.color, title: 'Other');
                   listChartModel.add(pieChartModel);
                 }
               }
@@ -476,7 +444,7 @@ class AssetsController extends GetxController {
           update();
         },
         failure: (final String error) {
-          snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information '.tr + 'Wallet'.tr);
+          snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information'.tr + 'Wallet'.tr);
           isSearching(false);
           isLoading(false);
           isDone(true);
@@ -530,7 +498,7 @@ class AssetsController extends GetxController {
           update();
         },
         failure: (final String error) {
-          snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information '.tr + 'Wallet'.tr);
+          snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information'.tr + 'Wallet'.tr);
           isSearching(false);
           isLoading(false);
           isDone(true);

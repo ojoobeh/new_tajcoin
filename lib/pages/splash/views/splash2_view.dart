@@ -40,11 +40,7 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
   void initState() {
     WidgetsBinding.instance.addObserver(this);
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
+    screenshotOn();
     playVideo();
 
     getAppInfo(action: () {
@@ -84,12 +80,7 @@ class _Splash2ViewState extends State<Splash2View> with WidgetsBindingObserver {
 
   @override
   dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
     super.dispose();
   }
 

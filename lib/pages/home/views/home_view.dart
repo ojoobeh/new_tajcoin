@@ -32,10 +32,7 @@ changeThem() {
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(final BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.dark.copyWith(),
@@ -265,7 +262,7 @@ class HomeView extends GetView<HomeController> {
                           child: Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(data.image!),
+                                image: NetworkImage(data.image??''),
                                 fit: BoxFit.cover,
                               ),
                             ),

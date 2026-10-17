@@ -20,10 +20,7 @@ class _WebViewViewState extends State<WebViewView> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
   }
 
 
@@ -31,10 +28,7 @@ class _WebViewViewState extends State<WebViewView> {
 
   @override
   Widget build(final BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
     return Scaffold(
       backgroundColor: Get.theme.scaffoldBackgroundColor,
 body: Container(),

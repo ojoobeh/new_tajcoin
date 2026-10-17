@@ -51,43 +51,31 @@ class PagesCuntactUsView extends GetView<PagesCuntactUsController> {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: controller.callPage.value != null && controller.callPage.value.data != null && controller.callPage.value.data != '' && controller.callPage.value.data != 'null'
               ? Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 100,
-                        padding: EdgeInsets.all(8),
-                        child: Html(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Html(
                           style: {
                             "*": Style(textAlign: TextAlign.right, direction: TextDirection.rtl, fontSize: FontSize.medium),
                           },
                           data: controller.callPage.value.data,
                         ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: 80,
-                          padding: EdgeInsets.symmetric(vertical: 4),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                _item(Assets.iconWhatsapp, 'https://chat.whatsapp.com/DU82lYXAcsJLZkpQmc42nE'),
-                                _item(Assets.iconTelegram, 'https://t.me/ir_tajcoin'),
-                                _item(Assets.iconIta, 'https://eitaa.com/taj_coin'),
-                                _item(Assets.iconRobika, 'https://rubika.ir/tajcoin_ex'),
-                                _item(Assets.iconSms, 'sms://09105956681'),
-                                _item(Assets.iconPhone1, 'tel://+989198729736'),
-                                _item(Assets.iconPhone2, 'tel://+8632235391'),
-                                _item(Assets.iconInstagram, 'https://www.instagram.com/ir_tajcoin'),
-                                _item(Assets.iconGmail, 'mailto:EX.tajcoin@gmail.com'),
-                              ],
-                            ),
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _item(Assets.iconWhatsapp, 'https://chat.whatsapp.com/DU82lYXAcsJLZkpQmc42nE'),
+                            _item(Assets.iconTelegram, 'https://t.me/ir_tajcoin'),
+                            _item(Assets.iconIta, 'https://eitaa.com/taj_coin'),
+                            _item(Assets.iconRobika, 'https://rubika.ir/tajcoin_ex'),
+                            _item(Assets.iconSms, 'sms://09105956681'),
+                            _item(Assets.iconPhone1, 'tel://+989198729736'),
+                            _item(Assets.iconPhone2, 'tel://+8632235391'),
+                            _item(Assets.iconInstagram, 'https://www.instagram.com/ir_tajcoin'),
+                            _item(Assets.iconGmail, 'mailto:EX.tajcoin@gmail.com'),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               : Container(),

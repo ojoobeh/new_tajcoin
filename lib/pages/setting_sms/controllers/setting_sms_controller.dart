@@ -129,7 +129,7 @@ class SettingSmsController extends GetxController {
           dismissLoading();
         },
         failure: (error) {
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + " User".tr);
+          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + " User".tr);
           dismissLoading();
         },
       );
@@ -158,7 +158,7 @@ class SettingSmsController extends GetxController {
           dismissLoading();
         },
         failure: (error) {
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + " User".tr);
+          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + " User".tr);
           dismissLoading();
         },
       );
@@ -188,7 +188,7 @@ class SettingSmsController extends GetxController {
         dismissLoading();
       },
       failure: (error) {
-        snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + " User".tr);
+        snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + " User".tr);
         dismissLoading();
       },
     );

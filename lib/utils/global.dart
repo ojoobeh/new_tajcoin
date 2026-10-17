@@ -101,7 +101,7 @@ void getUser({required VoidCallback action}) {
     failure: (error) {
       retRyDialog(
         action: () => getUser(action: action),
-        description: 'Error in receiving information '.tr + ' User',
+        description: 'Error in receiving information'.tr + ' User',
       );
     },
   );
@@ -124,7 +124,7 @@ void getApplicationInfo({required VoidCallback action}) {
     failure: (error) {
       retRyDialog(
         action: () => getApplicationInfo(action: action),
-        description: 'Error in receiving information '.tr + ' Application '.tr,
+        description: 'Error in receiving information'.tr + ' Application '.tr,
       );
     },
   );
@@ -148,7 +148,7 @@ void getCurrencies({required VoidCallback action}) {
     failure: (error) {
       retRyDialog(
         action: () => getCurrencies(action: action),
-        description: 'Error in receiving information '.tr + ' Application '.tr,
+        description: 'Error in receiving information'.tr + ' Application '.tr,
       );
     },
   );

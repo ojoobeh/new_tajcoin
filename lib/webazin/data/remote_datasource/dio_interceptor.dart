@@ -56,7 +56,7 @@ Future<void> request(
       if (encodeBody)
         params = body.toJson();
       else
-        params = body;
+        params = body;//
     }
     if (httpMethod == EHttpMethod.get) {
       Response response = await dio.get(url, options: Options(headers: header));

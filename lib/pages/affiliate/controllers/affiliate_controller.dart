@@ -29,7 +29,7 @@ class AffiliateController extends GetxController {
           setLoading(false);
         },
         failure: (error) {
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr );
+          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr );
           setLoading(false);
         },
       );

@@ -11,7 +11,6 @@ class HomeMenu extends GetView<HomeController> {
 
   @override
   Widget build(final BuildContext context) {
-
     return Container(
       padding: EdgeInsets.only(top: 8, left: 10),
       color: context.theme.scaffoldBackgroundColor,
@@ -28,35 +27,34 @@ class HomeMenu extends GetView<HomeController> {
                   return Get.toNamed(Routes.ORDER);
                 },
                 title: "Orders".tr,
-                icon: Assets.orders,
+                icon: Assets.svgOrders,
                 size: 26,
               ),
             ),
 
-                        Container(
+            Container(
               width: (Get.width / 4) - 5,
               child: ItemStatusWidget(
                 onTap: () {
                   return Get.toNamed(Routes.BANKCARD);
                 },
                 title: "Bank card".tr,
-                icon: Assets.bankCards,
+                icon: Assets.svgBankCards,
                 size: 26,
               ),
             ),
 
-                                    Container(
+            Container(
               width: (Get.width / 4) - 5,
               child: ItemStatusWidget(
                 onTap: () {
                   return Get.toNamed(Routes.TicketS);
                 },
                 title: "Support".tr,
-                icon: Assets.support,
+                icon: Assets.svgSupport,
                 size: 26,
               ),
             ),
-
 
             Container(
               key: controller.keyButton1,
@@ -66,7 +64,7 @@ class HomeMenu extends GetView<HomeController> {
                   Get.toNamed(Routes.MORE);
                 },
                 title: "More".tr,
-                icon: Assets.more,
+                icon: Assets.svgMore,
                 size: 22,
               ),
             ),

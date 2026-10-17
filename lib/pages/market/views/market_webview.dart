@@ -16,28 +16,19 @@ class MarketWebView extends StatefulWidget {
 class _MarketWebViewState extends State<MarketWebView> {
   @override
   void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
     super.initState();
   }
 
   @override
   dispose(){
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+
     super.dispose();
   }
 
   @override
   Widget build(final BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
 
 
     return Scaffold(

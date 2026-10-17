@@ -125,7 +125,7 @@ class MarketAllOrderController extends GetxController {
         },
         failure: (error) {
           dismissLoading();
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' Orders'.tr);
+          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + ' Orders'.tr);
           debugPrint(error);
           update();
         },
@@ -202,7 +202,7 @@ class MarketAllOrderController extends GetxController {
           },
           failure: (error) {
             dismissLoading();
-            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' Orders'.tr);
+            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + ' Orders'.tr);
             debugPrint(error);
             update();
           },

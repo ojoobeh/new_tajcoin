@@ -29,10 +29,7 @@ class RootController extends GetxController {
     } else {
       changePageInRoot(0);
     }
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+
 
     pages.add(HomeView());
     pages.add(AssetsView());

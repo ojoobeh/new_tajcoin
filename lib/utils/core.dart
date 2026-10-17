@@ -5,6 +5,7 @@ import 'dart:developer' as developer;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:no_screenshot/no_screenshot.dart';
 import 'package:webazin/pages/splash/views/splash2_view.dart';
 import 'package:webazin/webazin/data/remote_datasource/other_source.dart';
 import 'package:webazin/webazin/utilities.dart';
@@ -73,4 +74,19 @@ class Core{
 
 
 
+}
+
+Future<void> screenshotOn() async {
+  if (!isWeb) {
+    final NoScreenshot _noScreenshot = NoScreenshot.instance;
+    await _noScreenshot.screenshotOn();
+  }
+}
+
+Future<void> screenshotOff() async {
+  final NoScreenshot _noScreenshot = NoScreenshot.instance;
+  if ( !isWeb) {
+    debugPrint('ddddd');
+    await _noScreenshot.screenshotOff();
+  }
 }

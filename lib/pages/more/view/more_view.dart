@@ -116,13 +116,13 @@ class MoreView extends GetView<DefaultController> {
                           : Container(
                               width: 1,
                             ),
-                      CustomButtonMore(
-                        title: "Cooperation".tr,
-                        iconData: Assets.cooperation,
-                        onTap: () {
-                          Get.toNamed(Routes.PAGES, arguments: "Cooperation".tr);
-                        },
-                      ),
+                      // CustomButtonMore(
+                      //   title: "Cooperation".tr,
+                      //   iconData: Assets.cooperation,
+                      //   onTap: () {
+                      //     Get.toNamed(Routes.PAGES, arguments: "Cooperation".tr);
+                      //   },
+                      // ),
                     ],
                   ),
                 ),
@@ -250,13 +250,13 @@ class MoreView extends GetView<DefaultController> {
                               width: 1,
                             ),
 
-                      CustomButtonMore(
-                        title: "Weblog".tr,
-                        iconData: Assets.weblog,
-                        onTap: () {
-                          launch('https://Cryptopersian.com');
-                        },
-                      ),
+                      // CustomButtonMore(
+                      //   title: "Weblog".tr,
+                      //   iconData: Assets.weblog,
+                      //   onTap: () {
+                      //     launch('https://Cryptopersian.com');
+                      //   },
+                      // ),
 
                     ],
                   ),
@@ -297,36 +297,36 @@ class MoreView extends GetView<DefaultController> {
                     crossAxisAlignment: WrapCrossAlignment.start,
                     textDirection: TextDirection.ltr,
                     children: <Widget>[
-                      CustomButtonMore(
-                        title: "Virtual".tr,
-                        iconData: Assets.virtual,
-                        onTap: () {},
-                      ),
+                      // CustomButtonMore(
+                      //   title: "Virtual".tr,
+                      //   iconData: Assets.virtual,
+                      //   onTap: () {},
+                      // ),
                       CustomButtonMore(
                         title: "Contract".tr,
                         iconData: Assets.contract,
                         onTap: () {},
                       ),
-                      CustomButtonMore(
-                        title: "Round".tr,
-                        iconData: Assets.roundOfLuck,
-                        onTap: () {},
-                      ),
-                      CustomButtonMore(
-                        title: "Store".tr,
-                        iconData: Assets.shopping,
-                        onTap: () {},
-                      ),
-                      CustomButtonMore(
-                        title: "Ticket".tr,
-                        iconData: Assets.ticket,
-                        onTap: () {},
-                      ),
-                      CustomButtonMore(
-                        title: "Stake".tr,
-                        iconData: Assets.deposit,
-                        onTap: () {},
-                      ),
+                      // CustomButtonMore(
+                      //   title: "Round".tr,
+                      //   iconData: Assets.roundOfLuck,
+                      //   onTap: () {},
+                      // ),
+                      // CustomButtonMore(
+                      //   title: "Store".tr,
+                      //   iconData: Assets.shopping,
+                      //   onTap: () {},
+                      // ),
+                      // CustomButtonMore(
+                      //   title: "Ticket".tr,
+                      //   iconData: Assets.ticket,
+                      //   onTap: () {},
+                      // ),
+                      // CustomButtonMore(
+                      //   title: "Stake".tr,
+                      //   iconData: Assets.deposit,
+                      //   onTap: () {},
+                      // ),
                       CustomButtonMore(
                         title: "NFT".tr,
                         iconData: Assets.nft,
@@ -337,16 +337,16 @@ class MoreView extends GetView<DefaultController> {
                         iconData: Assets.existing,
                         onTap: () {},
                       ),
-                      CustomButtonMore(
-                        title: "Caht".tr,
-                        iconData: Assets.chat,
-                        onTap: () {},
-                      ),
-                      CustomButtonMore(
-                        title: "ETH_2.0".tr,
-                        iconData: Assets.eth2,
-                        onTap: () {},
-                      ),
+                      // CustomButtonMore(
+                      //   title: "Caht".tr,
+                      //   iconData: Assets.chat,
+                      //   onTap: () {},
+                      // ),
+                      // CustomButtonMore(
+                      //   title: "ETH_2.0".tr,
+                      //   iconData: Assets.eth2,
+                      //   onTap: () {},
+                      // ),
                       CustomButtonMore(
                         title: "Lvg trade".tr,
                         iconData: Assets.traidAhrom,
@@ -368,11 +368,11 @@ class MoreView extends GetView<DefaultController> {
                         onTap: () {},
                       ),
 
-                      CustomButtonMore(
-                        title: "Price alert".tr,
-                        iconData: Assets.alarmPrice,
-                        onTap: () {},
-                      ),
+                      // CustomButtonMore(
+                      //   title: "Price alert".tr,
+                      //   iconData: Assets.alarmPrice,
+                      //   onTap: () {},
+                      // ),
                       CustomButtonMore(
                         title: "Market".tr,
                         iconData: Assets.market,

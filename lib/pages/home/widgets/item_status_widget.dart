@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:webazin/utils/utils.dart';
+import 'package:webazin/widgets/image.dart';
 
 class ItemStatusWidget extends StatelessWidget {
   final onTap;
@@ -24,7 +25,7 @@ class ItemStatusWidget extends StatelessWidget {
         onTap: onTap,
         child: Column(
           children: <Widget>[
-            Image.asset(
+            image(
               icon!,
               width: 32,
               height: 32,

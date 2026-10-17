@@ -20,6 +20,13 @@ class PagesMoreController extends GetxController {
   PagesMoreController() {}
 
   @override
+  void dispose()async {
+    // TODO: implement dispose
+   await screenshotOn();
+    super.dispose();
+  }
+
+  @override
   void onInit() async {
     link = Get.arguments[0];
     title = Get.arguments[1];
@@ -30,9 +37,13 @@ class PagesMoreController extends GetxController {
         }
       }
     });
+
+    screenshotOff();
     await refreshHome();
     super.onInit();
   }
+
+
 
   Future refreshHome({bool showMessage = false, String? statusId}) async {
     printInfo();
@@ -80,7 +91,7 @@ class PagesMoreController extends GetxController {
             isSearching(false);
           },
           failure: (error) {
-            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + '');
+            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + '');
             isLoading(false);
             isSearching(false);
           },

@@ -324,7 +324,7 @@
 //           snackbarRed(title: 'Error'.tr, subtitle: errorResponse.message);
 //         },
 //         failure: (error) {
-//           snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' currency '.tr);
+//           snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + ' currency '.tr);
 //         },
 //       );
 //
@@ -738,7 +738,7 @@
 //           },
 //           failure: (error) {
 //             dismissLoading();
-//             snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' Orders'.tr);
+//             snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + ' Orders'.tr);
 //             isDoneOrder(true);
 //             debugPrint(error);
 //             update();

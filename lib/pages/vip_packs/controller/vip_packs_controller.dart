@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webazin/utils/core.dart';
 import 'package:webazin/webazin/data/models/null/call_null.dart';
 import 'package:webazin/webazin/data/models/vip/call_vip_packs.dart';
 import 'package:webazin/webazin/utility/global.dart';
@@ -22,10 +23,22 @@ class VipPacksController extends GetxController {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    screenshotOn();
+    super.dispose();
+
+  }
+
+  @override
   void onInit() async {
     await getVipPacks();
+
+    screenshotOff();
     super.onInit();
   }
+
+
 
   Future<void> setLoading (final bool _isLoading) async {
     isLoading.value = _isLoading;

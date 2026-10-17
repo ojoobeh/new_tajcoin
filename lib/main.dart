@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -10,7 +9,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:webazin/pages/splash/views/splash2_view.dart';
 import 'package:webazin/providers/laravel_provider.dart';
 import 'package:webazin/routes/theme1_app_pages.dart';
-import 'package:webazin/services/firebase_messaging_service.dart';
 import 'package:webazin/services/settings_service.dart';
 import 'package:webazin/services/them_service.dart';
 import 'package:webazin/services/translation_service.dart';
@@ -43,17 +41,24 @@ Future<void> initServices() async {
     ..dismissOnTap = false;
 
   Get.log('All services started...');
+
 }
 
 void main() async {
-  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
+  HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.manual,
     overlays: SystemUiOverlay.values,
   );
   await initServices();
+
+
 
   runApp(
     GetMaterialApp(

@@ -102,7 +102,7 @@ class PortfolioController extends GetxController {
             isLoading(false);
           },
           failure: (error) {
-            retRyDialog(action: () => getPortfolio, description:'Error in receiving information '.tr + 'Portfolio'.tr);
+            retRyDialog(action: () => getPortfolio, description:'Error in receiving information'.tr + 'Portfolio'.tr);
             isSearching(false);
             isLoading(false);
           },

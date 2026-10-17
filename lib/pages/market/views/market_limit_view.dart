@@ -133,7 +133,6 @@ class MarketLimitView extends GetView<MarketController> {
                                   String web = Core.laravelBaseUrl + 'chart/${controller.selectMarketList.value.symbol}';
                                   await Get.to(MarketWebView(web));
 
-                                  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(2),

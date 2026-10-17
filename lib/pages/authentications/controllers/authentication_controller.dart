@@ -404,7 +404,7 @@ class AuthenticationController extends GetxController {
         },
         failure: (error) {
           dismissLoading();
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + " User".tr);
+          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + " User".tr);
         },
       );
 
@@ -433,7 +433,7 @@ class AuthenticationController extends GetxController {
           dismissLoading();
         },
         failure: (error) {
-          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + " User".tr);
+          snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + " User".tr);
           setLoadingVerify(false);
           dismissLoading();
         },

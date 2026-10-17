@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webazin/pages/portfolio/controllers/portfolioController.dart';
 import 'package:webazin/webazin/data/dto/user.dart';
 import 'package:webazin/webazin/data/remote_datasource/user_source.dart';
 import 'package:webazin/webazin/utility/global.dart';
@@ -107,7 +108,7 @@ class TradeController extends GetxController {
   Future selectCurrency(DataCurrency dataCurrencies) async {
     count.value = 0;
     selectCurrencies.value = dataCurrencies;
-    price.value = (isSell.value ? (dataCurrencies.receivePrice) : (dataCurrencies.sendPrice))!;
+    price.value = (isSell.value ? (dataCurrencies.receivePrice) : (dataCurrencies.sendPrice)) ?? 0;
 
     tPrice.value = (count.value * price.value).toInt();
 
@@ -137,19 +138,20 @@ class TradeController extends GetxController {
   void setChartParam() {
     List<double> f = [];
     list.clear();
-    for (int i = 0; i < selectCurrencies.value.chartData!.length; i++) {
-      f.add(selectCurrencies.value.chartData![i]);
-    }
-
-    f.sort((a, b) {
-      var adate = a.toString(); //before -> var adate = a.expiry;
-      var bdate = b.toString(); //before -> var bdate = b.expiry;
-      return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
-    });
-    min = f[f.length - 1];
-    max = f[0];
-    for (int i = 0; i < selectCurrencies.value.chartData!.length; i++) {
-      list.add(FlSpot(double.parse(i.toString()), selectCurrencies.value.chartData![i]));
+    if (selectCurrencies.value.chartData?.isNotEmpty ?? false) {
+      for (int i = 0; i < (selectCurrencies.value.chartData?.length ?? 0); i++) {
+        f.add(selectCurrencies.value.chartData![i]);
+      }
+      f.sort((a, b) {
+        var adate = a.toString(); //before -> var adate = a.expiry;
+        var bdate = b.toString(); //before -> var bdate = b.expiry;
+        return bdate.compareTo(adate); //to get the order other way just switch `adate & bdate`
+      });
+      min = f[f.length - 1];
+      max = f[0];
+      for (int i = 0; i < selectCurrencies.value.chartData!.length; i++) {
+        list.add(FlSpot(double.parse(i.toString()), selectCurrencies.value.chartData![i]));
+      }
     }
 
     update();
@@ -340,8 +342,8 @@ class TradeController extends GetxController {
           user.value = await Core.user;
           refreshHome();
           await Get.find<TradeDrawerController>().resetSearch2();
-          // await Get.find<PortfolioController>().refreshHome();
-          // await getAssetsIrt();
+          await Get.find<PortfolioController>().refreshHome();
+          await getAssetsIrt();
           toast(response.message);
           setLoading(false);
           update();
@@ -356,7 +358,6 @@ class TradeController extends GetxController {
           setLoading(false);
         },
       );
-
     }
   }
 
@@ -374,8 +375,8 @@ class TradeController extends GetxController {
           user.value = await Core.user;
           refreshHome();
           await Get.find<TradeDrawerController>().resetSearch2();
-          // await Get.find<PortfolioController>().refreshHome();
-          // await getAssetsIrt();
+          await Get.find<PortfolioController>().refreshHome();
+          await getAssetsIrt();
           toast(response.message);
           setLoading(false);
           update();

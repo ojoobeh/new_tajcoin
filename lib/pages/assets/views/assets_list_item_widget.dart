@@ -30,9 +30,7 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
         decoration: BoxDecoration(
           color: Get.theme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(8),
-          boxShadow: <BoxShadow>[
-            BoxShadow(color: Colors.black87.withOpacity(0.1), blurRadius: 20, offset: Offset(0, 8)),
-          ],
+          boxShadow: <BoxShadow>[BoxShadow(color: Colors.black87.withOpacity(0.1), blurRadius: 20, offset: Offset(0, 8))],
         ),
         child: CustomExpansionTile(
           tilePadding: EdgeInsets.zero,
@@ -55,66 +53,56 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                                 controller.tTXID.value.text = '';
 
                                 if (_assets.currency!.symbol == "IRT" || _assets.currency!.networks!.length > 0) {
-
-
-                                  if(_assets.currency!.symbol! != 'IRT'&& !getBool(Core.warningAssets)){
-                                    controller.warningDialog(action:() {
-                                      Get.bottomSheet(
-                                        BottomSheetDepositWidget(
-                                          _assets,
-                                        ),
-                                        isDismissible: !controller.isDismissible.value,
-                                        enableDrag: controller.isDismissible.value,
-                                      );
-                                      setData(Core.warningAssets, true);
-                                    }, description: 'Warning Assets'.tr,);
-                                  }else{
+                                  if (_assets.currency!.symbol! != 'IRT' && !getBool(Core.warningAssets)) {
+                                    controller.warningDialog(
+                                      action: () {
+                                        Get.bottomSheet(
+                                          BottomSheetDepositWidget(_assets),
+                                          isDismissible: !controller.isDismissible.value,
+                                          enableDrag: controller.isDismissible.value,
+                                        );
+                                        setData(Core.warningAssets, true);
+                                      },
+                                      description: 'Warning Assets'.tr,
+                                    );
+                                  } else {
                                     Get.bottomSheet(
-                                      BottomSheetDepositWidget(
-                                        _assets,
-                                      ),
+                                      BottomSheetDepositWidget(_assets),
                                       isDismissible: !controller.isDismissible.value,
                                       enableDrag: controller.isDismissible.value,
                                     );
                                   }
-
-
-
                                 } else {
                                   snackbarRed(title: 'Error'.tr, subtitle: 'Network is down, contact support'.tr);
                                 }
                               },
                             ),
-                             AssetsWdButton(
+                            AssetsWdButton(
                               iconData: Assets.arrowDown2,
                               title: "Withdrawal".tr,
                               color: Colors.redAccent,
                               onTap: () {
                                 if (_assets.currency!.symbol == "IRT" || _assets.currency!.networks!.length > 0) {
                                   controller.tTXID.value.text = '';
-                                  if(_assets.currency!.symbol! != 'IRT'&& !getBool(Core.warningAssets)){
-                                    controller.warningDialog(action:() {
-                                      Get.bottomSheet(
-                                        BottomSheetWithdrawalWidget(
-                                          _assets,
-                                        ),
-                                        isDismissible: !controller.isDismissible.value,
-                                        enableDrag: controller.isDismissible.value,
-                                      );
-                                      setData(Core.warningAssets, true);
-                                    }, description: 'Warning Assets'.tr,);
-                                  }else{
+                                  if (_assets.currency!.symbol! != 'IRT' && !getBool(Core.warningAssets)) {
+                                    controller.warningDialog(
+                                      action: () {
+                                        Get.bottomSheet(
+                                          BottomSheetWithdrawalWidget(_assets),
+                                          isDismissible: !controller.isDismissible.value,
+                                          enableDrag: controller.isDismissible.value,
+                                        );
+                                        setData(Core.warningAssets, true);
+                                      },
+                                      description: 'Warning Assets'.tr,
+                                    );
+                                  } else {
                                     Get.bottomSheet(
-                                      BottomSheetWithdrawalWidget(
-                                        _assets,
-                                      ),
+                                      BottomSheetWithdrawalWidget(_assets),
                                       isDismissible: !controller.isDismissible.value,
                                       enableDrag: controller.isDismissible.value,
                                     );
-
                                   }
-
-
                                 } else {
                                   snackbarRed(title: 'Error'.tr, subtitle: 'Network is down, contact support'.tr);
                                 }
@@ -129,24 +117,12 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                           children: <Widget>[
                             Text(
                               _assets.currency!.symbol!,
-                              style: TextStyle(
-                                fontFamily: FontFamily.vazirBold,
-                                fontSize: 14,
-                                color: Get.theme.dividerColor,
-                              ),
+                              style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 14, color: Get.theme.dividerColor),
                             ),
-                            SizedBox(
-                              width: 8,
-                            ),
+                            SizedBox(width: 8),
                             _assets.currency!.iconUrl!.contains(".svg")
-                                ? SvgPicture.network(
-                                    _assets.currency!.iconUrl!,
-                                    width: 22,
-                                  )
-                                : Image.network(
-                                    _assets.currency!.iconUrl!,
-                                    width: 22,
-                                  ),
+                                ? SvgPicture.network(_assets.currency!.iconUrl!, width: 22)
+                                : Image.network(_assets.currency!.iconUrl!, width: 22),
                           ],
                         ),
                       ),
@@ -158,30 +134,17 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                         child: Column(
                           children: <Widget>[
                             Container(
-                              margin: const EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                top: 32,
-                                bottom: 16,
-                              ),
+                              margin: const EdgeInsets.only(left: 16, right: 16, top: 32, bottom: 16),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
                                     'Property value: '.tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 12,
-                                      color: Get.theme.dividerColor.withOpacity(0.9),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                                   ).marginOnly(left: 4),
                                   Text(
                                     getPrice(_assets.balance!.toString()) + "  " + " IRT".tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 12,
-                                      color: Get.theme.dividerColor.withOpacity(0.9),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                                   ),
                                 ],
                               ),
@@ -202,16 +165,14 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                                     child: Row(
                                       children: <Widget>[
                                         Icon(Icons.keyboard_arrow_down_rounded).marginOnly(left: 4),
-                                        Obx(() => controller.isChange.value
-                                            ? Text(
-                                                _assets.balance?.toString() ?? '',
-                                                style: TextStyle(
-                                                  fontFamily: FontFamily.vazirBold,
-                                                  fontSize: 12,
-                                                  color: Get.theme.dividerColor.withOpacity(0.9),
-                                                ),
-                                              )
-                                            : Container())
+                                        Obx(
+                                          () => controller.isChange.value
+                                              ? Text(
+                                                  _assets.balance?.toString() ?? '',
+                                                  style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
+                                                )
+                                              : Container(),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -225,29 +186,22 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                                 children: <Widget>[
                                   Text(
                                     'Property value: '.tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 12,
-                                      color: Get.theme.dividerColor.withOpacity(0.9),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                                   ).marginOnly(left: 4),
-                                  Obx(() => controller.isChange.value
-                                      ? Text(
-                                          getPrice(((double.parse(_assets.currency!.irtPrice.toString().replaceAll(",", "")) *
-                                                          double.parse(
-                                                            _assets.balance?.toString() ?? '0',
-                                                          ))
-                                                      .toInt())
-                                                  .toString()) +
-                                              "  " +
-                                              " IRT".tr,
-                                          style: TextStyle(
-                                            fontFamily: FontFamily.vazirBold,
-                                            fontSize: 12,
-                                            color: Get.theme.dividerColor.withOpacity(0.9),
-                                          ),
-                                        )
-                                      : Container()),
+                                  Obx(
+                                    () => controller.isChange.value
+                                        ? Text(
+                                            getPrice(
+                                                  ((double.parse(_assets.currency!.irtPrice.toString().replaceAll(",", "")) * double.parse(_assets.balance?.toString() ?? '0'))
+                                                          .toInt())
+                                                      .toString(),
+                                                ) +
+                                                "  " +
+                                                " IRT".tr,
+                                            style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
+                                          )
+                                        : Container(),
+                                  ),
                                 ],
                               ),
                             ),
@@ -262,12 +216,7 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                 ? Container(
                     child: Column(
                       children: <Widget>[
-                        Divider(
-                          height: 1,
-                          indent: 8,
-                          endIndent: 8,
-                          color: Colors.grey,
-                        ),
+                        Divider(height: 1, indent: 8, endIndent: 8, color: Colors.grey),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: Row(
@@ -275,21 +224,13 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                             children: <Widget>[
                               Text(
                                 'Currency value: '.tr,
-                                style: TextStyle(
-                                  fontFamily: FontFamily.vazirBold,
-                                  fontSize: 12,
-                                  color: Get.theme.dividerColor.withOpacity(0.9),
-                                ),
+                                style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                               ).marginOnly(left: 4),
                               Container(
                                 child: Container(
                                   child: Text(
                                     double.parse((_assets.currency!.price!).toString()).toStringAsFixed(int.parse(_assets.currency!.decimal!)) + " \$",
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 12,
-                                      color: Get.theme.dividerColor.withOpacity(0.9),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                                   ),
                                 ),
                               ),
@@ -303,19 +244,11 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                             children: <Widget>[
                               Text(
                                 'Available stock: '.tr,
-                                style: TextStyle(
-                                  fontFamily: FontFamily.vazirBold,
-                                  fontSize: 12,
-                                  color: Get.theme.dividerColor.withOpacity(0.9),
-                                ),
+                                style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                               ),
                               Text(
                                 _assets.balanceFree?.toString() ?? '0',
-                                style: TextStyle(
-                                  fontFamily: FontFamily.vazirBold,
-                                  fontSize: 12,
-                                  color: Get.theme.dividerColor.withOpacity(0.9),
-                                ),
+                                style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: Get.theme.dividerColor.withOpacity(0.9)),
                               ),
                             ],
                           ),
@@ -323,7 +256,7 @@ class AssetsListItemWidget extends GetWidget<AssetsController> {
                       ],
                     ),
                   )
-                : Container()
+                : Container(),
           ],
         ),
       );

@@ -27,7 +27,9 @@ class Assets {
   static const String roundOfLuck = "assets/png/round_of_luck.png";
   static const String history = "assets/png/history.png";
   static const String orders = "assets/png/orders.png";
+  static const String svgOrders = "assets/svg/orders.svg";
   static const String bankCards = "assets/png/bank_cards.png";
+  static const String svgBankCards = "assets/svg/bank_cards.svg";
   static const String accreditation = "assets/png/accreditation.png";
   static const String discount = "assets/png/discount.png";
   static const String airdrop = "assets/png/airdrop.png";
@@ -37,10 +39,12 @@ class Assets {
   static const String learn = "assets/png/learn.png";
   static const String metavers = "assets/png/metavers.png";
   static const String more = "assets/png/more.png";
+  static const String svgMore = "assets/svg/more.svg";
   static const String reward = "assets/png/reward.png";
   static const String shopping = "assets/png/shopping.png";
   static const String subset = "assets/png/subset.png";
   static const String support = "assets/png/support.png";
+  static const String svgSupport = "assets/svg/support.svg";
   static const String ticket = "assets/png/ticket.png";
   static const String vip = "assets/png/vip.png";
   static const String virtual = "assets/png/virtual.png";

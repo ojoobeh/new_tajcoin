@@ -75,7 +75,7 @@ class CalculatorController extends GetxController {
             isLoading(true);
           },
           failure: (error) {
-            snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information '.tr + ' currency '.tr);
+            snackbarRed(title: 'Error'.tr, subtitle: 'Error in receiving information'.tr + ' currency '.tr);
             isDoneOrder(true);
             isLoading(true);
           },

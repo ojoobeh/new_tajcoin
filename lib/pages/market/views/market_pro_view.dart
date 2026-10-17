@@ -145,15 +145,11 @@ class MarketProView extends GetView<MarketController> {
                             ? Container()
                             : InkWell(
                                 onTap: () async {
-                                  SystemChrome.setPreferredOrientations([
-                                    DeviceOrientation.landscapeLeft,
-                                  ]);
+
                                   String web = Core.laravelBaseUrl + 'chart/${controller.selectMarketList.value.symbol}';
                                   await Get.to(WebViewView(web));
 
-                                  SystemChrome.setPreferredOrientations([
-                                    DeviceOrientation.portraitUp,
-                                  ]);
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(2),

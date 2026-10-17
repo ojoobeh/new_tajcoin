@@ -103,7 +103,7 @@ class HomeAllOrderController extends GetxController {
             update();
           },
           failure: (error) {
-            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' currency '.tr);
+            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + ' currency '.tr);
             isSearching(false);
             isLoadingOrder(false);
             isDoneOrder(true);
@@ -134,7 +134,7 @@ class HomeAllOrderController extends GetxController {
             update();
           },
           failure: (error) {
-            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information '.tr + ' currency '.tr);
+            snackbarRed(title: 'Error'.tr, subtitle:'Error in receiving information'.tr + ' currency '.tr);
             isSearching(false);
             isLoadingOrder(false);
             isDoneOrder(true);
