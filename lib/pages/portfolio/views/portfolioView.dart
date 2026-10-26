@@ -21,7 +21,7 @@ class PortfolioView extends GetView<PortfolioController> {
     printInfo();
     controller.initScrollController();
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.secondary,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: RefreshIndicator(
           onRefresh: () async {
             controller.setLoading(true);
@@ -53,7 +53,7 @@ class PortfolioView extends GetView<PortfolioController> {
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontFamily: FontFamily.vazirBold,
-                                  color: Colors.black87,
+                                  // color: context.theme.primaryColor,
                                 ),
                               ),
                             ),
@@ -70,7 +70,7 @@ class PortfolioView extends GetView<PortfolioController> {
                                       )
                                     : SvgPicture.asset(
                                         Assets.refresh,
-                                        color: Colors.black87,
+                                        color: context.theme.hoverColor,
                                         width: 22,
                                       );
                               }),

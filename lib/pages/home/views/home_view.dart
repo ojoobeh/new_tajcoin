@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
       controller.isShowDialog = true;
     }
 
-    Color colors = context.theme.colorScheme.secondary;
+    Color colors = context.theme.scaffoldBackgroundColor;
     return WillPopScope(
       onWillPop: Helper().onWillPop,
       child: SafeArea(
@@ -85,7 +85,7 @@ class HomeView extends GetView<HomeController> {
                               ),
                               SizedBox(
                                 width: 8,
-                              ),
+                              ),//
                               InkWell(
                                 child: Image.asset(
                                   Assets.chat,

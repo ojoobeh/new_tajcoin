@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:webazin/webazin/utility/local_storage.dart';
 import 'dart:core';
 import 'package:flutter/material.dart';
@@ -5,3 +6,7 @@ import 'package:flutter/material.dart';
 part  'const.dart';
 part 'font_family.dart';
 part 'colors.dart';
+
+Future<void> copyText(String text) async {
+  await Clipboard.setData(ClipboardData(text: text));
+}

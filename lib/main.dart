@@ -41,28 +41,29 @@ Future<void> initServices() async {
     ..dismissOnTap = false;
 
   Get.log('All services started...');
-
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   HttpOverrides.global = MyHttpOverrides();
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: SystemUiOverlay.values,
-  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
   await initServices();
 
+  runApp(MyApp());
+}
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  runApp(
-    GetMaterialApp(
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
       title: "Taj Coin",
+      navigatorKey: navigatorKey,
       getPages: Theme1AppPages.routes,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
@@ -74,15 +75,8 @@ void main() async {
       darkTheme: Themes.dark,
       home: Splash2View(),
       builder: (context, child) {
-        return SafeArea(
-          top: false,
-          bottom: true,
-          child: EasyLoading.init()(
-            context,
-            child,
-          ),
-        );
+        return SafeArea(top: false, bottom: true, child: EasyLoading.init()(context, child));
       },
-    ),
-  );
+    );
+  }
 }

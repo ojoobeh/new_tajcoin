@@ -24,6 +24,7 @@ class Routes {
   static const VIPPACKS = '/vipPacks';
   static const HOMEALLCURRENCIES = '/homeAllCurrencies';
   static const GOOGLE_VERIFICATION = '/google_verification';
+  static const Cart2CartView = '/Cart2CartView';
 
   static const FORGETPASSWORD = '/forgetPassword';
   static const PORTFOLIO = '/portfolio';

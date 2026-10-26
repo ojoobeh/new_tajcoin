@@ -174,6 +174,7 @@ class Assets {
 
 
   static const String backCoin = "assets/img/back_coin.jpg";
+  static const String card = "assets/img/card.jpg";
   static const String stars = "assets/img/stars.png";
   static const String buy = "assets/img/buy.png";
   static const String reconnect = "assets/img/reconnect.png";

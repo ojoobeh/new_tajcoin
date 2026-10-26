@@ -21,6 +21,7 @@ class Themes {
     dividerColor: (AppColors.dividerColor),
     focusColor: (AppColors.focusColor),
     hintColor: (AppColors.hintColor),
+    hoverColor: AppColors.textsColor,
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: (AppColors.accentColor)),
     textTheme: TextTheme(
       // titleLarge: TextStyle(color: AppColors.textsColor, fontSize: 16, fontWeight: FontWeight.bold, fontFamily: bold),
@@ -53,6 +54,7 @@ class Themes {
     dividerColor: (AppColors.dividerDarkColor),
     focusColor: (AppColors.focusDarkColor),
     hintColor: (AppColors.hintDarkColor),
+    hoverColor: AppColors.textsColorDark,
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: (AppColors.accentDarkColor)),
     textTheme: TextTheme(
       // titleLarge: TextStyle(color: AppColors.textsColorDark, fontSize: 16, fontWeight: FontWeight.bold, fontFamily: bold),

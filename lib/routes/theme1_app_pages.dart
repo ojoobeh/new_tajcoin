@@ -1,5 +1,7 @@
 
 import 'package:get/get.dart' show GetPage;
+import 'package:webazin/pages/cart_2_cart/binding/cart_2_cart_binding.dart';
+import 'package:webazin/pages/cart_2_cart/view/cart_2_cart_view.dart';
 import 'package:webazin/pages/pages_cuntact_us/binding/pages_cuntact_us_binding.dart';
 import 'package:webazin/pages/pages_cuntact_us/view/pages_cuntact_us_view.dart';
 
@@ -73,6 +75,7 @@ class Theme1AppPages {
     GetPage(name: Routes.PAGES, page: () => PagesView(), binding: PagesBinding()),
     GetPage(name: Routes.PAGESCUNTACTUS, page: () => PagesCuntactUsView(), binding: PagesCuntactUsBinding()),
     GetPage(name: Routes.PAGESMORE, page: () => PagesMoreView(), binding: PagesMoreBinding()),
+    GetPage(name: Routes.Cart2CartView, page: () => Cart2CartView(), binding: Cart2CartBinding()),
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginView(),

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+
 // import 'package:loading/indicator/ball_pulse_indicator.dart';
 // import 'package:loading/loading.dart';
 import 'package:webazin/chart/pieChart/pie_chart_sample2.dart';
 import 'package:webazin/pages/assets/views/assetsChart.dart';
+import 'package:webazin/routes/app_routes.dart';
 import 'package:webazin/webazin/utilities.dart';
 import 'package:webazin/webazin/utility/global.dart';
 
@@ -34,49 +36,59 @@ class AssetsHeader extends GetView<AssetsController> {
                   children: <Widget>[
                     Text(
                       'Total assets estimate'.tr,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: FontFamily.vazirBold,
-                        color: context.theme.dividerColor,
-                      ),
+                      style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold, color: context.theme.dividerColor),
                     ),
-                    SizedBox(
-                      width: 8,
-                    ),
+                    SizedBox(width: 8),
                     InkWell(
                       onTap: () => controller.visibleCash(),
                       child: Obx(() {
-                        return Icon(
-                          controller.isVisibleCash.value ? Icons.visibility : Icons.visibility_off,
-                          color: context.theme.dividerColor,
-                          size: 20,
-                        );
+                        return Icon(controller.isVisibleCash.value ? Icons.visibility : Icons.visibility_off, color: context.theme.dividerColor, size: 20);
                       }),
                     ),
                   ],
                 ),
-                InkWell(
-                  onTap: () async {
-                    await controller.refreshHome();
-                  },
-                  child: Container(
-                    height: 40,
-                    child: Obx(() {
-                      return controller.isLoading.value
-
-                      //todo-REMOVE
-                      ?Container()
-                      //     ? Loading(
-                      //         indicator: BallPulseIndicator(),
-                      //         size: 40.0,
-                      //         color: Colors.white,
-                      //       )
-                          : SvgPicture.asset(
-                              Assets.refresh,
-                              color: context.theme.dividerColor,
-                              width: 22,
-                            );
-                    }),
+                Container(
+                  child: Row(
+                    spacing: 8,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 22,
+                        height: 22,
+                        child: InkWell(
+                          onTap: () async {
+                            await controller.refreshHome();
+                          },
+                          child: Obx(() {
+                            return controller.isLoading.value
+                                //todo-REMOVE
+                                ? Container()
+                                : Container(
+                                    width: 22, //
+                                    height: 22, //
+                                    child: SvgPicture.asset(Assets.refresh, color: context.theme.dividerColor, height: 22, width: 22),
+                                  );
+                          }),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 22,
+                        child: InkWell(
+                          onTap: () async {
+                            Get.toNamed(Routes.Cart2CartView);
+                          },
+                          child: Container(
+                            height: 40,
+                            child: Obx(() {
+                              return controller.isLoading.value
+                                  //todo-REMOVE
+                                  ? Container()
+                                  : Text('کارت به کارت');
+                            }),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -93,21 +105,13 @@ class AssetsHeader extends GetView<AssetsController> {
                   children: <Widget>[
                     Text(
                       'Cash: '.tr,
-                      style: TextStyle(
-                        color: context.theme.dividerColor,
-                        fontSize: 12,
-                        fontFamily: FontFamily.vazirBold,
-                      ),
+                      style: TextStyle(color: context.theme.dividerColor, fontSize: 12, fontFamily: FontFamily.vazirBold),
                     ),
                     Obx(() {
                       return controller.myIrt != null
                           ? Text(
                               !controller.isVisibleCash.value ? getPrice(controller.myIrt.value) + " " + " IRT".tr : "*******",
-                              style: TextStyle(
-                                color: context.theme.dividerColor,
-                                fontSize: 16,
-                                fontFamily: FontFamily.vazirBold,
-                              ),
+                              style: TextStyle(color: context.theme.dividerColor, fontSize: 16, fontFamily: FontFamily.vazirBold),
                             )
                           : Container();
                     }),
@@ -121,11 +125,7 @@ class AssetsHeader extends GetView<AssetsController> {
                         return controller.myUsd.value != null
                             ? Text(
                                 controller.myUsd + " " + "\$".tr,
-                                style: TextStyle(
-                                  color: context.theme.dividerColor,
-                                  fontSize: 16,
-                                  fontFamily: FontFamily.vazirBold,
-                                ),
+                                style: TextStyle(color: context.theme.dividerColor, fontSize: 16, fontFamily: FontFamily.vazirBold),
                               )
                             : Container();
                       }),
@@ -135,21 +135,19 @@ class AssetsHeader extends GetView<AssetsController> {
               ],
             ),
           ),
-          Obx((){
-            return  controller.listChartModel.length>0? SizedBox(
-              width: double.infinity,
-              height: 100,
-              child: Obx(
-                    () => InkWell(
-                    onTap: () => Get.to(
-                      AssetsChart(
-                        list: controller.assets.value,
-                        balance: double.parse(controller.myUsd.value ),
+          Obx(() {
+            return controller.listChartModel.length > 0
+                ? SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: Obx(
+                      () => InkWell(
+                        onTap: () => Get.to(AssetsChart(list: controller.assets.value, balance: double.parse(controller.myUsd.value))),
+                        child: PieChartSample2(list: controller.listChartModel.value),
                       ),
                     ),
-                    child: PieChartSample2(list: controller.listChartModel.value)),
-              ),
-            ):SizedBox();
+                  )
+                : SizedBox();
           }),
           Obx(() {
             return controller.assetsIRT.value.currency != null
@@ -165,9 +163,7 @@ class AssetsHeader extends GetView<AssetsController> {
                               controller.tTXID.value.text = '';
 
                               Get.bottomSheet(
-                                BottomSheetDepositWidget(
-                                  controller.assetsIRT.value,
-                                ),
+                                BottomSheetDepositWidget(controller.assetsIRT.value),
                                 isDismissible: !controller.isDismissible.value,
                                 enableDrag: controller.isDismissible.value,
                               );
@@ -187,28 +183,20 @@ class AssetsHeader extends GetView<AssetsController> {
                                 children: <Widget>[
                                   Text(
                                     "Deposit".tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 16,
-                                      color: context.theme.dividerColor.withOpacity(0.9),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 16, color: context.theme.dividerColor.withOpacity(0.9)),
                                   ),
-                                  Icon(Icons.arrow_upward)
+                                  Icon(Icons.arrow_upward),
                                 ],
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 8,
-                        ),
+                        SizedBox(width: 8),
                         InkWell(
                           onTap: () {
                             controller.tTXID.value.text = '';
                             Get.bottomSheet(
-                              BottomSheetWithdrawalWidget(
-                                controller.assetsIRT.value,
-                              ),
+                              BottomSheetWithdrawalWidget(controller.assetsIRT.value),
                               isDismissible: !controller.isDismissible.value,
                               enableDrag: controller.isDismissible.value,
                             );
@@ -227,13 +215,9 @@ class AssetsHeader extends GetView<AssetsController> {
                                 children: <Widget>[
                                   Text(
                                     "Withdrawal".tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 16,
-                                      color: context.theme.dividerColor.withOpacity(0.9),
-                                    ),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 16, color: context.theme.dividerColor.withOpacity(0.9)),
                                   ),
-                                  Icon(Icons.arrow_downward)
+                                  Icon(Icons.arrow_downward),
                                 ],
                               ),
                             ),
@@ -243,7 +227,7 @@ class AssetsHeader extends GetView<AssetsController> {
                     ),
                   )
                 : Container();
-          })
+          }),
         ],
       ),
     );
