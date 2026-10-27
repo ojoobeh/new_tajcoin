@@ -8,6 +8,8 @@ class Assets {
   static const String icon = "assets/logo/icon.png";
   /***************************** PNG ************************************/
   static const String noChart = "assets/img/no_chart.PNG";
+  static const String imageAssetLight = "assets/img/image_asset_light.jpg";
+  static const String imageAssetDark = "assets/img/image_asset_dark.jpg";
   static const String twoStepLogin = "assets/png/two_step_login.png";
   static const String key = "assets/png/key.png";
   static const String email = "assets/png/email.png";

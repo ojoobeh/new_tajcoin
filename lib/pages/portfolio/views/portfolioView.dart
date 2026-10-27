@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:webazin/pages/assets/views/assets_header.dart';
+import 'package:webazin/pages/assets/views/assets_header2.dart';
 
 import '../../../utils/assets.dart';
 import 'package:webazin/utils/utils.dart';
@@ -81,6 +83,8 @@ class PortfolioView extends GetView<PortfolioController> {
                     ],
                   ),
                 ),
+
+                AssetsHeader2(),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8),
                   decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webazin/pages/assets/views/assets_header3.dart';
 import 'package:webazin/webazin/utilities.dart';
 
 import '../../root/controllers/root_controller.dart';
@@ -15,7 +16,7 @@ class AssetsView extends GetView<AssetsController> {
 
     // controller.setIsSwitched(true);
     return Scaffold(
-      backgroundColor: context.theme.colorScheme.secondary,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: RefreshIndicator(
         onRefresh: () async {
           await controller.refreshHome(showMessage: true);
@@ -31,7 +32,7 @@ class AssetsView extends GetView<AssetsController> {
                 Container(
                   child: Column(
                     children: <Widget>[
-                      AssetsHeader(),
+                      AssetsHeader3(),
                       Flexible(
                         child: AssetsFooter(),
                       ),

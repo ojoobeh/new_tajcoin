@@ -24,7 +24,7 @@ class AssetsFooter extends GetView<AssetsController> {
     // );
 
     return Container(
-        margin: const EdgeInsets.only(top: 16),
+        // margin: const EdgeInsets.only(top: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(36),
@@ -119,6 +119,7 @@ class AssetsFooter extends GetView<AssetsController> {
                                   hintStyle: TextStyle(
                                     fontSize: 12,
                                     fontFamily: FontFamily.vazirLight,
+                                    color: context.theme.hoverColor.withValues(alpha: 0.5),
                                   ),
                                   keyboardType: TextInputType.text,
                                   maxLength: 50,

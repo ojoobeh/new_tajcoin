@@ -67,7 +67,7 @@ class TradeCustomTextFieldWidget extends StatelessWidget {
       input!.length < 3 ?
       "Should be more than 3 characters".tr : null,
       style: TextStyle(
-        color: Get.theme.dividerColor,
+        color: Get.theme.hoverColor,
       ),
       obscureText: false,
       inputFormatters: inputFormatters,
@@ -80,7 +80,7 @@ class TradeCustomTextFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText ,
         hintStyle:hintStyle?? TextStyle(
-          color: Get.theme.dividerColor,
+          color: Get.theme.hoverColor,//
         ),
         hintTextDirection: TextDirection.ltr,
         floatingLabelBehavior: FloatingLabelBehavior.never,
