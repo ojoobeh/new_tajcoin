@@ -59,7 +59,6 @@ class HomeListItemWidget extends GetView<HomeController> {
             ),
           ),
 
-
           Container(
             child: ListView.builder(
               padding: EdgeInsets.zero,
@@ -153,32 +152,39 @@ class HomeListItemWidget extends GetView<HomeController> {
                     ),
                     Divider(color: context.theme.primaryColorDark.withValues(alpha: 0.3)),
                   ],
-                );
+                ).onTap(() {
+                  if (ConfigApp.goToMarket && currencies.symbol != "IRT" && currencies.markets!.length > 0) {
+                    DataMarket data = DataMarket.fromJson(currencies.markets![0].toJson());
+                    Get.find<MarketController>().selectCurrency(data);
+                    Get.find<RootController>().changePage(3);
+                  }
+                },);
               }),
             ),
-          ),//
+          ), //
 
           Container(
             padding: EdgeInsets.all(8),
             width: double.infinity,
             color: context.theme.cardColor,
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(),
-                  Row(
-                    spacing: 8,
+            child:
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('View All Markets'.tr, style: context.textTheme.bodyLarge!.copyWith(fontSize: 12, color: Color(0xff385ae4))),
-                      Icon(Icons.arrow_forward_ios,  color: Color(0xff385ae4),size: 12,),
+                      SizedBox(),
+                      Row(
+                        spacing: 8,
+                        children: [
+                          Text('View All Markets'.tr, style: context.textTheme.bodyLarge!.copyWith(fontSize: 12, color: Color(0xff385ae4))),
+                          Icon(Icons.arrow_forward_ios, color: Color(0xff385ae4), size: 12),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ).onTap(() {
-              Get.toNamed(Routes.HOMEALLCURRENCIES);
-            },),
+                ).onTap(() {
+                  Get.toNamed(Routes.HOMEALLCURRENCIES);
+                }),
           ),
         ],
       ),
