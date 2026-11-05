@@ -16,13 +16,13 @@ class AppColors {
   static const Color primaryDarkColorDark = Color.fromRGBO(66, 66, 66, 1.0);
 
   static const Color backgroundColor = Color(0xffffffff);
-  static const Color backgroundDarkColor = Color(0xff1f2630);
+  static const Color backgroundDarkColor = Color(0xff01060c);
 
   static const Color dividerColor = Color.fromRGBO(18, 21, 28, 1.0);
   static const Color dividerDarkColor = Color.fromRGBO(231, 231, 231, 1.0);
 
   static const Color cardColor = Color.fromRGBO(220, 220, 220, 1.0);
-  static const Color cardDarkColor = Color(0xff303845);
+  static const Color cardDarkColor = Color(0xff070e16);
 
   static const Color mainColor = Color(0xFF3F4786);
   static const Color mainDarkColor = Color(0xFF3F4786);

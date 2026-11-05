@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webazin/pages/global_widgets/scrolling_text.dart';
+import 'package:webazin/pages/home/views/home_list_item_widget2.dart';
 import 'package:webazin/utils/core.dart';
 import 'package:webazin/webazin/data/models/popup/call_popup.dart' hide DataPopup;
 import 'package:webazin/webazin/data/remote_datasource/other_source.dart';
@@ -168,63 +169,38 @@ class HomeView extends GetView<HomeController> {
                     height: 10,
                   ),
                   HomeMenu(),
-                  Container(
-                    color: context.theme.colorScheme.secondary,
-                    width: double.infinity,
-                    height: 10,
-                  ),
+                  SizedBox(height: 8),
+                  // Container(
+                  //   color: context.theme.colorScheme.secondary,
+                  //   width: double.infinity,
+                  //   height: 10,
+                  // ),
 
-                  Container(
-                    padding: EdgeInsets.only(top: 8),
-                    width: double.infinity,
-                    color: context.theme.scaffoldBackgroundColor,
-                    child:  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text('24h Change', style: context.textTheme.bodyLarge!.copyWith(fontSize: 12,color: context.theme.dividerColor.withOpacity(0.4))),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Text('Last price', style: context.textTheme.bodyLarge!.copyWith(fontSize: 12,color: context.theme.dividerColor.withOpacity(0.4))),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text('Name', style: context.textTheme.bodyLarge!.copyWith(fontSize: 12,color: context.theme.dividerColor.withOpacity(0.4))),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),                  Container(
+                                  Container(
                     width: double.infinity,
                     color: context.theme.scaffoldBackgroundColor,
                     child: Obx(() {
                       return controller.currencies.length > 0 ? HomeListItemWidget() : HomeShimmerListItemWidget();
                     }),
                   ),
-                  InkWell(
-                    onTap: () => Get.toNamed(Routes.HOMEALLCURRENCIES),
-                    child: Container(
-                      color: context.theme.scaffoldBackgroundColor,
-                      width: double.infinity,
-                      height: 50,
-                      child: Center(
-                        child: Text(
-                          "More...".tr,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: FontFamily.vazirBold,
-                            color: AppColors.green,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
+                  // InkWell(
+                  //   onTap: () => Get.toNamed(Routes.HOMEALLCURRENCIES),
+                  //   child: Container(
+                  //     color: context.theme.scaffoldBackgroundColor,
+                  //     width: double.infinity,
+                  //     height: 50,
+                  //     child: Center(
+                  //       child: Text(
+                  //         "More...".tr,
+                  //         style: TextStyle(
+                  //           fontSize: 16,
+                  //           fontFamily: FontFamily.vazirBold,
+                  //           color: AppColors.green,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),

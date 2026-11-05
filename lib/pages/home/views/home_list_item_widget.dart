@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:webazin/data/extensions/text_extension.dart';
+import 'package:webazin/data/extensions/widget_extension.dart';
 import 'package:webazin/pages/market/controllers/market_controller.dart';
+import 'package:webazin/routes/app_routes.dart';
 import 'package:webazin/webazin/utilities.dart';
 import 'package:webazin/webazin/utility/global.dart';
-
+import 'package:webazin/widgets/image.dart';
 
 import '../../../utils/config_app.dart';
 import 'package:webazin/utils/utils.dart';
@@ -27,215 +30,158 @@ class HomeListItemWidget extends GetView<HomeController> {
 
   @override
   Widget build(final BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.only(bottom: 10),
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      // itemCount: controller.currencies.length,
-      itemCount: 5,
-      itemBuilder: ((_, index) {
-        DataCurrency currencies = controller.currencies.value[index];
-        return CustomExpansionTile(
-          title: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-
-                Container(
-                  padding: EdgeInsets.zero,
-                  height: 64,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 70,
-                            height: 30,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                color: currencies.percent == "0"
-                                    ? Colors.grey
-                                    : currencies.percent.length > 1 && currencies.percent.contains("-")
-                                        ? Colors.red
-                                        : AppColors.green,
-                                borderRadius: BorderRadius.all(Radius.circular(4))),
-                            child: Center(
-                                child: Text(
-                              currencies.percent.toString() + " %",
-                              style: TextStyle(
-                                fontFamily: FontFamily.vazirBold,
-                                fontSize: 12,
-                                color: context.theme.dividerColor,
-                              ),
-                              textDirection: TextDirection.ltr,
-                            )),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      getPrice(currencies.irtPrice.toString(), limit: 0),
-                                      style: TextStyle(
-                                        fontFamily: FontFamily.vazirBold,
-                                        fontSize: 12,
-                                        color: context.theme.dividerColor.withOpacity(0.9),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      ' IRT'.tr,
-                                      style: TextStyle(
-                                        fontFamily: FontFamily.vazirBold,
-                                        fontSize: 10,
-                                        color: context.theme.dividerColor.withOpacity(0.9),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  '\$ ' + currencies.price.toString(),
-                                  style: TextStyle(
-                                    fontFamily: FontFamily.vazirLight,
-                                    fontSize: 12,
-                                    color: context.theme.dividerColor.withOpacity(0.6),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            currencies.symbol!,
-                            style: TextStyle(
-                              fontFamily: FontFamily.vazirBold,
-                              fontSize: 16,
-                              color: context.theme.dividerColor,
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          currencies.iconUrl!.contains(".svg")
-                              ? SvgPicture.network(
-                                  currencies.iconUrl!,
-                                  width: 28,
-                                  fit: BoxFit.cover,
-                                ).marginOnly(left: 8)
-                              : Image.network(
-                                  currencies.iconUrl!,
-                                  width: 20,
-                                  fit: BoxFit.cover,
-                                ).marginOnly(left: 8),
-                        ],
-                      ),
-                    ],
-                  ),
-                ).marginSymmetric(horizontal: 16),
-                Divider(
-                  height: 1,
-                  indent: 8,
-                  endIndent: 8,
-                  color: Colors.grey,
-                )
-              ],
-            ),
-          ),
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 70,
-              padding: EdgeInsets.symmetric(horizontal: 16),
+    return Container(
+      decoration: BoxDecoration(color: context.theme.cardColor, borderRadius: BorderRadius.circular(16)),
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            width: double.infinity,
+            color: context.theme.cardColor,
+            child: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  !currencies.chartImage!.contains(".svg")
-                      ? CachedNetworkImage(
-                          width: 100,
-                          height: 50,
-                          imageUrl: currencies.chartImage!,
-                          placeholder: (context, url) => Shimmer.fromColors(
-                            baseColor: Get.theme.cardColor,
-                            highlightColor: Get.theme.dividerColor.withOpacity(0.5),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              width: double.infinity,
-                              height: 20,
-                            ),
-                          ),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                        )
-                      : SvgPicture.network(
-                          currencies.chartImage!,
-                          width: 80,
-                          height: 50,
-                        ),
-                  ConfigApp.goToMarket && currencies.symbol != "IRT" && currencies.markets!.length > 0
-                      ? InkWell(
-                          onTap: () {
-                            if (ConfigApp.goToMarket && currencies.symbol != "IRT" && currencies.markets!.length > 0) {
-                              DataMarket data = DataMarket.fromJson(currencies.markets![0].toJson());
-                              Get.find<MarketController>().selectCurrency(data);
-                              Get.find<RootController>().changePage(3);
-                            }
-                          },
-                          child: Container(
-                            height: 30,
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: AppColors.green,
-                            ),
-                            child: Center(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    "trade now".tr,
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 13,
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Icon(
-                                      Icons.arrow_right,
-                                      size: 32,
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container(),
+                children: [
+                  Row(
+                    children: [
+                      Text('Latest Changes'.tr, style: context.textTheme.bodyLarge!.copyWith(fontSize: 12, color: context.theme.dividerColor.withOpacity(0.4))),
+                      SizedBox(width: 56),
+                      Text('Latest price'.tr, style: context.textTheme.bodyLarge!.copyWith(fontSize: 12, color: context.theme.dividerColor.withOpacity(0.4))),
+                    ],
+                  ),
+                  Row(
+                    children: [Text('Markets'.tr, style: context.textTheme.bodyLarge!.copyWith(fontSize: 12, color: context.theme.dividerColor.withOpacity(0.4)))],
+                  ),
                 ],
               ),
-            )
-          ],
-        );
-      }),
+            ),
+          ),
+
+
+          Container(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+
+              // itemCount: controller.currencies.length,
+              itemCount: 5,
+              itemBuilder: ((_, index) {
+                DataCurrency currencies = controller.currencies.value[index];
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 8,
+                          children: [
+                            !currencies.chartImage!.contains(".svg")
+                                ? CachedNetworkImage(
+                                    width: 64,
+                                    imageUrl: currencies.chartImage!,
+                                    placeholder: (context, url) => Shimmer.fromColors(
+                                      baseColor: Get.theme.cardColor,
+                                      highlightColor: Get.theme.dividerColor.withOpacity(0.5),
+                                      child: Container(
+                                        decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(100)),
+                                        width: double.infinity,
+                                        height: 20,
+                                      ),
+                                    ),
+                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                  )
+                                : SvgPicture.network(
+                                    currencies.chartImage!,
+                                    width: 64,
+                                    color: currencies.percent == "0"
+                                        ? Colors.grey
+                                        : currencies.percent.length > 1 && currencies.percent.contains("-")
+                                        ? Colors.red
+                                        : AppColors.green,
+                                  ),
+                            Container(
+                              width: 56,
+                              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: currencies.percent == "0"
+                                    ? Colors.grey.withValues(alpha: 0.5)
+                                    : currencies.percent.length > 1 && currencies.percent.contains("-")
+                                    ? Colors.red.withValues(alpha: 0.5)
+                                    : AppColors.green.withValues(alpha: 0.5),
+                                borderRadius: BorderRadius.all(Radius.circular(4)),
+                                border: Border.all(
+                                  color: currencies.percent == "0"
+                                      ? Colors.grey
+                                      : currencies.percent.length > 1 && currencies.percent.contains("-")
+                                      ? Colors.red
+                                      : AppColors.green,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${currencies.percent} %",
+                                  style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: context.theme.dividerColor),
+                                  textDirection: TextDirection.ltr,
+                                ),
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${getPrice(currencies.irtPrice.toString(), limit: 0)} ${' IRT'.tr}').labelMedium(),
+                                Text('${getPrice(currencies.price.toString(), limit: 0)} ${'\$ '}').labelMedium(fontSize: 10),
+                              ],
+                            ),
+                          ],
+                        ).expanded(),
+                        Row(
+                          spacing: 4,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [Text(currencies.symbol!), Text(currencies.symbol!).bodySmall(fontSize: 8)],
+                            ),
+                            image(currencies.iconUrl!, width: 22, height: 22),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Divider(color: context.theme.primaryColorDark.withValues(alpha: 0.3)),
+                  ],
+                );
+              }),
+            ),
+          ),//
+
+          Container(
+            padding: EdgeInsets.all(8),
+            width: double.infinity,
+            color: context.theme.cardColor,
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(),
+                  Row(
+                    spacing: 8,
+                    children: [
+                      Text('View All Markets'.tr, style: context.textTheme.bodyLarge!.copyWith(fontSize: 12, color: Color(0xff385ae4))),
+                      Icon(Icons.arrow_forward_ios,  color: Color(0xff385ae4),size: 12,),
+                    ],
+                  ),
+                ],
+              ),
+            ).onTap(() {
+              Get.toNamed(Routes.HOMEALLCURRENCIES);
+            },),
+          ),
+        ],
+      ),
     );
   }
 }
