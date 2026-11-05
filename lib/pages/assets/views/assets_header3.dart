@@ -11,6 +11,7 @@ import 'package:webazin/routes/app_routes.dart';
 import 'package:webazin/services/them_service.dart';
 import 'package:webazin/webazin/utilities.dart';
 import 'package:webazin/webazin/utility/global.dart';
+import 'package:webazin/widgets/button.dart';
 import 'package:webazin/widgets/image.dart';
 
 import '../../../utils/assets.dart';
@@ -126,7 +127,7 @@ class AssetsHeader3 extends GetView<AssetsController> {
                       Obx(() {
                         return controller.myUsd.value != null
                             ? Text(
-                                controller.myUsd + " " + "\$".tr,
+                                controller.myUsd + " \$".tr,
                                 style: TextStyle(color: context.theme.dividerColor, fontSize: 16, fontFamily: FontFamily.vazirBold),
                               )
                             : Container();
@@ -136,9 +137,12 @@ class AssetsHeader3 extends GetView<AssetsController> {
                 ),
               ],
             ),
-          ),//
-          
-          image(ThemeService().theme == ThemeMode.dark ?Assets.imageAssetDark:Assets.imageAssetLight),
+          ), //
+
+          image(ThemeService().theme == ThemeMode.dark ? Assets.imageAssetDark : Assets.imageAssetLight, borderRadius: 8).marginSymmetric(horizontal: 16),
+          AppButton(text: 'Card to card'.tr, onPressed: () {
+            Get.toNamed(Routes.Cart2CartView);
+          }).marginSymmetric(horizontal: 16,vertical: 8),
           // Obx(() {
           //   return controller.listChartModel.length > 0
           //       ? SizedBox(

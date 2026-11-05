@@ -34,9 +34,9 @@ class AssetsFooter extends GetView<AssetsController> {
         ),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 18,
-            ),
+            // SizedBox(
+            //   height: 18,
+            // ),
             Container(
               height: 50,
               child: Row(
@@ -63,13 +63,16 @@ class AssetsFooter extends GetView<AssetsController> {
                           );
                         }),
                         Obx(() {
-                          return Switch(
-                            onChanged: (value) => controller.setIsSwitched(value),
-                            value: controller.isAllAssets.value,
-                            activeColor: Colors.grey.shade600,
-                            activeTrackColor: Colors.grey.shade200,
-                            inactiveThumbColor: Colors.redAccent,
-                            inactiveTrackColor: Colors.orange,
+                          return Transform.scale(
+                            scale: 0.7,
+                            child: Switch(
+                              onChanged: (value) => controller.setIsSwitched(value),
+                              value: controller.isAllAssets.value,
+                              activeColor: Colors.grey.shade600,
+                              activeTrackColor: Colors.grey.shade200,
+                              inactiveThumbColor: Colors.redAccent,
+                              inactiveTrackColor: Colors.orange,
+                            ),
                           );
                         }),
                       ],
