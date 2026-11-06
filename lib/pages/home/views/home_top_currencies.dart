@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:webazin/data/extensions/text_extension.dart';
+import 'package:webazin/data/extensions/widget_extension.dart';
+import 'package:webazin/webazin/utilities.dart';
 import 'package:webazin/webazin/utility/global.dart';
 
-
 import 'package:webazin/utils/utils.dart';
+import 'package:webazin/widgets/image.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/home_shimmer_list_item_widget.dart';
 
 class HomeTopCurrencies extends GetWidget<HomeController> {
   final int limit;
 
-  HomeTopCurrencies({this.limit= 0});
+  HomeTopCurrencies({this.limit = 0});
 
   @override
   Widget build(final BuildContext context) {
@@ -22,106 +25,92 @@ class HomeTopCurrencies extends GetWidget<HomeController> {
       margin: const EdgeInsets.only(bottom: 15),
       child: Obx(() {
         return controller.currencies.length > 0
-            ? ListView.builder(
-                primary: false,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: limit == 0 ? controller.currencies.length : limit,
-                itemBuilder: (_, index) {
-                  var _category = controller.currencies.elementAt(index);
-                  Color color = _category.percent.toString().contains("-") ? Colors.red : AppColors.green;
-                  return Container(
-                    width: (Get.width / limit) - (100 / limit),
-                    margin: EdgeInsetsDirectional.only(end: index == limit - 1 ? 0 : 10, start: index == 0 ? 0 : 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  _category.symbol != "USDT" ? '/USDT' : "",
-                                  textDirection: TextDirection.ltr,
-                                  style: TextStyle(
-                                    fontFamily: FontFamily.vazirBold,
-                                    fontSize: 14,
-                                    color: context.theme.dividerColor.withOpacity(0.5),
-                                  ),
-                                ),
-                                Text(
-                                  _category.symbol!,
-                                  style: TextStyle(
-                                    fontFamily: FontFamily.vazirBold,
-                                    fontSize: 18,
-                                    color: context.theme.dividerColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 8),
-                          child: Text(
-                            sDouble(_category.price.toString(), decimal: (int.parse(_category.decimal!))) + " \$",
-                            maxLines: 2,
-                            style: TextStyle(
-                              color: context.theme.dividerColor.withOpacity(0.8),
-                              fontSize: 14,
-                              fontFamily: FontFamily.vazirBold,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          child: Text(
-                            "%" + _category.percent.toString(),
-                            textDirection: TextDirection.ltr,
-                            maxLines: 2,
-                            style: TextStyle(
-                              color: color,
-                              fontSize: 12,
-                              fontFamily: FontFamily.vazirBold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        !_category.chartImage!.contains(".svg")
-                            ? CachedNetworkImage(
-                                width: 50,
-                                height: 30,
-                                imageUrl: _category.chartImage!,
-                                placeholder: (context, url) => Shimmer.fromColors(
-                                  baseColor: Get.theme.cardColor,
-                                  highlightColor: Get.theme.dividerColor.withOpacity(0.5),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    width: double.infinity,
-                                    height: 20,
-                                  ),
-                                ),
-                                errorWidget: (context, url, error) => Icon(Icons.error),
-                              )
-                            : SvgPicture.network(
-                                _category.chartImage!,
-                                width: 50,
-                                height: 30,
-                              ),
-                      ],
-                    ),
-                  );
-                })
+            ? Row(children: [_item(index: 0,color: Color(0xff111328)).expanded(), _item(index: 1
+            ,color: Color(0xff141319)).expanded(), _item(index: 2,color: Color(0xff090d16)).expanded()])
             : HomeShimmerListItemWidget();
       }),
     );
   }
+
+  Widget _item({required int index,required Color color}) => Directionality(
+    textDirection: TextDirection.ltr,
+    child: Container(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: context.theme.dividerColor.withValues(alpha: 0.1)),
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            //
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(spacing: 2, children: [Text(controller.currencies[index].symbol!).labelSmall(fontSize: 12), Text('/USDT').labelSmall()]),
+              image(controller.currencies[index].iconUrl!, width: 22, height: 22),
+              // Image.network(controller.currencies[index].icon!,width: 32,height: 32),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('${getPrice(controller.currencies[index].price.toString(), limit: 0)} ${'\$ '}').labelLarge(fontSize: 14),
+              SizedBox(),
+              // Image.network(controller.currencies[index].icon!,width: 32,height: 32),
+            ],
+          ),
+         Row(
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           children: [
+             Container(
+               width: 56,
+               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+               child: Center(
+                 child: Text(
+                   "${controller.currencies[index].percent} %",
+                   style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: controller.currencies[index].percent == "0"
+                       ? Colors.grey
+                       : controller.currencies[index].percent.length > 1 && controller.currencies[index].percent.contains("-")
+                       ? Colors.red
+                       : AppColors.green,),
+                   textDirection: TextDirection.ltr,
+                 ),
+               ),
+             ),
+             SizedBox(),
+           ],
+         ),
+          !controller.currencies[index].chartImage!.contains(".svg")
+              ? Row(
+                children: [
+                  CachedNetworkImage(
+                      imageUrl: controller.currencies[index].chartImage!,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Get.theme.cardColor,
+                        highlightColor: Get.theme.dividerColor.withOpacity(0.5),
+                        child: Container(
+                          decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(100)),
+                          width: double.infinity,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ).expanded(),
+                ],
+              )
+              : SvgPicture.network(
+                  controller.currencies[index].chartImage!,
+                  color: controller.currencies[index].percent == "0"
+                      ? Colors.grey
+                      : controller.currencies[index].percent.length > 1 && controller.currencies[index].percent.contains("-")
+                      ? Colors.red
+                      : AppColors.green,
+                ),
+        ],
+      ),
+    ),
+  );
 }

@@ -33,13 +33,9 @@ changeThem() {
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(final BuildContext context) {
-
-
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.dark.copyWith(),
-    );
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith());
     if (!controller.isShowDialog) {
-      Future.delayed(Duration.zero, () => sendMessage(context,Core.lastPopupData));
+      Future.delayed(Duration.zero, () => sendMessage(context, Core.lastPopupData));
       controller.isShowDialog = true;
     }
 
@@ -77,24 +73,10 @@ class HomeView extends GetView<HomeController> {
                                 onTap: () async {
                                   return Core.user.apiToken != null ? Get.toNamed(Routes.SETTINGS) : Get.toNamed(Routes.LOGIN)!.then((value) => Get.rootController.refresh());
                                 },
-                                child: Image.asset(
-                                  Assets.profile2,
-                                  width: 28,
-                                  height: 28,
-                                  color: context.theme.dividerColor.withOpacity(0.8),
-                                ),
+                                child: Image.asset(Assets.profile2, width: 28, height: 28, color: context.theme.dividerColor.withOpacity(0.8)),
                               ),
-                              SizedBox(
-                                width: 8,
-                              ),//
-                              InkWell(
-                                child: Image.asset(
-                                  Assets.chat,
-                                  width: 28,
-                                  height: 28,
-                                  color: context.theme.dividerColor.withOpacity(0.8),
-                                ),
-                              ),
+                              SizedBox(width: 8), //
+                              InkWell(child: Image.asset(Assets.chat, width: 28, height: 28, color: context.theme.dividerColor.withOpacity(0.8))),
                             ],
                           ),
                         ),
@@ -109,9 +91,7 @@ class HomeView extends GetView<HomeController> {
                               ).marginOnly(right: 32),
                             ),
                             Image.asset(Assets.logoWide, height: 28),
-                            SizedBox(
-                              width: 8,
-                            ),
+                            SizedBox(width: 8),
                             // InkWell(
                             //   onTap: () async {
                             //     await controller.refreshHome();
@@ -131,52 +111,45 @@ class HomeView extends GetView<HomeController> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(32),
-                        topRight: Radius.circular(32),
-                      ),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
                       color: context.theme.scaffoldBackgroundColor,
                     ),
                     child: ConfigApp.textMovie
                         ? Core.applicationInfo.message != null && Core.applicationInfo.message != ''
-                            ? SizedBox(
-                                height: 30,
+                              ? SizedBox(
+                                  height: 30,
 
-                                child: ScrollingText(
+                                  child: ScrollingText(
                                     text: Core.applicationInfo.message ?? '',
                                     textStyle: TextStyle(color: context.theme.dividerColor, fontFamily: FontFamily.vazirLight, fontSize: 14),
-                                    color: Colors.transparent),
-                              )
-                            : Container()
+                                    color: Colors.transparent,
+                                  ),
+                                )
+                              : Container()
                         : Container(),
                   ),
+                  HomeMenu(),
                   Container(
                     width: double.infinity,
                     color: context.theme.scaffoldBackgroundColor,
                     child: Center(
                       child: Obx(() {
-                        return controller.currencies.length > 0 //
-                            ? HomeTopCurrencies(
-                                limit: 3,
-                              )
+                        return controller.currencies.length >
+                                0 //
+                            ? HomeTopCurrencies(limit: 3)
                             : ListShimmerTopCurrenciesWidget(3);
                       }),
                     ),
                   ),
-                  Container(
-                    color: context.theme.colorScheme.secondary,
-                    width: double.infinity,
-                    height: 10,
-                  ),
-                  HomeMenu(),
+                  Container(color: context.theme.colorScheme.secondary, width: double.infinity, height: 10),
                   SizedBox(height: 8),
+
                   // Container(
                   //   color: context.theme.colorScheme.secondary,
                   //   width: double.infinity,
                   //   height: 10,
                   // ),
-
-                                  Container(
+                  Container(
                     width: double.infinity,
                     color: context.theme.scaffoldBackgroundColor,
                     child: Obx(() {
@@ -210,173 +183,143 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  void sendMessage(final BuildContext context,DataPopup data) async {
+  void sendMessage(final BuildContext context, DataPopup data) async {
+    String lastId = getString('LastPopup') ?? '-1';
 
-    String lastId=getString('LastPopup')??'-1';
-
-    if (data.id!=lastId) {
+    if (data.id != lastId) {
       debugPrint('ddd');
       showGeneralDialog(
-          barrierColor: Colors.black.withOpacity(0.8),
-          transitionBuilder: (context, a1, a2, widget) {
-            return Transform.scale(
-              scale: a1.value,
-              child: Opacity(
-                opacity: a1.value,
-                child: AlertDialog(
-                  contentPadding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  content: WillPopScope(
-                    onWillPop: () async => false,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(color: context.theme.primaryColor, borderRadius: BorderRadius.circular(16)),
-                          height: 400,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(data.image??''),
-                                fit: BoxFit.cover,
+        barrierColor: Colors.black.withOpacity(0.8),
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(
+              opacity: a1.value,
+              child: AlertDialog(
+                contentPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                content: WillPopScope(
+                  onWillPop: () async => false,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(color: context.theme.primaryColor, borderRadius: BorderRadius.circular(16)),
+                        height: 400,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(image: NetworkImage(data.image ?? ''), fit: BoxFit.cover),
+                          ),
+                          height: double.infinity,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                margin: const EdgeInsets.only(top: 16),
+                                child: Text(
+                                  data.title.toString(),
+                                  style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 15, color: Colors.white),
+                                ),
                               ),
-                            ),
-                            height: double.infinity,
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  margin: const EdgeInsets.only(top: 16),
+                              Flexible(
+                                child: Container(
+                                  height: double.infinity,
+                                  padding: EdgeInsets.all(16),
+                                  margin: const EdgeInsets.only(top: 26),
                                   child: Text(
-                                    data.title.toString(),
-                                    style: TextStyle(
-                                      fontFamily: FontFamily.vazirBold,
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                    ),
+                                    data.message.toString(),
+                                    style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 13, color: Colors.white),
                                   ),
                                 ),
-                                Flexible(
-                                  child: Container(
-                                    height: double.infinity,
-                                    padding: EdgeInsets.all(16),
-                                    margin: const EdgeInsets.only(top: 26),
-                                    child: Text(
-                                      data.message.toString(),
-                                      style: TextStyle(
-                                        fontFamily: FontFamily.vazirBold,
-                                        fontSize: 13,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: 80,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: <Widget>[
-                                      InkWell(
-                                        onTap: () {
-                                          // DbHelper.insertPopup(dataPopup: data.data![0]);
-                                          Get.back();
-                                          bool isShowHelper = getBool('${Core.helperHome}');
+                              ),
+                              Container(
+                                height: 80,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
+                                    InkWell(
+                                      onTap: () {
+                                        // DbHelper.insertPopup(dataPopup: data.data![0]);
+                                        Get.back();
+                                        bool isShowHelper = getBool('${Core.helperHome}');
 
-                                          setData('LastPopup', data.id);
+                                        setData('LastPopup', data.id);
 
-                                          if (!isShowHelper) {
-                                            controller.showTutorial(context);
-                                          }
-                                        },
-                                        child: Container(
-                                          width: 130,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            border: Border.all(color: Colors.orangeAccent, width: 1),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              'متوجه شدم',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily: FontFamily.vazirBold,
-                                                color: Colors.orange,
-                                              ),
-                                            ),
+                                        if (!isShowHelper) {
+                                          controller.showTutorial(context);
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 130,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8),
+                                          border: Border.all(color: Colors.orangeAccent, width: 1),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'متوجه شدم',
+                                            style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold, color: Colors.orange),
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          await launch(data.link!);
-                                          Get.back();
-                                          bool isShowHelper = getBool('${Core.helperHome}');
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        await launch(data.link!);
+                                        Get.back();
+                                        bool isShowHelper = getBool('${Core.helperHome}');
 
-                                          if (!isShowHelper) {
-                                            controller.showTutorial(context);
-                                          }
-                                        },
-                                        child: Container(
-                                          width: 130,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            color: Colors.orangeAccent,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              'جزئیات',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily: FontFamily.vazirBold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
+                                        if (!isShowHelper) {
+                                          controller.showTutorial(context);
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 130,
+                                        height: 50,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.orangeAccent),
+                                        child: Center(
+                                          child: Text(
+                                            'جزئیات',
+                                            style: TextStyle(fontSize: 12, fontFamily: FontFamily.vazirBold, color: Colors.white),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Container(
-                          width: 2,
-                          height: 50,
-                          color: Colors.white,
-                        ),
-                        InkWell(
-                            onTap: () {
-                              Get.back();
-                              bool isShowHelper = getBool('${Core.helperHome}');
+                      ),
+                      Container(width: 2, height: 50, color: Colors.white),
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                          bool isShowHelper = getBool('${Core.helperHome}');
 
-                              if (!isShowHelper) {
-                                controller.showTutorial(context);
-                              }
-                            },
-                            child: SvgPicture.asset(
-                              Assets.close,
-                              width: 34,
-                              height: 34,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
+                          if (!isShowHelper) {
+                            controller.showTutorial(context);
+                          }
+                        },
+                        child: SvgPicture.asset(Assets.close, width: 34, height: 34, color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-          },
-          transitionDuration: Duration(milliseconds: 200),
-          barrierDismissible: false,
-          barrierLabel: '',
-          context: context,
-          pageBuilder: (context, animation1, animation2) {
-            return Container();
-          });
+            ),
+          );
+        },
+        transitionDuration: Duration(milliseconds: 200),
+        barrierDismissible: false,
+        barrierLabel: '',
+        context: context,
+        pageBuilder: (context, animation1, animation2) {
+          return Container();
+        },
+      );
     } else {
       bool isShowHelper = getBool('${Core.helperHome}');
       debugPrint('ddd');
@@ -396,9 +339,7 @@ class HomeView extends GetView<HomeController> {
   }
 
   void showPopup(DataPopup response) {
-
-    Get.dialog(Container(width: 100,height: 100,color: Colors.red,));
-
+    Get.dialog(Container(width: 100, height: 100, color: Colors.red));
   }
 }
 
@@ -415,29 +356,17 @@ class ListItem extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
       child: Row(
         children: <Widget>[
-          Container(
-            width: 50.0,
-            height: 50.0,
-            margin: const EdgeInsets.only(right: 15.0),
-            color: Colors.blue,
-          ),
+          Container(width: 50.0, height: 50.0, margin: const EdgeInsets.only(right: 15.0), color: Colors.blue),
           index != -1
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      'This is title $index',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    Text('This is title $index', style: TextStyle(fontWeight: FontWeight.bold)),
                     Text('This is more details'),
                     Text('One more detail'),
                   ],
                 )
-              : Expanded(
-                  child: Container(
-                    color: Colors.grey,
-                  ),
-                )
+              : Expanded(child: Container(color: Colors.grey)),
         ],
       ),
     );

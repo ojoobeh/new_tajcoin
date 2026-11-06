@@ -26,7 +26,8 @@ class ItemStatusWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: context.theme.cardColor,
-        borderRadius: BorderRadius.circular(8)
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: context.theme.dividerColor.withValues(alpha: 0.2),width: 0.5)
       ),
       padding: EdgeInsets.symmetric(vertical: 8),
       margin: EdgeInsets.symmetric(horizontal: 4),

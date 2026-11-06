@@ -16,7 +16,7 @@ class AppColors {
   static const Color primaryDarkColorDark = Color.fromRGBO(66, 66, 66, 1.0);
 
   static const Color backgroundColor = Color(0xffffffff);
-  static const Color backgroundDarkColor = Color(0xff01060c);
+  static const Color backgroundDarkColor = Color(0xff030710);
 
   static const Color dividerColor = Color.fromRGBO(18, 21, 28, 1.0);
   static const Color dividerDarkColor = Color.fromRGBO(231, 231, 231, 1.0);
