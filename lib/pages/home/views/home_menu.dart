@@ -13,8 +13,8 @@ class HomeMenu extends GetView<HomeController> {
   @override
   Widget build(final BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 8, left: 10),
-      color: context.theme.scaffoldBackgroundColor,
+      // padding: EdgeInsets.only(top: 8, left: 10),
+      // color: context.theme.scaffoldBackgroundColor,
       child: Align(
         alignment: Alignment.centerLeft,
         child: Row(

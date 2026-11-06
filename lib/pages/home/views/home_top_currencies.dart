@@ -21,18 +21,104 @@ class HomeTopCurrencies extends GetWidget<HomeController> {
   @override
   Widget build(final BuildContext context) {
     return Container(
-      height: 140,
+      // height: 140,
       margin: const EdgeInsets.only(bottom: 15),
       child: Obx(() {
         return controller.currencies.length > 0
-            ? Row(children: [_item(index: 0,color: Color(0xff111328)).expanded(), _item(index: 1
-            ,color: Color(0xff141319)).expanded(), _item(index: 2,color: Color(0xff090d16)).expanded()])
+            ? Row(
+                children: [
+                  _item(index: 0, color: Color(0xff111328)).expanded(),
+                  _item(index: 1, color: Color(0xff141319)).expanded(),
+                ],
+              )
             : HomeShimmerListItemWidget();
       }),
     );
   }
 
-  Widget _item({required int index,required Color color}) => Directionality(
+  Widget _item({required int index, required Color color}) => Directionality(
+    textDirection: TextDirection.ltr,
+    child: Container(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: context.theme.dividerColor.withValues(alpha: 0.1)),
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 8,
+        children: [
+          Row(
+            spacing: 8,
+            children: [
+              image(controller.currencies[index].iconUrl!, width: 32, height: 32),
+              Row(spacing: 2, children: [Text(controller.currencies[index].symbol!).labelSmall(fontSize: 12), Text('/USDT').labelSmall()]),
+            ],
+          ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Text('${getPrice(controller.currencies[index].price.toString(), limit: 0)} ${'\$ '}').labelLarge(fontSize: 18),
+                  Text('${getPrice(controller.currencies[index].irtPrice.toString(), limit: 0)} ${'IRT'.tr}').labelLarge(fontSize: 9),
+                ],
+              ).expanded(),
+
+              Container(
+                width: 56,
+                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                child: Center(
+                  child: Text(
+                    "${controller.currencies[index].percent} %",
+                    style: TextStyle(
+                      fontFamily: FontFamily.vazirBold,
+                      fontSize: 12,
+                      color: controller.currencies[index].percent == "0"
+                          ? Colors.grey
+                          : controller.currencies[index].percent.length > 1 && controller.currencies[index].percent.contains("-")
+                          ? Colors.red
+                          : AppColors.green,
+                    ),
+                    textDirection: TextDirection.ltr,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          !controller.currencies[index].chartImage!.contains(".svg")
+              ? Row(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: controller.currencies[index].chartImage!,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Get.theme.cardColor,
+                        highlightColor: Get.theme.dividerColor.withOpacity(0.5),
+                        child: Container(
+                          decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(100)),
+                          width: double.infinity,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ).expanded(),
+                  ],
+                )
+              : SvgPicture.network(
+                  controller.currencies[index].chartImage!,
+                  color: controller.currencies[index].percent == "0"
+                      ? Colors.grey
+                      : controller.currencies[index].percent.length > 1 && controller.currencies[index].percent.contains("-")
+                      ? Colors.red
+                      : AppColors.green,
+                ),
+        ],
+      ),
+    ),
+  );
+
+  Widget _item2({required int index, required Color color}) => Directionality(
     textDirection: TextDirection.ltr,
     child: Container(
       decoration: BoxDecoration(
@@ -63,31 +149,35 @@ class HomeTopCurrencies extends GetWidget<HomeController> {
               // Image.network(controller.currencies[index].icon!,width: 32,height: 32),
             ],
           ),
-         Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             Container(
-               width: 56,
-               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-               child: Center(
-                 child: Text(
-                   "${controller.currencies[index].percent} %",
-                   style: TextStyle(fontFamily: FontFamily.vazirBold, fontSize: 12, color: controller.currencies[index].percent == "0"
-                       ? Colors.grey
-                       : controller.currencies[index].percent.length > 1 && controller.currencies[index].percent.contains("-")
-                       ? Colors.red
-                       : AppColors.green,),
-                   textDirection: TextDirection.ltr,
-                 ),
-               ),
-             ),
-             SizedBox(),
-           ],
-         ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 56,
+                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                child: Center(
+                  child: Text(
+                    "${controller.currencies[index].percent} %",
+                    style: TextStyle(
+                      fontFamily: FontFamily.vazirBold,
+                      fontSize: 12,
+                      color: controller.currencies[index].percent == "0"
+                          ? Colors.grey
+                          : controller.currencies[index].percent.length > 1 && controller.currencies[index].percent.contains("-")
+                          ? Colors.red
+                          : AppColors.green,
+                    ),
+                    textDirection: TextDirection.ltr,
+                  ),
+                ),
+              ),
+              SizedBox(),
+            ],
+          ),
           !controller.currencies[index].chartImage!.contains(".svg")
               ? Row(
-                children: [
-                  CachedNetworkImage(
+                  children: [
+                    CachedNetworkImage(
                       imageUrl: controller.currencies[index].chartImage!,
                       placeholder: (context, url) => Shimmer.fromColors(
                         baseColor: Get.theme.cardColor,
@@ -99,8 +189,8 @@ class HomeTopCurrencies extends GetWidget<HomeController> {
                       ),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ).expanded(),
-                ],
-              )
+                  ],
+                )
               : SvgPicture.network(
                   controller.currencies[index].chartImage!,
                   color: controller.currencies[index].percent == "0"

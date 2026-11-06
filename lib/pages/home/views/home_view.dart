@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webazin/data/extensions/widget_extension.dart';
 import 'package:webazin/pages/global_widgets/scrolling_text.dart';
 import 'package:webazin/pages/home/views/home_list_item_widget2.dart';
 import 'package:webazin/utils/core.dart';
@@ -61,25 +62,29 @@ class HomeView extends GetView<HomeController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        InkWell(
-                          onTap: () => Get.toNamed(Routes.TicketS),
-                          // onTap: () {
-                          //
-                          // },
-                          // onTap: () =>  showLoading(),
-                          child: Row(
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () async {
-                                  return Core.user.apiToken != null ? Get.toNamed(Routes.SETTINGS) : Get.toNamed(Routes.LOGIN)!.then((value) => Get.rootController.refresh());
-                                },
-                                child: Image.asset(Assets.profile2, width: 28, height: 28, color: context.theme.dividerColor.withOpacity(0.8)),
-                              ),
-                              SizedBox(width: 8), //
-                              InkWell(child: Image.asset(Assets.chat, width: 28, height: 28, color: context.theme.dividerColor.withOpacity(0.8))),
-                            ],
-                          ),
-                        ),
+                        _itemAppbar(
+                          icon: Icons.person,
+                        ).onTap(() => Core.user.apiToken != null ? Get.toNamed(Routes.SETTINGS) : Get.toNamed(Routes.LOGIN)!.then((value) => Get.rootController.refresh())),
+                        _itemAppbar(icon: Icons.alarm),
+                        //   InkWell(
+                        //     onTap: () => Get.toNamed(Routes.TicketS),
+                        //     // onTap: () {
+                        //     //
+                        //     // },
+                        //     // onTap: () =>  showLoading(),
+                        //     child: Row(
+                        //       children: <Widget>[
+                        //         InkWell(
+                        //           onTap: () async {
+                        //             return Core.user.apiToken != null ? Get.toNamed(Routes.SETTINGS) : Get.toNamed(Routes.LOGIN)!.then((value) => Get.rootController.refresh());
+                        //           },
+                        //           child: Image.asset(Assets.profile2, width: 28, height: 28, color: context.theme.dividerColor.withOpacity(0.8)),
+                        //         ),
+                        //         SizedBox(width: 8), //
+                        //         InkWell(child: Image.asset(Assets.chat, width: 28, height: 28, color: context.theme.dividerColor.withOpacity(0.8))),
+                        //       ],
+                        //     ),
+                        //   ),
                         Row(
                           children: <Widget>[
                             Container(
@@ -128,7 +133,8 @@ class HomeView extends GetView<HomeController> {
                               : Container()
                         : Container(),
                   ),
-                  HomeMenu(),
+                  HomeMenu().marginSymmetric(horizontal: 8),
+                  SizedBox(height: 8),
                   Container(
                     width: double.infinity,
                     color: context.theme.scaffoldBackgroundColor,
@@ -136,13 +142,13 @@ class HomeView extends GetView<HomeController> {
                       child: Obx(() {
                         return controller.currencies.length >
                                 0 //
-                            ? HomeTopCurrencies(limit: 3)
+                            ? HomeTopCurrencies(limit: 3).marginSymmetric(horizontal: 8)
                             : ListShimmerTopCurrenciesWidget(3);
                       }),
                     ),
                   ),
-                  Container(color: context.theme.colorScheme.secondary, width: double.infinity, height: 10),
-                  SizedBox(height: 8),
+                  // Container(color: context.theme.colorScheme.secondary, width: double.infinity, height: 10),
+                  // SizedBox(height: 8),
 
                   // Container(
                   //   color: context.theme.colorScheme.secondary,
@@ -155,7 +161,7 @@ class HomeView extends GetView<HomeController> {
                     child: Obx(() {
                       return controller.currencies.length > 0 ? HomeListItemWidget() : HomeShimmerListItemWidget();
                     }),
-                  ),
+                  ).marginSymmetric(horizontal: 8),
                   // InkWell(
                   //   onTap: () => Get.toNamed(Routes.HOMEALLCURRENCIES),
                   //   child: Container(
@@ -341,6 +347,15 @@ class HomeView extends GetView<HomeController> {
   void showPopup(DataPopup response) {
     Get.dialog(Container(width: 100, height: 100, color: Colors.red));
   }
+
+  Widget _itemAppbar({required IconData icon}) => InkWell(
+    onTap: () => Get.toNamed(Routes.TicketS),
+    // onTap: () {
+    //
+    // },
+    // onTap: () =>  showLoading(),
+    child: InkWell(child: Icon(icon, size: 24, color: context.theme.dividerColor.withOpacity(0.8))),
+  );
 }
 
 class ListItem extends StatelessWidget {
